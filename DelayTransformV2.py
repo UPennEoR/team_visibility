@@ -89,18 +89,17 @@ def delaytransformlooped(data_dir):
 	for filename in images:
    		gif.append(imageio.imread(filename))
 	imageio.mimsave('/data4/paper/rkb/gifstorage/delaygif.gif', gif,fps=3)
-def delaytransformv1(data_dir):
-	antstr = "10_72"
+def delaytransformv1(data_dir, antstr, stokes):
 	ant_i, ant_j = map(int, antstr.split('_'))
-	d_transform = np.fft.ifft(avgfreqcalc(data_dir))
+	d_transform = np.fft.ifft(avgfreqcalc(data_dir, antstr, stokes))
 	d_transform = (np.fft.fftshift(d_transform))
 	d_transform = np.abs(d_transform)
 	plt.plot(np.log10((d_transform)))
 	plt.xlabel('Delay(ns)')
-	plt.xlim(350, 650)
+	plt.xlim(400, 600)
 	plt.ylabel('Time')
-	plt.title('XX Delay Transform'+antstr)
-	plt.savefig("/data4/paper/rkb/"+'{}.png'.format(antstr))
+	plt.title('XX Delay Transform'+antstr+stokes)
+	plt.savefig("/data4/paper/rkb/"+'{} {}.png'.format(antstr, stokes))
 
 
 
