@@ -102,6 +102,7 @@ def delaytransformv1(data_dir, antstr, stokes):
 #Errorlog:
 #Error 1: 7/5/17 at 23:51; running into error "UnboundLocalError: local variable 'uv' referenced before assignment"
 #Resolved (Error 1): 7/6/17; fixed location of directory; the program wasn't finding anything at the files I pointed it to
-#Error 2: 7/7/17 at 9:00; “Failed to load platform plugin ”xcb“ ” -- found when running delaytransformv1 in folio.
+#Error 2: 7/7/17 at 9:00; This application failed to start because it could not find or load the Qt platform plugin "xcb" in "". Available platform plugins are: minimal, offscreen, xcb. Reinstalling the application may fix this problem. Occured when running in folio.
+
 
 
