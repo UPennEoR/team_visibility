@@ -6,9 +6,6 @@ import imageio
 from VIQUVaveraged_over_time import avgfreqcalc
 
 
-#7/5/17 at 23:51; running into error "UnboundLocalError: local variable 'uv' referenced before assignment"
-
-
 def delaytransform(data_dir):
 	files= glob.glob(''.join([data_dir, 'zen.2457746.*.*.HH.uvcORR']))
 	t, d, f = capo.miriad.read_files(files, antstr='cross', polstr='xx', verbose=True)
@@ -102,5 +99,9 @@ def delaytransformv1(data_dir, antstr, stokes):
 	plt.savefig("/data4/paper/rkb/"+'{} {}.png'.format(antstr, stokes))
 
 
+#Errorlog:
+#Error 1: 7/5/17 at 23:51; running into error "UnboundLocalError: local variable 'uv' referenced before assignment"
+#Resolved (Error 1): 7/6/17; fixed location of directory; the program wasn't finding anything at the files I pointed it to
+#Error 2: 7/7/17 at 9:00; “Failed to load platform plugin ”xcb“ ” -- found when running delaytransformv1 in folio.
 
 
