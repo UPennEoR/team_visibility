@@ -1,35 +1,19 @@
-
-# coding: utf-8
-
-# In[8]:
-
-
 import numpy as np
 import capo
 import matplotlib.pyplot as plt
 import glob
 
-
-# In[9]:
 def avgfreqcalc(data_dir, antstr, stokes):
     xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
     xy_data = glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR']))
     yx_data = glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR']))
     yy_data = glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR']))
 
-
     ant_i, ant_j = map(int, antstr.split('_'))
-
-
-
 
     # initialize average power
     avg_freq = None
     n_avg = 0
-
-
-
-
     # loop over files
     for i in np.arange(len(xx_data)):
         t_xx, d_xx, f_xx = capo.miriad.read_files([xx_data[i]], antstr=antstr, polstr='xx')
@@ -52,8 +36,8 @@ def avgfreqcalc(data_dir, antstr, stokes):
             for it in range(vis_xx.shape[0]):    
                 avg_freq += np.abs(stokes_Q[it, :])
                 n_avg += 1
-
-
+        else:
+            print ("I'm sorry, but this script does not yet support the stokes you have requested.")
 
     # finish averaging
     avg_freq = avg_freq/n_avg

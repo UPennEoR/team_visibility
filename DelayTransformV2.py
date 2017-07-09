@@ -1,15 +1,17 @@
-import capo
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import capo
 import numpy as np
 import glob
 import imageio
+import shutil
 from VIQUVaveraged_over_time import avgfreqcalc
 
 
 def delaytransform(data_dir):
 	files= glob.glob(''.join([data_dir, 'zen.2457746.*.*.HH.uvcORR']))
 	t, d, f = capo.miriad.read_files(files, antstr='cross', polstr='xx', verbose=True)
-	
 	d_short = d[(72,97)]['xx']
 	d_long = d[(43,88)]['xx']
 
@@ -73,12 +75,9 @@ def delaytransformlooped(data_dir):
 		plt.ylabel('Time')
 		plt.xlabel('Delay [ns]')
 		plt.tight_layout()
-		plt.savefig("/data4/paper/rkb/gifstorage/"+str(counter2[i])+".png")
-		# filename = ("/Users/rbenefo/Desktop/HERAwork/DATADUMP/gifstorage/"+str(counter2[i])+".png")
+		plt.savefig("/data4/paper/rkb/gifstorage/"+'delaytransform'+str(counter2[i])+".png")
 		i +=1
-		# for filez in filename:
-		# 	gif.append()
-
+	
 	#convert output to gif form
 	
 	images = glob.glob('/data4/paper/rkb/gifstorage/*.png')
@@ -86,23 +85,33 @@ def delaytransformlooped(data_dir):
 	for filename in images:
    		gif.append(imageio.imread(filename))
 	imageio.mimsave('/data4/paper/rkb/gifstorage/delaygif.gif', gif,fps=3)
-def delaytransformv1(data_dir, antstr, stokes):
-	ant_i, ant_j = map(int, antstr.split('_'))
-	d_transform = np.fft.ifft(avgfreqcalc(data_dir, antstr, stokes))
-	d_transform = (np.fft.fftshift(d_transform))
-	d_transform = np.abs(d_transform)
-	plt.plot(np.log10((d_transform)))
-	plt.xlabel('Delay(ns)')
-	plt.xlim(400, 600)
-	plt.ylabel('Time')
-	plt.title('XX Delay Transform'+antstr+stokes)
-	plt.savefig("/data4/paper/rkb/"+'{} {}.png'.format(antstr, stokes))
+def delaytransformv1(data_dir, stokes):
+	baselines = ['72_112', '97_112', '22_105', '22_81', '10_81', '9_88', '9_20', '20_89', '43_89', '53_64', '31_53', '31_65', '80_104', '96_104']
+	for antstr in baselines:
+		ant_i, ant_j = map(int, antstr.split('_'))
+		d_transform = np.fft.ifft(avgfreqcalc(data_dir, antstr, stokes))
+		d_transform = (np.fft.fftshift(d_transform))
+		d_transform = np.abs(d_transform)
+		plt.plot(np.log10((d_transform)))
+		plt.xlabel('Delay(ns)')
+		plt.xlim(400, 600)
+		plt.ylabel('log10(abs(V_{}))').format(stokes)
+		plt.title('XX Delay Transform'+antstr+stokes)
+		plt.savefig("/data4/paper/rkb/delaygifstorage/"+'delaytransform'+'{} {}.png'.format(antstr, stokes))
+		plt.clf()
+	images = glob.glob('/data4/paper/rkb/delaygifstorage/*.png')
+	gif = []
+	for filename in images:
+   		gif.append(imageio.imread(filename))
+	imageio.mimsave('/data4/paper/rkb/delayv1gif.gif', gif,fps=3)
+	shutil.rmtree('/data4/paper/rkb/delaygifstorage/')
 
 
 #Errorlog:
 #Error 1: 7/5/17 at 23:51; running into error "UnboundLocalError: local variable 'uv' referenced before assignment"
 #Resolved (Error 1): 7/6/17; fixed location of directory; the program wasn't finding anything at the files I pointed it to
-#Error 2: 7/7/17 at 9:00; This application failed to start because it could not find or load the Qt platform plugin "xcb" in "". Available platform plugins are: minimal, offscreen, xcb. Reinstalling the application may fix this problem. Occured when running in folio.
+#Error 2: 7/7/17 at 9:00; This application failed to start because
+#it could not find or load the Qt platform plugin "xcb" in "". Available platform plugins are: minimal, offscreen, xcb. Reinstalling the application may fix this problem. Occured when running in folio.
 
 
 
