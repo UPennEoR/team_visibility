@@ -97,8 +97,8 @@ def delaytransformv1(data_dir, stokes):
 		ant_i, ant_j = map(int, antstr.split('_'))
 		data, channels = avgfreqcalc(data_dir, antstr, stokes)
 		window = aipy.dsp.gen_window(channels, window="blackman-harris")
-		d_transform = np.fft.ifft(data * window)
-		d_transform = (np.fft.fftshift(d_transform))
+		d_transform = np.fft.ifft((data * window), axis=1)
+		d_transform = (np.fft.fftshift(d_transform), axes=1)
 		#d_transform = np.abs(d_transform)
 		plt.plot(np.log10(np.abs(d_transform)))
 		plt.xlabel('Delay [bins]')
@@ -122,8 +122,8 @@ def delaytransformavgbaseline(data_dir, stokes):
 	avg = 0
 	for antstr in baselines:
 		ant_i, ant_j = map(int, antstr.split('_'))
-		d_transform = np.fft.ifft(avgfreqcalc(data_dir, antstr, stokes), axis=1)
-		d_transform = (np.fft.fftshift(d_transform), axes=1)
+		d_transform = np.fft.ifft(avgfreqcalc(data_dir, antstr, stokes))
+		d_transform = (np.fft.fftshift(d_transform))
 		d_transform = np.abs(d_transform)
 		avg += d_transform
 	avg = avg/len(baselines)
