@@ -102,7 +102,6 @@ def delaytransformv1(data_dir, stokes):
 		#d_transform = np.abs(d_transform)
 		plt.plot(np.log10(np.abs(d_transform)))
 		plt.xlabel('Delay [bins]')
-		plt.xlim(400, 600)
 		plt.ylabel('log10(abs(V_I)')
 		plt.title('XX Delay Transform'+antstr+stokes)
 		plt.savefig("/data4/paper/rkb/delaygifstorage/"+'delaytransform'+'{} {}.png'.format(antstr, stokes))
