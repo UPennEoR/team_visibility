@@ -6,6 +6,7 @@ import numpy as np
 import glob
 import imageio
 import shutil
+import os
 from VIQUVaveraged_over_time import avgfreqcalc
 
 
@@ -25,14 +26,14 @@ def delaytransform(data_dir):
 	t_start = d_short.shape[0]
 
 	plt.subplot(121)
-	plt.imshow(np.log10(np.abs(d_fft_short)), aspect='auto', cmap='jet', vmax=0, vmin = -4, extent=[d_start, d_end, t_start,0])
+	plt.imshow(np.log10(np.abs(d_fft_short)), aspect='auto', cmap='jet', vmax=0, vmin = -6, extent=[-250, 250, t_start,0])
 	plt.title('short: 72_97')
 	plt.ylabel('Time')
 	plt.xlabel('Delay [ns]')
 	plt.tight_layout()
 
 	plt.subplot(122)
-	plt.imshow(np.log10(np.abs(d_fft_long)), aspect='auto', cmap='jet', vmax=0, vmin = -4, extent=[d_start, d_end, t_start,0])
+	plt.imshow(np.log10(np.abs(d_fft_long)), aspect='auto', cmap='jet', vmax=0, vmin = -4, extent=[-250, 250, t_start,0])
 	plt.title('long: 88_43')
 	plt.ylabel('Time')
 	plt.xlabel('Delay [ns]')
@@ -84,18 +85,22 @@ def delaytransformlooped(data_dir):
 	gif = []
 	for filename in images:
    		gif.append(imageio.imread(filename))
-	imageio.mimsave('/data4/paper/rkb/gifstorage/delaygif.gif', gif,fps=3)
+	imageio.mimsave('/data4/paper/rkb/gifstorage/delaygif.gif', gif,fps=1)
 def delaytransformv1(data_dir, stokes):
-	baselines = ['72_112', '97_112', '22_105', '22_81', '10_81', '9_88', '9_20', '20_89', '43_89', '53_64', '31_53', '31_65', '80_104', '96_104']
+	os.makedirs("/data4/paper/rkb/delaygifstorage/")
+	#type-abaselines = ['72_112', '97_112', '22_105', '9_88', '9_20', '20_89', '43_89', '53_64', '31_53', '31_65', '80_104', '96_104']
+	#type-cbaselines = ['72_105', '88_105', '22_112', '9_22', '9_64', '20_53', '53_80', '10_89', '31_89', '31_104', '43_65', '65_96']
+	baselines = ['64_88', '64_80', '9_105', '9_53', '53_104', '22_72', '20_22', '20_31', '31_96', '65_89', '10_97', '10_43']
 	for antstr in baselines:
 		ant_i, ant_j = map(int, antstr.split('_'))
 		d_transform = np.fft.ifft(avgfreqcalc(data_dir, antstr, stokes))
 		d_transform = (np.fft.fftshift(d_transform))
-		d_transform = np.abs(d_transform)
-		plt.plot(np.log10((d_transform)))
-		plt.xlabel('Delay(ns)')
+		#d_transform = np.abs(d_transform)
+		plt.plot(np.real(np.log10((d_transform))))
+		plt.plot(np.imag(np.log10(np.fft.fftshift(np.fft.ifft(avgfreqcalc(data_dir, antstr, stokes))))))
+		plt.xlabel('Delay [bins]')
 		plt.xlim(400, 600)
-		plt.ylabel('log10(abs(V_{}))').format(stokes)
+		plt.ylabel('log10(abs(V_I)')
 		plt.title('XX Delay Transform'+antstr+stokes)
 		plt.savefig("/data4/paper/rkb/delaygifstorage/"+'delaytransform'+'{} {}.png'.format(antstr, stokes))
 		plt.clf()
@@ -103,10 +108,26 @@ def delaytransformv1(data_dir, stokes):
 	gif = []
 	for filename in images:
    		gif.append(imageio.imread(filename))
-	imageio.mimsave('/data4/paper/rkb/delayv1gif.gif', gif,fps=3)
+	imageio.mimsave('/data4/paper/rkb/delayv1gif.gif', gif,fps=1)
 	shutil.rmtree('/data4/paper/rkb/delaygifstorage/')
 
-
+def delaytransformavgbaseline(data_dir, stokes):
+	baselines = ['64_88', '64_80', '9_105', '9_53', '53_104', '22_72', '20_22', '20_31', '31_96', '65_89', '10_97', '10_43', '72_105', '88_105', '22_112', '9_22', '9_64', '20_53', '53_80', '10_89', '31_89', '31_104', '43_65', '65_96', '72_112', '97_112', '22_105', '9_88', '9_20', '20_89', '43_89', '53_64', '31_53', '31_65', '80_104', '96_104']
+	avg = 0
+	for antstr in baselines:
+		ant_i, ant_j = map(int, antstr.split('_'))
+		d_transform = np.fft.ifft(avgfreqcalc(data_dir, antstr, stokes))
+		d_transform = (np.fft.fftshift(d_transform))
+		d_transform = np.abs(d_transform)
+		avg += d_transform
+	avg = avg/len(baselines)
+	plt.xlim(400,600)
+	plt.xlabel('Delay [bins]')
+	plt.ylabel('log10(V_I)')
+	plt.plot(np.real(np.log10(avg)))
+	plt.plot(np.imag(np.log10(avg)))
+	plt.title('Delay Transform Averaged over Baseline')
+	plt.savefig("/data4/paper/rkb/"+ "delaytransformavged.png")
 #Errorlog:
 #Error 1: 7/5/17 at 23:51; running into error "UnboundLocalError: local variable 'uv' referenced before assignment"
 #Resolved (Error 1): 7/6/17; fixed location of directory; the program wasn't finding anything at the files I pointed it to

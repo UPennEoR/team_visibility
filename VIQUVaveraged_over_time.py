@@ -5,8 +5,8 @@ import glob
 
 def avgfreqcalc(data_dir, antstr, stokes):
     xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
-    xy_data = glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR']))
-    yx_data = glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR']))
+    #xy_data = glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR']))
+    #yx_data = glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR']))
     yy_data = glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR']))
 
     ant_i, ant_j = map(int, antstr.split('_'))
@@ -51,3 +51,21 @@ def avgfreqcalc(data_dir, antstr, stokes):
     # plt.xlabel("Frequency channel")
     # plt.ylabel("Average power")
     # plt.show()
+def avgfreqloop(data_dir, stokes):
+    baselines = ['64_88', '64_80', '9_105', '9_53', '53_104', '22_72', '20_22', '20_31', '31_96', '65_89', '10_97', '10_43', '72_105', '88_105', '22_112', '9_22', '9_64', '20_53', '53_80', '10_89', '31_89', '31_104', '43_65', '65_96', '72_112', '97_112', '22_105', '9_88', '9_20', '20_89', '43_89', '53_64', '31_53', '31_65', '80_104', '96_104']
+    for antstr in baselines:
+        ant_i, ant_j = map(int, antstr.split('_'))
+        if stokes == "I":
+            xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
+            yy_data = glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR']))
+            for i in np.arange(len(xx_data)):
+                t_xx, d_xx, f_xx = capo.miriad.read_files([xx_data[i]], antstr=antstr, polstr='xx')
+                t_yy, d_yy, f_yy = capo.miriad.read_files([yy_data[i]], antstr=antstr, polstr='yy')
+                vis_xx = d_xx[(ant_i, ant_j)]['xx']
+                vis_yy = d_yy[(ant_i, ant_j)]['yy']
+
+    xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
+    #xy_data = glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR']))
+    #yx_data = glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR']))
+    yy_data = glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR']))
+
