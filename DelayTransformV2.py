@@ -7,6 +7,7 @@ import glob
 import imageio
 import shutil
 import os
+import aipy
 from VIQUVaveraged_over_time import avgfreqcalc
 
 
@@ -90,14 +91,17 @@ def delaytransformv1(data_dir, stokes):
 	os.makedirs("/data4/paper/rkb/delaygifstorage/")
 	#type-abaselines = ['72_112', '97_112', '22_105', '9_88', '9_20', '20_89', '43_89', '53_64', '31_53', '31_65', '80_104', '96_104']
 	#type-cbaselines = ['72_105', '88_105', '22_112', '9_22', '9_64', '20_53', '53_80', '10_89', '31_89', '31_104', '43_65', '65_96']
-	baselines = ['64_88', '64_80', '9_105', '9_53', '53_104', '22_72', '20_22', '20_31', '31_96', '65_89', '10_97', '10_43']
+	#baselines = ['64_88', '64_80', '9_105', '9_53', '53_104', '22_72', '20_22', '20_31', '31_96', '65_89', '10_97', '10_43']
+	baselines = ['64_88', '64_80']
 	for antstr in baselines:
 		ant_i, ant_j = map(int, antstr.split('_'))
-		d_transform = np.fft.ifft(avgfreqcalc(data_dir, antstr, stokes))
+		data, channels = avgfreqcalc(data_dir, antstr, stokes)
+		window = aipy.dsp.gen_window(channels, window="blackman-harris")
+		d_transform = np.fft.ifft(data * window)
 		d_transform = (np.fft.fftshift(d_transform))
 		#d_transform = np.abs(d_transform)
-		plt.plot(np.real(np.log10((d_transform))))
-		plt.plot(np.imag(np.log10(np.fft.fftshift(np.fft.ifft(avgfreqcalc(data_dir, antstr, stokes))))))
+		plt.plot(np.log10(np.real(d_transform)))
+		plt.plot(np.log10(np.imag(d_transform)))
 		plt.xlabel('Delay [bins]')
 		plt.xlim(400, 600)
 		plt.ylabel('log10(abs(V_I)')
@@ -110,6 +114,9 @@ def delaytransformv1(data_dir, stokes):
    		gif.append(imageio.imread(filename))
 	imageio.mimsave('/data4/paper/rkb/delayv1gif.gif', gif,fps=1)
 	shutil.rmtree('/data4/paper/rkb/delaygifstorage/')
+
+
+
 
 def delaytransformavgbaseline(data_dir, stokes):
 	baselines = ['64_88', '64_80', '9_105', '9_53', '53_104', '22_72', '20_22', '20_31', '31_96', '65_89', '10_97', '10_43', '72_105', '88_105', '22_112', '9_22', '9_64', '20_53', '53_80', '10_89', '31_89', '31_104', '43_65', '65_96', '72_112', '97_112', '22_105', '9_88', '9_20', '20_89', '43_89', '53_64', '31_53', '31_65', '80_104', '96_104']

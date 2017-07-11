@@ -26,6 +26,7 @@ def avgfreqcalc(data_dir, antstr, stokes):
 
         if avg_freq is None:
             avg_freq = np.zeros((vis_xx.shape[1]))
+        channels = vis_xx.shape[1]
         if stokes == "I":
             stokes_I = vis_xx + vis_yy
             for it in range(vis_xx.shape[0]):    
@@ -41,7 +42,7 @@ def avgfreqcalc(data_dir, antstr, stokes):
 
     # finish averaging
     avg_freq = avg_freq/n_avg
-    return avg_freq
+    return avg_freq, channels
 
 
 
