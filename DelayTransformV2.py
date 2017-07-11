@@ -98,7 +98,7 @@ def delaytransformv1(data_dir, stokes):
 		data, channels = avgfreqcalc(data_dir, antstr, stokes)
 		window = aipy.dsp.gen_window(channels, window="blackman-harris")
 		d_transform = np.fft.ifft((data * window), axis=1)
-		d_transform = (np.fft.fftshift(d_transform), axes=1)
+		d_transform = np.fft.fftshift(d_transform, axes=1)
 		#d_transform = np.abs(d_transform)
 		plt.plot(np.log10(np.abs(d_transform)))
 		plt.xlabel('Delay [bins]')
