@@ -13,7 +13,7 @@ import hsa7458_v001 as cal
 
 def calculate_baseline(pair):
 	antennae = cal.prms['antpos_ideal']
-	dx = ant_i[0]['top_x'] - antennae[pair[1]]['top_x']
+	dx = antennae[pair[0]]['top_x'] - antennae[pair[1]]['top_x']
 	dy = antennae[pair[0]]['top_y'] - antennae[pair[1]]['top_y']
 	baseline = np.around([np.sqrt(dx**2. + dy**2.)],3)[0] #XXX this may need tuning
 	return baseline
