@@ -89,7 +89,7 @@ def delaytransformlooped(data_dir):
 	imageio.mimsave('/data4/paper/rkb/gifstorage/delaygif.gif', gif,fps=1)
 def delaytransformv1(data_dir, stokes):
 	if os.path.isdir("/data4/paper/rkb/delaygifstorage/"):
-		continue
+		pass
 	else:
 		os.makedirs("/data4/paper/rkb/delaygifstorage/")
 	#type-abaselines = ['72_112', '97_112', '22_105', '9_88', '9_20', '20_89', '43_89', '53_64', '31_53', '31_65', '80_104', '96_104']
