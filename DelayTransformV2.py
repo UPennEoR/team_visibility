@@ -35,7 +35,7 @@ def get_baselines(ex_ants=[]):
 	f.close()
 	baselines = {}
 	if antenna_i == antenna_j:
-		continue
+		pass
 	elif antenna_i < antenna_j:
 		pair = (antenna_i, antenna_j)
 	elif antenna_i > antenna_j:
@@ -46,7 +46,7 @@ def get_baselines(ex_ants=[]):
 	if (baseline not in baselines):
 		baselines[baseline] = [pair]
 	elif (pair in baselines[baseline]):
-		continue
+		pass
 	else:
 		baselines[baseline].append(pair)
 	return baselines
