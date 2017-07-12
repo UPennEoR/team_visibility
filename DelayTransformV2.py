@@ -27,14 +27,14 @@ def delaytransform(data_dir):
 	t_start = d_short.shape[0]
 
 	plt.subplot(121)
-	plt.imshow(np.log10(np.abs(d_fft_short)), aspect='auto', cmap='jet', vmax=0, vmin = -6)
+	plt.imshow(np.log10(np.abs(d_fft_short)), aspect='auto', cmap='jet', vmax=0, vmin = -6, extent=[-250, 250, t_start,0])
 	plt.title('short: 72_97')
 	plt.ylabel('Time')
 	plt.xlabel('Delay [ns]')
 	plt.tight_layout()
 
 	plt.subplot(122)
-	plt.imshow(np.log10(np.abs(d_fft_long)), aspect='auto', cmap='jet', vmax=0, vmin = -4)
+	plt.imshow(np.log10(np.abs(d_fft_long)), aspect='auto', cmap='jet', vmax=0, vmin = -4, extent=[-250, 250, t_start,0])
 	plt.title('long: 88_43')
 	plt.ylabel('Time')
 	plt.xlabel('Delay [ns]')
@@ -105,10 +105,9 @@ def delaytransformv1(data_dir, stokes):
 		d_start = delays[0]
 		d_end = delays[-1]
 		t_start = d_transform.shape[0]
-
-
 		#d_transform = np.abs(d_transform)
 		plt.plot(np.log10(np.abs(d_transform)))
+		plt.xlim(d_start, d_end)
 		plt.xlabel('Delay [bins]')
 		plt.ylabel('log10(abs(V_I)')
 		plt.title('XX Delay Transform'+antstr+stokes)
