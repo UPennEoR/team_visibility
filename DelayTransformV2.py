@@ -10,6 +10,69 @@ import os
 import aipy
 from VIQUVaveraged_over_time import avgfreqcalc
 
+def calculate_baseline(pair):
+	calfile = f.open("/data4/paper/rkb/hsa7458_v001.py")
+	try:
+		print 'reading, %s'%calfile
+		exec("import {cfile} as cal".format(cfile=calfile))
+		antennae = cal.prms['antpos_ideal']
+	except ImportError:
+		raise Exception("Unable to import {cfile}.".format(cfile=calfile))
+	f.close()
+
+    """
+    The decimal module is necessary for keeping the number of decimal places small.
+    Due to small imprecision, if more than 8 or 9 decimal places are used, 
+    many baselines will be calculated that are within ~1 nanometer to ~1 picometer of each other.
+    Because HERA's position precision is down to the centimeter, there is no 
+    need to worry about smaller imprecision.
+    """
+
+    dx = ant_i[0]['top_x'] - antennae[pair[1]]['top_x']
+    dy = antennae[pair[0]]['top_y'] - antennae[pair[1]]['top_y']
+    baseline = np.around([np.sqrt(dx**2. + dy**2.)],3)[0] #XXX this may need tuning
+    return baseline
+
+def get_baselines(ex_ants=[]):
+    """
+    Returns a dictionary of redundant baselines based on a calfile, and
+    excluding bad antennae, specified by ex_ants, a list of integers.
+    
+    Requires cal file to be in PYTHONPATH.
+    """
+	calfile = f.open("/data4/paper/rkb/hsa7458_v001.py")
+	try:
+		print 'reading, %s'%calfile
+		exec("import {cfile} as cal".format(cfile=calfile))
+		antennae = cal.prms['antpos_ideal']
+	except ImportError:
+		raise Exception("Unable to import {cfile}.".format(cfile=calfile))
+	f.close()
+
+    
+    """
+    determines the baseline and places them in the dictionary.
+    excludes antennae with z-position < 0 or if in ex_ants list
+    """
+    
+    baselines = {}
+            if antenna_i == antenna_j:
+                continue
+            elif antenna_i < antenna_j:
+                pair = (antenna_i, antenna_j)
+            elif antenna_i > antenna_j:
+                pair = (antenna_j, antenna_i)
+
+            baseline = calculate_baseline(antennae, pair)
+
+            if (baseline not in baselines):
+                baselines[baseline] = [pair]
+            elif (pair in baselines[baseline]):
+                continue
+            else:
+                baselines[baseline].append(pair)
+    return baselines
+
 
 def delaytransform(data_dir):
 	files= glob.glob(''.join([data_dir, 'zen.2457746.*.*.HH.uvcORR']))
@@ -98,6 +161,7 @@ def delaytransformv1(data_dir, stokes):
 	baselines = ['64_88', '64_80']
 	for antstr in baselines:
 		ant_i, ant_j = map(int, antstr.split('_'))
+		pair = (ant_i, ant_j)
 		data, channels = avgfreqcalc(data_dir, antstr, stokes)
 		window = aipy.dsp.gen_window(channels, window="blackman-harris")
 		d_transform = np.fft.fftshift(np.fft.ifft(np.fft.fftshift(data * window)))
@@ -107,7 +171,7 @@ def delaytransformv1(data_dir, stokes):
 		#d_transform = np.abs(d_transform)
 		f, ax = plt.subplots(figsize=(5, 4))
 		ax.plot(delays, np.log(np.abs(d_transform)))
-		tauh = baseline_length_in_m/2.9979e8*1e9 # convert to ns
+		tauh = calculate_baseline(pair)/2.9979e8*1e9 # convert to ns
 		ax = plt.gca()
 		ax.axvline(y=0., linestyle='--', color='0.5')
 		ax.axvline(y=-tauh, linestyle='--', color='0.5')
