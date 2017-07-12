@@ -88,7 +88,10 @@ def delaytransformlooped(data_dir):
    		gif.append(imageio.imread(filename))
 	imageio.mimsave('/data4/paper/rkb/gifstorage/delaygif.gif', gif,fps=1)
 def delaytransformv1(data_dir, stokes):
-	os.makedirs("/data4/paper/rkb/delaygifstorage/")
+	if os.path.isdir("/data4/paper/rkb/delaygifstorage/"):
+		continue
+	else:
+		os.makedirs("/data4/paper/rkb/delaygifstorage/")
 	#type-abaselines = ['72_112', '97_112', '22_105', '9_88', '9_20', '20_89', '43_89', '53_64', '31_53', '31_65', '80_104', '96_104']
 	#type-cbaselines = ['72_105', '88_105', '22_112', '9_22', '9_64', '20_53', '53_80', '10_89', '31_89', '31_104', '43_65', '65_96']
 	#baselines = ['64_88', '64_80', '9_105', '9_53', '53_104', '22_72', '20_22', '20_31', '31_96', '65_89', '10_97', '10_43']
@@ -97,8 +100,7 @@ def delaytransformv1(data_dir, stokes):
 		ant_i, ant_j = map(int, antstr.split('_'))
 		data, channels = avgfreqcalc(data_dir, antstr, stokes)
 		window = aipy.dsp.gen_window(channels, window="blackman-harris")
-		d_transform = np.fft.fftshift(np.fft.ifft(data * window))
-		d_transform = np.fft.fftshift(d_transform)
+		d_transform = (np.fft.ifft(data * window))
 		#d_transform = np.abs(d_transform)
 		plt.plot(np.log10(np.abs(d_transform)))
 		plt.xlabel('Delay [bins]')
