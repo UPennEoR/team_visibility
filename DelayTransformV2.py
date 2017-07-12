@@ -101,7 +101,7 @@ def delaytransformv1(data_dir, stokes):
 		data, channels = avgfreqcalc(data_dir, antstr, stokes)
 		window = aipy.dsp.gen_window(channels, window="blackman-harris")
 		d_transform = np.fft.fftshift(np.fft.ifft(data * window))
-		delays = np.fft.fftshift(np.fft.fftfreq(d_transform.shape[1], .1/d_transform.shape[1])) # fftfreq takes in (nchan, chan_spacing)
+		delays = np.fft.fftshift(np.fft.fftfreq(d_transform.shape[0], .1/d_transform.shape[0])) # fftfreq takes in (nchan, chan_spacing)
 		d_start = delays[0]
 		d_end = delays[-1]
 		t_start = d_transform.shape[0]
