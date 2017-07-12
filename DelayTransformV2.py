@@ -105,7 +105,7 @@ def delaytransformv1(data_dir, stokes):
 		d_start = delays[0]
 		d_end = delays[-1]
 		#d_transform = np.abs(d_transform)
-		f, ax = plt.subplots(figsize(9, 16))
+		f, ax = plt.subplots(figsize=(9, 16))
 		ax.plot(delays, np.log(np.abs(d_transform)))
 		ax.set_xlim(d_start, d_end)
 		ax.set_xlabel('Delay [bins]')
