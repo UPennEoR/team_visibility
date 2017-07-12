@@ -19,12 +19,10 @@ def calculate_baseline(pair):
 	except ImportError:
 		raise Exception("Unable to import {cfile}.".format(cfile=calfile))
 	f.close()
-
-   
-    dx = ant_i[0]['top_x'] - antennae[pair[1]]['top_x']
-    dy = antennae[pair[0]]['top_y'] - antennae[pair[1]]['top_y']
-    baseline = np.around([np.sqrt(dx**2. + dy**2.)],3)[0] #XXX this may need tuning
-    return baseline
+	dx = ant_i[0]['top_x'] - antennae[pair[1]]['top_x']
+	dy = antennae[pair[0]]['top_y'] - antennae[pair[1]]['top_y']
+	baseline = np.around([np.sqrt(dx**2. + dy**2.)],3)[0] #XXX this may need tuning
+	return baseline
 
 def get_baselines(ex_ants=[]):
     """
