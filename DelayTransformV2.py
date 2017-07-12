@@ -25,12 +25,6 @@ def calculate_baseline(pair):
 	return baseline
 
 def get_baselines(ex_ants=[]):
-    """
-    Returns a dictionary of redundant baselines based on a calfile, and
-    excluding bad antennae, specified by ex_ants, a list of integers.
-    
-    Requires cal file to be in PYTHONPATH.
-    """
 	calfile = f.open("/data4/paper/rkb/hsa7458_v001.py")
 	try:
 		print 'reading, %s'%calfile
