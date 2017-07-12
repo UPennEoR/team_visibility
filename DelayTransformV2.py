@@ -145,9 +145,9 @@ def delaytransformv1(data_dir, stokes):
 		ax.plot(delays, np.log(np.abs(d_transform)))
 		tauh = calculate_baseline(pair)/2.9979e8*1e9 # convert to ns
 		ax = plt.gca()
-		ax.axvline(y=0., linestyle='--', color='0.5')
-		ax.axvline(y=-tauh, linestyle='--', color='0.5')
-		ax.axvline(y=tauh, linestyle='--', color='0.5')
+		ax.axvline(x=0., linestyle='--', color='0.5')
+		ax.axvline(x=-tauh, linestyle='--', color='0.5')
+		ax.axvline(x=tauh, linestyle='--', color='0.5')
 		ax.set_xlim(-400, 400)
 		ax.set_ylim(-8, -2)
 		ax.set_xlabel('Delay [bins]')
