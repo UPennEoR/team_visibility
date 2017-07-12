@@ -15,27 +15,46 @@ def avgfreqcalc(data_dir, antstr, stokes):
     avg_freq = None
     n_avg = 0
     # loop over files
-    for i in np.arange(len(xx_data)):
-        t_xx, d_xx, f_xx = capo.miriad.read_files([xx_data[i]], antstr=antstr, polstr='xx', verbose=True)
-        #t_xy, d_xy, f_xy = capo.miriad.read_files([xy_data[i]], antstr=antstr, polstr='xy')
-        #t_yx, d_yx, f_yx = capo.miriad.read_files([yx_data[i]], antstr=antstr, polstr='yx')
-        t_yy, d_yy, f_yy = capo.miriad.read_files([yy_data[i]], antstr=antstr, polstr='yy', verbose=True)
+    if stokes == "I" or "Q":
+        for i in np.arange(len(xx_data)):
+            t_xx, d_xx, f_xx = capo.miriad.read_files([xx_data[i]], antstr=antstr, polstr='xx', verbose=True)
+            #t_xy, d_xy, f_xy = capo.miriad.read_files([xy_data[i]], antstr=antstr, polstr='xy')
+            #t_yx, d_yx, f_yx = capo.miriad.read_files([yx_data[i]], antstr=antstr, polstr='yx')
+            t_yy, d_yy, f_yy = capo.miriad.read_files([yy_data[i]], antstr=antstr, polstr='yy', verbose=True)
 
-        vis_xx = d_xx[(ant_i, ant_j)]['xx']
-        vis_yy = d_yy[(ant_i, ant_j)]['yy']
-        channels = vis_xx.shape[1]
-        if avg_freq is None:
-            avg_freq = np.zeros((vis_xx.shape[1]))
-        if stokes == "I":
-            stokes_I = vis_xx + vis_yy
-            for it in range(vis_xx.shape[0]):    
-                avg_freq += np.abs(stokes_I[it, :])
-                n_avg += 1
-        elif stokes == "Q":
-            stokes_Q = vis_xx - vis_yy
-            for it in range(vis_xx.shape[0]):    
-                avg_freq += np.abs(stokes_Q[it, :])
-                n_avg += 1
+            vis_xx = d_xx[(ant_i, ant_j)]['xx']
+            vis_yy = d_yy[(ant_i, ant_j)]['yy']
+            channels = vis_xx.shape[1]
+            if avg_freq is None:
+                avg_freq = np.zeros((vis_xx.shape[1]))
+            if stokes == "I":
+                stokes_I = vis_xx + vis_yy
+                for it in range(vis_xx.shape[0]):    
+                    avg_freq += np.abs(stokes_I[it, :])
+                    n_avg += 1
+            elif stokes == "Q":
+                stokes_Q = vis_xx - vis_yy
+                for it in range(vis_xx.shape[0]):    
+                    avg_freq += np.abs(stokes_Q[it, :])
+                    n_avg += 1
+        elif stokes == "U" or "V":
+            t_xy, d_xy, f_xy = capo.miriad.read_files([xy_data[i]], antstr=antstr, polstr='xy')
+            t_yx, d_yx, f_yx = capo.miriad.read_files([yx_data[i]], antstr=antstr, polstr='yx')
+            vis_xy = d_xy[(ant_i, ant_j)]['xy']
+            vis_yx = d_yx[(ant_i, ant_j)]['yx']
+            channels = vis_xy.shape[1]
+            if avg_freq is None:
+                avg_freq = np.zeros((vis_xx.shape[1]))
+            if stokes == "U":
+                stokes_U = vis_xy + vis_yx
+                for it in range(vis_xy.shape[0]):    
+                    avg_freq += np.abs(stokes_U[it, :])
+                    n_avg += 1
+            elif stokes == "V":
+                stokes_V = np.imag(vis_xy) - np.imag(vis_yx)
+                for it in range(vis_xy.shape[0]):    
+                    avg_freq += np.abs(stokes_U[it, :])
+                    n_avg += 1
         else:
             print ("I'm sorry, but this script does not yet support the stokes you have requested.")
 
