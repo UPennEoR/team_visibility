@@ -34,21 +34,21 @@ def get_baselines(ex_ants=[]):
 		raise Exception("Unable to import {cfile}.".format(cfile=calfile))
 	f.close()
 	baselines = {}
-		if antenna_i == antenna_j:
-			continue
-		elif antenna_i < antenna_j:
-			pair = (antenna_i, antenna_j)
-		elif antenna_i > antenna_j:
-			pair = (antenna_j, antenna_i)
+	if antenna_i == antenna_j:
+		continue
+	elif antenna_i < antenna_j:
+		pair = (antenna_i, antenna_j)
+	elif antenna_i > antenna_j:
+		pair = (antenna_j, antenna_i)
 
-		baseline = calculate_baseline(antennae, pair)
+	baseline = calculate_baseline(antennae, pair)
 
-		if (baseline not in baselines):
-			baselines[baseline] = [pair]
-		elif (pair in baselines[baseline]):
-			continue
-		else:
-			baselines[baseline].append(pair)
+	if (baseline not in baselines):
+		baselines[baseline] = [pair]
+	elif (pair in baselines[baseline]):
+		continue
+	else:
+		baselines[baseline].append(pair)
 	return baselines
 
 
