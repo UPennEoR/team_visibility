@@ -151,7 +151,7 @@ def delaytransformv1(data_dir, stokes):
 		ax.set_ylim(-8, -2)
 		ax.set_xlabel('Delay [bins]')
 		ax.set_ylabel('log10(abs(V_I)')
-		ax.set_title('XX Delay Transform'+antstr+stokes)
+		ax.set_title('Delay Transform'+antstr+stokes)
 		plt.savefig("/data4/paper/rkb/delaygifstorage/"+'delaytransform'+'{} {}.png'.format(antstr, stokes))
 		plt.clf()
 	images = glob.glob('/data4/paper/rkb/delaygifstorage/*.png')
