@@ -5,8 +5,8 @@ import glob
 
 def avgfreqcalc(data_dir, antstr, stokes):
     xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
-    #xy_data = glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR']))
-    #yx_data = glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR']))
+    xy_data = glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR']))
+    yx_data = glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR']))
     yy_data = glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR']))
 
     ant_i, ant_j = map(int, antstr.split('_'))
@@ -37,7 +37,8 @@ def avgfreqcalc(data_dir, antstr, stokes):
                 for it in range(vis_xx.shape[0]):    
                     avg_freq += np.abs(stokes_Q[it, :])
                     n_avg += 1
-        elif stokes is "U" or "V":
+    elif stokes is "U" or "V":
+        for i in np.arange(len(xy_data)):
             t_xy, d_xy, f_xy = capo.miriad.read_files([xy_data[i]], antstr=antstr, polstr='xy')
             t_yx, d_yx, f_yx = capo.miriad.read_files([yx_data[i]], antstr=antstr, polstr='yx')
             vis_xy = d_xy[(ant_i, ant_j)]['xy']
