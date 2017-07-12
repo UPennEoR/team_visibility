@@ -108,7 +108,7 @@ def delaytransformv1(data_dir, stokes):
 
 
 		#d_transform = np.abs(d_transform)
-		plt.plot(np.log10(np.abs(d_transform)), extent=)
+		plt.plot(np.log10(np.abs(d_transform)))
 		plt.xlabel('Delay [bins]')
 		plt.ylabel('log10(abs(V_I)')
 		plt.title('XX Delay Transform'+antstr+stokes)
