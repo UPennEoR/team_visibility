@@ -104,10 +104,10 @@ def delaytransformv1(data_dir, stokes):
 		delays = np.fft.fftshift(np.fft.fftfreq(d_transform.shape[0], .1/d_transform.shape[0])) # fftfreq takes in (nchan, chan_spacing)
 		d_start = delays[0]
 		d_end = delays[-1]
-		t_start = d_transform.shape[0]
 		#d_transform = np.abs(d_transform)
 		plt.plot(np.log10(np.abs(d_transform)))
 		plt.xlim(d_start, d_end)
+		plt.set_xlim(-400, 400)
 		plt.xlabel('Delay [bins]')
 		plt.ylabel('log10(abs(V_I)')
 		plt.title('XX Delay Transform'+antstr+stokes)
