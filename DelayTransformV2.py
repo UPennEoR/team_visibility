@@ -12,12 +12,7 @@ from VIQUVaveraged_over_time import avgfreqcalc
 
 def calculate_baseline(pair):
 	calfile = open("/data4/paper/rkb/hsa7458_v001.py")
-	try:
-		print 'reading, %s'%calfile
-		exec("import {cfile} as cal".format(cfile=calfile))
-		antennae = cal.prms['antpos_ideal']
-	except ImportError:
-		raise Exception("Unable to import {cfile}.".format(cfile=calfile))
+	antennae = cal.prms['antpos_ideal']
 	calfile.close()
 	dx = ant_i[0]['top_x'] - antennae[pair[1]]['top_x']
 	dy = antennae[pair[0]]['top_y'] - antennae[pair[1]]['top_y']
