@@ -20,14 +20,7 @@ def calculate_baseline(pair):
 		raise Exception("Unable to import {cfile}.".format(cfile=calfile))
 	f.close()
 
-    """
-    The decimal module is necessary for keeping the number of decimal places small.
-    Due to small imprecision, if more than 8 or 9 decimal places are used, 
-    many baselines will be calculated that are within ~1 nanometer to ~1 picometer of each other.
-    Because HERA's position precision is down to the centimeter, there is no 
-    need to worry about smaller imprecision.
-    """
-
+   
     dx = ant_i[0]['top_x'] - antennae[pair[1]]['top_x']
     dy = antennae[pair[0]]['top_y'] - antennae[pair[1]]['top_y']
     baseline = np.around([np.sqrt(dx**2. + dy**2.)],3)[0] #XXX this may need tuning
