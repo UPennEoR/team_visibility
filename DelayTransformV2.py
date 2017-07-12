@@ -33,30 +33,23 @@ def get_baselines(ex_ants=[]):
 	except ImportError:
 		raise Exception("Unable to import {cfile}.".format(cfile=calfile))
 	f.close()
+	baselines = {}
+			if antenna_i == antenna_j:
+				continue
+			elif antenna_i < antenna_j:
+				pair = (antenna_i, antenna_j)
+			elif antenna_i > antenna_j:
+				pair = (antenna_j, antenna_i)
 
-    
-    """
-    determines the baseline and places them in the dictionary.
-    excludes antennae with z-position < 0 or if in ex_ants list
-    """
-    
-    baselines = {}
-            if antenna_i == antenna_j:
-                continue
-            elif antenna_i < antenna_j:
-                pair = (antenna_i, antenna_j)
-            elif antenna_i > antenna_j:
-                pair = (antenna_j, antenna_i)
+			baseline = calculate_baseline(antennae, pair)
 
-            baseline = calculate_baseline(antennae, pair)
-
-            if (baseline not in baselines):
-                baselines[baseline] = [pair]
-            elif (pair in baselines[baseline]):
-                continue
-            else:
-                baselines[baseline].append(pair)
-    return baselines
+			if (baseline not in baselines):
+				baselines[baseline] = [pair]
+			elif (pair in baselines[baseline]):
+				continue
+			else:
+				baselines[baseline].append(pair)
+	return baselines
 
 
 def delaytransform(data_dir):
@@ -133,7 +126,7 @@ def delaytransformlooped(data_dir):
 	images = glob.glob('/data4/paper/rkb/gifstorage/*.png')
 	gif = []
 	for filename in images:
-   		gif.append(imageio.imread(filename))
+		gif.append(imageio.imread(filename))
 	imageio.mimsave('/data4/paper/rkb/gifstorage/delaygif.gif', gif,fps=1)
 def delaytransformv1(data_dir, stokes):
 	if os.path.isdir("/data4/paper/rkb/delaygifstorage/"):
@@ -171,7 +164,7 @@ def delaytransformv1(data_dir, stokes):
 	images = glob.glob('/data4/paper/rkb/delaygifstorage/*.png')
 	gif = []
 	for filename in images:
-   		gif.append(imageio.imread(filename))
+		gif.append(imageio.imread(filename))
 	imageio.mimsave('/data4/paper/rkb/delayv1gif.gif', gif,fps=1)
 	shutil.rmtree('/data4/paper/rkb/delaygifstorage/')
 
