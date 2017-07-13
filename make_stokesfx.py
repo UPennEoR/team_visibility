@@ -13,10 +13,10 @@ def getstokes(data_dir):
 		os.makedirs("/data4/paper/rkb/stokesgifstorage/")
 	baseline = ['64_88', '64_80', '9_105', '9_53', '53_104', '22_72', '20_22']
 	for antstr in baseline:
-		xx_data = glob.glob(''.join([data_dir, 'zen.2457746.xx.HH.uvcORR']))
-		xy_data = glob.glob(''.join([data_dir, 'zen.2457746.xy.HH.uvcORR']))
-		yx_data = glob.glob(''.join([data_dir, 'zen.2457746.yx.HH.uvcORR']))
-		yy_data = glob.glob(''.join([data_dir, 'zen.2457746.yy.HH.uvcORR']))
+		xx_data = glob.glob(''.join([data_dir, 'zen.2457746.35483.xx.HH.uvcORR']))
+		xy_data = glob.glob(''.join([data_dir, 'zen.2457746.35483.xy.HH.uvcORR']))
+		yx_data = glob.glob(''.join([data_dir, 'zen.2457746.35483.yx.HH.uvcORR']))
+		yy_data = glob.glob(''.join([data_dir, 'zen.2457746.35483.yy.HH.uvcORR']))
 
 		ant_i, ant_j = map(int, antstr.split('_'))
 
