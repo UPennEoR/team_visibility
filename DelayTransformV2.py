@@ -177,6 +177,7 @@ def delaytransformavgbaseline(data_dir, stokes):
 		delays = np.fft.fftshift(np.fft.fftfreq(channels, .1/channels))
 		avg += d_transform
 	avg = avg/len(baselines)
+	f, ax = plt.subplots(figsize=(5, 4))
 	ax.plot(delays, np.real(np.log10(avg)))
 	ax.plot(delays, np.imag(np.log10(avg)))
 	plt.xlim(-400,400)
