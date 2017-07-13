@@ -181,7 +181,7 @@ def delaytransformavgbaseline(data_dir, stokes):
 	ax.plot(delays, np.real(np.log10(avg)))
 	ax.plot(delays, np.imag(np.log10(avg)))
 	ax.set_xlim(-400,400)
-	ax.set_ylim(-10, -2)
+	ax.set_ylim(-5, 5)
 	ax.set_xlabel('Delay [bins]')
 	ax.set_ylabel('log10(V_I)')
 	ax.set_title('Delay Transform Averaged over Baseline')
