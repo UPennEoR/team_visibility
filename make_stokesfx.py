@@ -10,7 +10,7 @@ def getstokes(data_dir):
 		pass
 	else:
 		os.makedirs("/data4/paper/rkb/stokesgifstorage/")
-	baselines = ['64_88', '64_80', '9_105', '9_53', '53_104', '22_72', '20_22']
+	baseline = ['64_88', '64_80', '9_105', '9_53', '53_104', '22_72', '20_22']
 	for antstr in baseline:
 		xx_data = glob.glob(''.join([data_dir, 'zen.2457746.xx.HH.uvcORR']))
 		xy_data = glob.glob(''.join([data_dir, 'zen.2457746.xy.HH.uvcORR']))
