@@ -15,7 +15,7 @@ def avgfreqcalc(data_dir, antstr, stokes):
 	avg_freq = None
 	n_avg = 0
 	# loop over files
-	if stokes == "I" or "Q":
+	if stokes == "I" or stokes == "Q":
 		for i in np.arange(len(xx_data)):
 			t_xx, d_xx, f_xx = capo.miriad.read_files([xx_data[i]], antstr=antstr, polstr='xx', verbose=True)
 			#t_xy, d_xy, f_xy = capo.miriad.read_files([xy_data[i]], antstr=antstr, polstr='xy')
@@ -37,7 +37,7 @@ def avgfreqcalc(data_dir, antstr, stokes):
 				for it in range(vis_xx.shape[0]):    
 					avg_freq += np.abs(stokes_Q[it, :])
 					n_avg += 1
-	else:
+	elif stokes == "V" or stokes == "U":
 		for i in np.arange(len(xy_data)):
 			t_xy, d_xy, f_xy = capo.miriad.read_files([xy_data[i]], antstr=antstr, polstr='xy', verbose=True)
 			t_yx, d_yx, f_yx = capo.miriad.read_files([yx_data[i]], antstr=antstr, polstr='yx', verbose=True)
