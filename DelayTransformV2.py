@@ -167,12 +167,24 @@ def delaytransformv1(data_dir, stokes):
 def delaytransformavgbaseline(data_dir, stokes):
 	baselines = ['64_88', '64_80', '9_105', '9_53', '53_104', '22_72', '20_22', '20_31', '31_96', '65_89', '10_97', '10_43', '72_105', '88_105', '22_112', '9_22', '9_64', '20_53', '53_80', '10_89', '31_89', '31_104', '43_65', '65_96', '72_112', '97_112', '22_105', '9_88', '9_20', '20_89', '43_89', '53_64', '31_53', '31_65', '80_104', '96_104']
 	avg = 0
-	for antstr in baselines:
-		ant_i, ant_j = map(int, antstr.split('_'))
-		d_transform = np.fft.ifft(avgfreqcalc(data_dir, antstr, stokes))
-		d_transform = (np.fft.fftshift(d_transform))
-		d_transform = np.abs(d_transform)
-		avg += d_transform
+	if stokes == "I" or stokes == "Q":
+		t_xx, d_xx, f_xx = capo.miriad.read_files([xx_data[i]], antstr=antstr, polstr='xx', verbose=True)
+		t_yy, d_yy, f_yy = capo.miriad.read_files([yy_data[i]], antstr=antstr, polstr='yy', verbose=True)
+		for antstr in baselines:
+			ant_i, ant_j = map(int, antstr.split('_'))
+			d_transform = np.fft.ifft(avgfreqcalc(data_dir, antstr, stokes, d_xx, d_yy))
+			d_transform = (np.fft.fftshift(d_transform))
+			d_transform = np.abs(d_transform)
+			avg += d_transform
+	if stokes =="U" or stokes =="V":
+		t_xy, d_xy, f_xy = capo.miriad.read_files([xy_data[i]], antstr=antstr, polstr='xy', verbose=True)
+		t_yx, d_yx, f_yx = capo.miriad.read_files([yx_data[i]], antstr=antstr, polstr='yx', verbose=True)
+		for antstr in baselines:
+				ant_i, ant_j = map(int, antstr.split('_'))
+				d_transform = np.fft.ifft(avgfreqcalc(data_dir, antstr, stokes, d_xy, d_yx))
+				d_transform = (np.fft.fftshift(d_transform))
+				d_transform = np.abs(d_transform)
+				avg += d_transform
 	avg = avg/len(baselines)
 	plt.xlim(400,600)
 	plt.xlabel('Delay [bins]')
