@@ -54,7 +54,7 @@ def avgfreqcalc(data_dir, antstr, stokes):
 			elif stokes == "V":
 				stokes_V = np.imag(vis_xy) - np.imag(vis_yx)
 				for it in range(vis_yx.shape[0]):    
-					avg_freq += np.abs(stokes_U[it, :])
+					avg_freq += np.abs(stokes_V[it, :])
 					n_avg += 1
 			
 
