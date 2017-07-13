@@ -3,7 +3,7 @@ import capo
 import matplotlib.pyplot as plt
 import glob
 
-def avgfreqcalc(data_dir, antstr, stokes, d_xx, d_yy):
+def avgfreqcalc(data_dir, antstr, stokes):
 	xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
 	xy_data = glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR']))
 	yx_data = glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR']))
