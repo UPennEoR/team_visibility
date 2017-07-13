@@ -37,7 +37,7 @@ def avgfreqcalc(data_dir, antstr, stokes):
                 for it in range(vis_xx.shape[0]):    
                     avg_freq += np.abs(stokes_Q[it, :])
                     n_avg += 1
-    elif stokes is "U" or "V":
+    elif stokes == "U" or "V":
         for i in np.arange(len(xy_data)):
             t_xy, d_xy, f_xy = capo.miriad.read_files([xy_data[i]], antstr=antstr, polstr='xy')
             t_yx, d_yx, f_yx = capo.miriad.read_files([yx_data[i]], antstr=antstr, polstr='yx')
@@ -56,8 +56,7 @@ def avgfreqcalc(data_dir, antstr, stokes):
                 for it in range(vis_yx.shape[0]):    
                     avg_freq += np.abs(stokes_U[it, :])
                     n_avg += 1
-        else:
-            print ("I'm sorry, but this script does not yet support the stokes you have requested.")
+            
 
     # finish averaging
     avg_freq = avg_freq/n_avg
