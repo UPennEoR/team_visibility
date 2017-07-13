@@ -1,6 +1,9 @@
 import numpy as np
 import capo
 import matplotlib.pyplot as plt
+import os
+import shutil
+
 
 def getstokes(data_dir):
 	if os.path.isdir("/data4/paper/rkb/stokesgifstorage/"):
