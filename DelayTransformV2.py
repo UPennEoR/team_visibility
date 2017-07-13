@@ -62,14 +62,16 @@ def delaytransform(data_dir):
 	t_start = d_short.shape[0]
 
 	plt.subplot(121)
-	plt.imshow(np.log10(np.abs(d_fft_short)), aspect='auto', cmap='jet', vmax=0, vmin = -6, extent=[-250, 250, t_start,0])
+	plt.imshow(np.log10(np.abs(d_fft_short)), aspect='auto', cmap='jet', vmax=0, vmin = -6, extent=[d_start, d_end, t_start,0])
+	plt.xlim(-250, 250)
 	plt.title('short: 72_97')
 	plt.ylabel('Time')
 	plt.xlabel('Delay [ns]')
 	plt.tight_layout()
 
 	plt.subplot(122)
-	plt.imshow(np.log10(np.abs(d_fft_long)), aspect='auto', cmap='jet', vmax=0, vmin = -4, extent=[-250, 250, t_start,0])
+	plt.imshow(np.log10(np.abs(d_fft_long)), aspect='auto', cmap='jet', vmax=0, vmin = -4, extent=[d_start, d_end, t_start,0])
+	plt.xlim(-250, 250)
 	plt.title('long: 88_43')
 	plt.ylabel('Time')
 	plt.xlabel('Delay [ns]')
@@ -169,16 +171,18 @@ def delaytransformavgbaseline(data_dir, stokes):
 	avg = 0
 	for antstr in baselines:
 		ant_i, ant_j = map(int, antstr.split('_'))
-		d_transform = np.fft.ifft(avgfreqcalc(data_dir, antstr, stokes))
-		d_transform = (np.fft.fftshift(d_transform))
-		d_transform = np.abs(d_transform)
+		data, channels = avgfreqcalc(data_dir, antstr, stokes)
+		window = aipy.dsp.gen_window(channels, window="blackman-harris")
+		d_transform = np.fft.fftshift(np.fft.ifft(np.fft.fftshift(data * window)))
+		delays = np.fft.fftshift(np.fft.fftfreq(channels, .1/channels))
 		avg += d_transform
 	avg = avg/len(baselines)
-	plt.xlim(400,600)
+	ax.plot(delays, np.real(np.log10(avg)))
+	ax.plot(delays, np.imag(np.log10(avg)))
+	plt.xlim(-400,400)
+	plt.setylim(-10, -2)
 	plt.xlabel('Delay [bins]')
 	plt.ylabel('log10(V_I)')
-	plt.plot(np.real(np.log10(avg)))
-	plt.plot(np.imag(np.log10(avg)))
 	plt.title('Delay Transform Averaged over Baseline')
 	plt.savefig("/data4/paper/rkb/"+ "delaytransformavged.png")
 #Errorlog:
