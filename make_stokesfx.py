@@ -3,6 +3,7 @@ import capo
 import matplotlib.pyplot as plt
 import os
 import shutil
+import glob
 
 
 def getstokes(data_dir):
