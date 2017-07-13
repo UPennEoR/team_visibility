@@ -180,11 +180,11 @@ def delaytransformavgbaseline(data_dir, stokes):
 	f, ax = plt.subplots(figsize=(5, 4))
 	ax.plot(delays, np.real(np.log10(avg)))
 	ax.plot(delays, np.imag(np.log10(avg)))
-	plt.xlim(-400,400)
-	plt.setylim(-10, -2)
-	plt.xlabel('Delay [bins]')
-	plt.ylabel('log10(V_I)')
-	plt.title('Delay Transform Averaged over Baseline')
+	ax.set_xlim(-400,400)
+	ax.set_ylim(-10, -2)
+	ax.set_xlabel('Delay [bins]')
+	ax.set_ylabel('log10(V_I)')
+	ax.set_title('Delay Transform Averaged over Baseline')
 	plt.savefig("/data4/paper/rkb/"+ "delaytransformavged.png")
 #Errorlog:
 #Error 1: 7/5/17 at 23:51; running into error "UnboundLocalError: local variable 'uv' referenced before assignment"
