@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import os
 import shutil
 import glob
-
+import imageio
 
 def getstokes(data_dir):
 	if os.path.isdir("/data4/paper/rkb/stokesgifstorage/"):
