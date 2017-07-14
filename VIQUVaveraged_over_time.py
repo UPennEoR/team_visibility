@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 import glob
 
 def avgfreqcalc(data_dir, antstr, stokes):
-	xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
-	xy_data = glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR']))
-	yx_data = glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR']))
-	yy_data = glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR']))
+	xx_data = glob.glob(''.join([data_dir, 'zen.*.3*.xx.HH.uvcORR']))
+	xy_data = glob.glob(''.join([data_dir, 'zen.*.3*.xy.HH.uvcORR']))
+	yx_data = glob.glob(''.join([data_dir, 'zen.*.3*.yx.HH.uvcORR']))
+	yy_data = glob.glob(''.join([data_dir, 'zen.*.3*.yy.HH.uvcORR']))
 
 	ant_i, ant_j = map(int, antstr.split('_'))
 
