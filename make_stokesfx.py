@@ -70,20 +70,18 @@ def getstokes(data_dir):
 		plt.imshow(np.log10(stokes_Q), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
 		plt.title('Stokes Q')
 		plt.xlabel('Frequency bin')
-		plt.ylabel('LST')
 
 		plt.subplot(143)
 		plt.imshow(np.log10(stokes_U), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
 		plt.title('Stokes U')
 		plt.xlabel('Frequency bin')
-		plt.ylabel('LST')
 
 		plt.subplot(144)
 		plt.imshow(np.log10(stokes_V), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
 		plt.title('Stokes V')
 		plt.xlabel('Frequency bin')
-		plt.ylabel('LST')
 		plt.colorbar()
+		plt.clf()
 
 		#plt.show()
 		plt.savefig("/data4/paper/rkb/stokesgifstorage/"+ '{}.png'.format(antstr))
