@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 import glob
 
 def avgfreqcalc(data_dir, antstr, stokes):
-	xx_data = glob.glob(''.join([data_dir, 'zen.*.3*.xx.HH.uvcORR']))
-	xy_data = glob.glob(''.join([data_dir, 'zen.*.3*.xy.HH.uvcORR']))
-	yx_data = glob.glob(''.join([data_dir, 'zen.*.3*.yx.HH.uvcORR']))
-	yy_data = glob.glob(''.join([data_dir, 'zen.*.3*.yy.HH.uvcORR']))
+	xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
+	xy_data = glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR']))
+	yx_data = glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR']))
+	yy_data = glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR']))
 
 	ant_i, ant_j = map(int, antstr.split('_'))
 
@@ -17,15 +17,11 @@ def avgfreqcalc(data_dir, antstr, stokes):
 	# loop over files
 
 	if stokes == "I" or stokes == "Q":
-		t_xx, d_xx, f_xx = capo.miriad.read_files([xx_data[i]], antstr=antstr, polstr='xx', verbose=True)
-		np.savez(tempdump.npz, t_xx, d_xx, f_xx)
-		t_yy, d_yy, f_yy = capo.miriad.read_files([yy_data[i]], antstr=antstr, polstr='yy', verbose=True)
-		np.savez(tempdump2.txt, t_yy, d_yy, f_yy)
-		npzfile1 = np.load(tempdump.npz)
-		npzfile2 = np.load(tempdump2.npz)
 		for i in np.arange(len(xx_data)):
-			vis_xx = npzfile1['d_xx'][(ant_i, ant_j)]['xx']
-			vis_yy = npzfile2['d_yy'][(ant_i, ant_j)]['yy']
+			t_xx, d_xx, f_xx = capo.miriad.read_files([xx_data[i]], antstr=antstr, polstr='xx', verbose=True)
+			t_yy, d_yy, f_yy = capo.miriad.read_files([yy_data[i]], antstr=antstr, polstr='yy', verbose=True)
+			vis_xx = d_xx[(ant_i, ant_j)]['xx']
+			vis_yy = d_yy[(ant_i, ant_j)]['yy']
 			channels = vis_xx.shape[1]
 			if avg_freq is None:
 				avg_freq = np.zeros((vis_xx.shape[1]))
