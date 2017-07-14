@@ -83,6 +83,7 @@ def getstokes(data_dir):
 		plt.title('Stokes V')
 		plt.xlabel('Frequency bin')
 		plt.ylabel('LST')
+		plt.colorbar()
 
 		#plt.show()
 		plt.savefig("/data4/paper/rkb/stokesgifstorage/"+ '{}.png'.format(antstr))

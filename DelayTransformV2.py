@@ -157,7 +157,7 @@ def delaytransformv1(data_dir, stokes):
 		ax.set_title('Delay Transform'+antstr+stokes)
 		plt.savefig("/data4/paper/rkb/delaygifstorage/"+'delaytransform'+'{} {}.png'.format(antstr, stokes))
 		plt.clf()
-	images = glob.glob('/data4/paper/rkb/delaygifstorage/*.png')
+	images = glob.glob(('/data4/paper/rkb/delaygifstorage/*.png').format(stokes))
 	gif = []
 	for filename in images:
 		gif.append(imageio.imread(filename))
