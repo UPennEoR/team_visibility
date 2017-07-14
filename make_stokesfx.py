@@ -59,7 +59,7 @@ def getstokes(data_dir):
 		stokes_Q = np.real(vis_xx - vis_yy)
 		stokes_U = np.real(vis_xy + vis_yx)
 		stokes_V = np.real(1j*vis_xy - 1j*vis_yx)
-
+		plt.tightlayout()
 		plt.subplot(141)
 		plt.imshow(np.log10(stokes_I), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
 		plt.title('Stokes I')
