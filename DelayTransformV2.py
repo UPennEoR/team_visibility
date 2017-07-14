@@ -32,9 +32,6 @@ def get_baselines(ex_ants=[]):
 		pass
 	elif antenna_i < antenna_j:
 		pair = (antenna_i, antenna_j)
-	elif antenna_i > antenna_j:
-		pair = (antenna_j, antenna_i)
-
 	baseline = calculate_baseline(antennae, pair)
 
 	if (baseline not in baselines):
@@ -137,7 +134,7 @@ def delaytransformv1(data_dir, stokes):
 		ant_i, ant_j = map(int, antstr.split('_'))
 		pair = (ant_i, ant_j)
 		data, channels = avgfreqcalc(data_dir, antstr, stokes)
-		window = aipy.dsp.gen_window(channels, window="blackman-harris")
+		window = aipy.dsp.gen_window(channels, window="guassian0.4")
 		d_transform = np.fft.fftshift(np.fft.ifft(np.fft.fftshift(data * window)))
 		delays = np.fft.fftshift(np.fft.fftfreq(channels, .1/channels)) # fftfreq takes in (nchan, chan_spacing)
 		d_start = delays[0]
