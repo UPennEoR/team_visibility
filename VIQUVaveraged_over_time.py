@@ -17,12 +17,15 @@ def avgfreqcalc(data_dir, antstr, stokes):
 	# loop over files
 
 	if stokes == "I" or stokes == "Q":
+		t_xx, d_xx, f_xx = capo.miriad.read_files([xx_data[i]], antstr=antstr, polstr='xx', verbose=True)
+		np.savez(tempdump.npz, t_xx, d_xx, f_xx)
+		t_yy, d_yy, f_yy = capo.miriad.read_files([yy_data[i]], antstr=antstr, polstr='yy', verbose=True)
+		np.savez(tempdump2.txt, t_yy, d_yy, f_yy)
+		npzfile1 = np.load(tempdump.npz)
+		npzfile2 = np.load(tempdump2.npz)
 		for i in np.arange(len(xx_data)):
-			t_xx, d_xx, f_xx = capo.miriad.read_files([xx_data[i]], antstr=antstr, polstr='xx', verbose=True)
-			t_yy, d_yy, f_yy = capo.miriad.read_files([yy_data[i]], antstr=antstr, polstr='yy', verbose=True)
-
-			vis_xx = d_xx[(ant_i, ant_j)]['xx']
-			vis_yy = d_yy[(ant_i, ant_j)]['yy']
+			vis_xx = npzfile1['d_xx'][(ant_i, ant_j)]['xx']
+			vis_yy = npzfile2['d_yy'][(ant_i, ant_j)]['yy']
 			channels = vis_xx.shape[1]
 			if avg_freq is None:
 				avg_freq = np.zeros((vis_xx.shape[1]))
