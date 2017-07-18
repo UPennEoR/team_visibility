@@ -33,6 +33,7 @@ import os
 import shutil
 import glob
 import imageio
+from VIQUVaveraged_over_time import avgfreqcalc2
 
 def getstokes(data_dir):
 	xx_data = glob.glob(''.join([data_dir, 'zen.2457746.38268.xx.HH.uvcORR']))
@@ -156,7 +157,10 @@ def getstokes(data_dir):
 				t_xy2, d_xy2, f_xy2 = capo.miriad.read_files(xy_data, antstr=baseline_2, polstr='xy')
 				t_yx2, d_yx2, f_yx2 = capo.miriad.read_files(yx_data, antstr=baseline_2, polstr='yx')
 				t_yy2, d_yy2, f_yy2 = capo.miriad.read_files(yy_data, antstr=baseline_2, polstr='yy')
-				plt.subplot(141)
+
+				avg_freq1, channels = avgfreqcalc2(data_dir, baseline1)
+
+
 				plt.imshow(np.log10(np.abs(d_xx1[(ant_i1, ant_j1)]['xx']))-np.log10(np.abs(d_xx2[(ant_i2, ant_j2)]['xx'])), aspect='auto', vmax=5, vmin=-6, cmap='viridis')
 				plt.title('xx Visibility')
 				plt.xlabel('Frequency bin')
