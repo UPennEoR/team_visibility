@@ -121,7 +121,7 @@ def getstokes(data_dir):
 				# plt.colorbar()
 
 				#plt.show()
-				plt.savefig("/data4/paper/rkb/stokesgifstorage/"+ '{}.png'.format(antstr))
+				plt.savefig("/data4/paper/rkb/stokesgifstorage/"+ '{}, {}.png'.format(baseline_1, baseline_2))
 				plt.clf()
 	images = glob.glob('/data4/paper/rkb/stokesgifstorage/*.png')
 	gif = []
