@@ -10,6 +10,7 @@ from operator import itemgetter
 
 def avgfreqall(data_dir):
 	keys = sorted(get_baselines(ex_ants=[81]))
+	baselines = get_baselines(ex_ants=[81])
 	my_path = '/data4/paper/rkb/'
 	xx_data = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
 	xy_data = sorted(glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR'])))
