@@ -66,20 +66,20 @@ def getstokes(data_dir):
 				t_yx2, d_yx2, f_yx2 = capo.miriad.read_files(yx_data, antstr=baseline_2, polstr='yx')
 				t_yy2, d_yy2, f_yy2 = capo.miriad.read_files(yy_data, antstr=baseline_2, polstr='yy')
 				plt.subplot(141)
-				plt.imshow(np.log10(np.abs(d_xx1[(ant_i1, ant_j1)]['xx']))-np.log10(np.abs(d_xx2[(ant_i2, ant_j2)]['xx'])), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
+				plt.imshow(np.log10(np.abs(d_xx1[(ant_i1, ant_j1)]['xx']))-np.log10(np.abs(d_xx2[(ant_i2, ant_j2)]['xx'])), aspect='auto', vmax=5, vmin=-6, cmap='viridis')
 				plt.title('xx Visibility')
 				plt.xlabel('Frequency bin')
 				plt.ylabel('LST')
 				plt.subplot(142)
-				plt.imshow(np.log10(np.abs(d_xy1[(ant_i1, ant_j1)]['xy']))-np.log10(np.abs(d_xy2[(ant_i2, ant_j2)]['xy'])), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
+				plt.imshow(np.log10(np.abs(d_xy1[(ant_i1, ant_j1)]['xy']))-np.log10(np.abs(d_xy2[(ant_i2, ant_j2)]['xy'])), aspect='auto', vmax=5, vmin=-6, cmap='viridis')
 				plt.title('xy Visibility')
 				plt.xlabel('Frequency bin')
 				plt.subplot(143)
-				plt.imshow(np.log10(np.abs(d_yx1[(ant_i1, ant_j1)]['yx']))-np.log10(np.abs(d_yx2[(ant_i2, ant_j2)]['yx'])), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
+				plt.imshow(np.log10(np.abs(d_yx1[(ant_i1, ant_j1)]['yx']))-np.log10(np.abs(d_yx2[(ant_i2, ant_j2)]['yx'])), aspect='auto', vmax=5, vmin=-6, cmap='viridis')
 				plt.title('yx Visibility')
 				plt.xlabel('Frequency bin')
 				plt.subplot(144)
-				plt.imshow(np.log10(np.abs(d_yy1[(ant_i1, ant_j1)]['yy']))-np.log10(np.abs(d_yy2[(ant_i2, ant_j2)]['yy'])), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
+				plt.imshow(np.log10(np.abs(d_yy1[(ant_i1, ant_j1)]['yy']))-np.log10(np.abs(d_yy2[(ant_i2, ant_j2)]['yy'])), aspect='auto', vmax=5, vmin=-6, cmap='viridis')
 				plt.title('yy Visibility')
 				plt.xlabel('Frequency bin')
 				plt.colorbar()
@@ -128,4 +128,97 @@ def getstokes(data_dir):
 		gif.append(imageio.imread(filename))
 	imageio.mimsave('/data4/paper/rkb/stokesgif.gif', gif,fps=1)
 	shutil.rmtree('/data4/paper/rkb/stokesgifstorage/')
+
+
+	def getstokes2(data_dir):
+	if os.path.isdir("/data4/paper/rkb/stokesgifstorage/"):
+		pass
+	else:
+		os.makedirs("/data4/paper/rkb/stokesgifstorage/")
+	#baseline = ['72_112', '9_20', '20_89', '80_104']
+	#
+	for i in np.arange(len(baseline)):
+		baseline_1 = baseline[i]
+		for j in np.arange(len(baseline)):
+			baseline_2 = baseline[j]
+			if baseline_1 != baseline_2:
+				ant_i1, ant_j1 = map(int, baseline_1.split('_'))
+				ant_i2, ant_j2 = map(int, baseline_2.split('_'))
+
+
+				t_xx1, d_xx1, f_xx1 = capo.miriad.read_files(xx_data, antstr=baseline_1, polstr='xx')
+				t_xy1, d_xy1, f_xy1 = capo.miriad.read_files(xy_data, antstr=baseline_1, polstr='xy')
+				t_yx1, d_yx1, f_yx1 = capo.miriad.read_files(yx_data, antstr=baseline_1, polstr='yx')
+				t_yy1, d_yy1, f_yy1 = capo.miriad.read_files(yy_data, antstr=baseline_1, polstr='yy')
+
+
+				t_xx2, d_xx2, f_xx2 = capo.miriad.read_files(xx_data, antstr=baseline_2, polstr='xx')
+				t_xy2, d_xy2, f_xy2 = capo.miriad.read_files(xy_data, antstr=baseline_2, polstr='xy')
+				t_yx2, d_yx2, f_yx2 = capo.miriad.read_files(yx_data, antstr=baseline_2, polstr='yx')
+				t_yy2, d_yy2, f_yy2 = capo.miriad.read_files(yy_data, antstr=baseline_2, polstr='yy')
+				plt.subplot(141)
+				plt.imshow(np.log10(np.abs(d_xx1[(ant_i1, ant_j1)]['xx']))-np.log10(np.abs(d_xx2[(ant_i2, ant_j2)]['xx'])), aspect='auto', vmax=5, vmin=-6, cmap='viridis')
+				plt.title('xx Visibility')
+				plt.xlabel('Frequency bin')
+				plt.ylabel('LST')
+				plt.subplot(142)
+				plt.imshow(np.log10(np.abs(d_xy1[(ant_i1, ant_j1)]['xy']))-np.log10(np.abs(d_xy2[(ant_i2, ant_j2)]['xy'])), aspect='auto', vmax=5, vmin=-6, cmap='viridis')
+				plt.title('xy Visibility')
+				plt.xlabel('Frequency bin')
+				plt.subplot(143)
+				plt.imshow(np.log10(np.abs(d_yx1[(ant_i1, ant_j1)]['yx']))-np.log10(np.abs(d_yx2[(ant_i2, ant_j2)]['yx'])), aspect='auto', vmax=5, vmin=-6, cmap='viridis')
+				plt.title('yx Visibility')
+				plt.xlabel('Frequency bin')
+				plt.subplot(144)
+				plt.imshow(np.log10(np.abs(d_yy1[(ant_i1, ant_j1)]['yy']))-np.log10(np.abs(d_yy2[(ant_i2, ant_j2)]['yy'])), aspect='auto', vmax=5, vmin=-6, cmap='viridis')
+				plt.title('yy Visibility')
+				plt.xlabel('Frequency bin')
+				plt.colorbar()
+				plt.suptitle('{0} - {1}'.format(baseline_1, baseline_2))
+
+				# vis_xx = np.abs(d_xx[(ant_i, ant_j)]['xx'])**2
+				# vis_yy = np.abs(d_yy[(ant_i, ant_j)]['yy'])**2
+				# vis_yx = d_yx[(ant_i, ant_j)]['yx']
+				# vis_xy = d_xy[(ant_i, ant_j)]['xy']
+
+				# # print(vis_xx.shape)
+
+				# stokes_I = np.real(vis_xx + vis_yy)
+				# stokes_Q = np.real(vis_xx - vis_yy)
+				# stokes_U = np.real(vis_xy + vis_yx)
+				# stokes_V = np.real(1j*vis_xy - 1j*vis_yx)
+				# plt.tight_layout()
+				# plt.subplot(245)
+				# plt.imshow(np.log10(stokes_I), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
+				# plt.title('Stokes I')
+				# plt.xlabel('Frequency bin')
+				# plt.ylabel('LST')
+
+				# plt.subplot(246)
+				# plt.imshow(np.log10(stokes_Q), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
+				# plt.title('Stokes Q')
+				# plt.xlabel('Frequency bin')
+
+				# plt.subplot(247)
+				# plt.imshow(np.log10(stokes_U), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
+				# plt.title('Stokes U')
+				# plt.xlabel('Frequency bin')
+
+				# plt.subplot(248)
+				# plt.imshow(np.log10(stokes_V), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
+				# plt.title('Stokes V')
+				# plt.xlabel('Frequency bin')
+				# plt.colorbar()
+
+				#plt.show()
+				plt.savefig("/data4/paper/rkb/stokesgifstorage/"+ '{}, {}; time is {}.png'.format(baseline_1, baseline_2))
+				plt.clf()
+	images = glob.glob('/data4/paper/rkb/stokesgifstorage/*.png')
+	gif = []
+	for filename in images:
+		gif.append(imageio.imread(filename))
+	imageio.mimsave('/data4/paper/rkb/stokesgif.gif', gif,fps=1)
+	shutil.rmtree('/data4/paper/rkb/stokesgifstorage/')
+
+
 
