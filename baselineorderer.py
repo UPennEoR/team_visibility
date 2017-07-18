@@ -68,7 +68,7 @@ def get_baselines(ex_ants=[]):
 				continue
 			else:
 				baselines[baseline].append(ps)
-	greturn baselines 
+	return baselines 
 #print (angles)
 
 #def order_baselines(baselines, angles):
