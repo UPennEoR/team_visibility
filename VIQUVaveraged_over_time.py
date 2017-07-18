@@ -28,12 +28,12 @@ def avgfreqcalc(data_dir, antstr, stokes):
 			if stokes == "I":
 				stokes_I = vis_xx + vis_yy
 				for it in range(vis_xx.shape[0]):    
-					avg_freq += np.abs(stokes_I[it, :])
+					avg_freq += (stokes_I[it, :])
 					n_avg += 1
 			elif stokes == "Q":
 				stokes_Q = vis_xx - vis_yy
 				for it in range(vis_xx.shape[0]):    
-					avg_freq += np.abs(stokes_Q[it, :])
+					avg_freq += (stokes_Q[it, :])
 					n_avg += 1
 	elif stokes == "V" or stokes == "U":
 		for i in np.arange(len(xy_data)):
@@ -48,7 +48,7 @@ def avgfreqcalc(data_dir, antstr, stokes):
 			if stokes == "U":
 				stokes_U = vis_xy + vis_yx
 				for it in range(vis_xy.shape[0]):    
-					avg_freq += np.abs(stokes_U[it, :])
+					avg_freq += (stokes_U[it, :])
 					n_avg += 1
 			elif stokes == "V":
 				stokes_V = np.imag(vis_xy) - np.imag(vis_yx)
@@ -58,7 +58,7 @@ def avgfreqcalc(data_dir, antstr, stokes):
 			
 
 	# finish averaging
-	avg_freq = avg_freq/n_avg
+	avg_freq = np.abs(avg_freq/n_avg)
 	return avg_freq, channels
 
 
