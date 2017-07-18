@@ -22,7 +22,7 @@ def avgfreqall(data_dir):
 	for it in keys:
 		x = sorted(set(baselines[it]), key=itemgetter(2))
 		print('i=', it)
-		new_folder =  'zen.2457746.npzstorage{}'.format(i)
+		new_folder =  'zen.2457746.npzstorage{}'.format(it)
 		os.makedirs(my_path + new_folder) #\t is tab in name
 		for elem, antstr in enumerate(x):
 			ant_i = x[elem][0]
