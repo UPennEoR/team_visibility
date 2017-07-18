@@ -1,5 +1,5 @@
 #baseline pairs:
-#72_112, complex.conjugate(97_112), complex.conj(22_105), 22_81, complex.conj(10_81), complex.conj(9_88), 9_20, 20_89, complex.conj(43_89), complex.conj(53_64), comlpex.conj(53_31), complex.conj(31_65), 80_104, complex.conjugate(96_104), complex.conj(9_88), 9_20, 20_89, complex.conj(89_43)
+#72_112, complex.conjugate(97_112), complex.conj(22_105), 22_81, complex.conj(10_81), complex.conj(9_88), 9_20, 20_89, complex.conj(43_89), complex.conj(53_64), comlpex.conj(53_31), complex.conj(31_65), 80_104, complex.conjugate(96_104), complex.conj(9_88)
 
 #complex.conjugate(72_112), 97_112, 10_81, complex.cong(22_81), 22_105, 9_88, complex.conj(9_20), complex.conj(89_20), 43_89, 53_64, 31_53, complex.conj(65_31), complex.conj(80_104), 96_10
 
@@ -44,7 +44,7 @@ def getstokes(data_dir):
 		pass
 	else:
 		os.makedirs("/data4/paper/rkb/stokesgifstorage/")
-	baseline = ['64_88', '64_80', '9_105', '9_53', '53_104', '22_72', '20_22']
+	baseline = ['72_112', '22_81', '9_20', '20_89', '80_104']
 	for i in np.arange(len(baseline)):
 		baseline_1 = baseline[i]
 		for j in np.arange(len(baseline)):
