@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.constants as sc
 import aipy
+sys.path.append('/data4/paper/rkb/hsa7458_v001.py')
 
 def calculate_baseline(antennae, pair):
 	"""
