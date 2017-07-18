@@ -1,27 +1,27 @@
 #baseline pairs:
-#72_112, complex.conjugate(97_112), complex.conj(22_105), 22_81, complex.conj(10_81), complex.conj(9_88), 9_20, 20_89, complex.conj(43_89), complex.conj(53_64), comlpex.conj(53_31), complex.conj(31_65), 80_104, complex.conjugate(96_104), complex.conj(9_88)
+#72_112, complex.conjugate(97_112), complex.conj(22_105), complex.conj(9_88), 9_20, 20_89, complex.conj(43_89), complex.conj(53_64), comlpex.conj(53_31), complex.conj(31_65), 80_104, complex.conjugate(96_104), complex.conj(9_88)
 
-#complex.conjugate(72_112), 97_112, 10_81, complex.cong(22_81), 22_105, 9_88, complex.conj(9_20), complex.conj(89_20), 43_89, 53_64, 31_53, complex.conj(65_31), complex.conj(80_104), 96_10
+#complex.conjugate(72_112), 97_112, 22_105, 9_88, complex.conj(9_20), complex.conj(89_20), 43_89, 53_64, 31_53, complex.conj(65_31), complex.conj(80_104), 96_10
 
-#72_105, complex.conj(88_105), complex.conj(22_112), complex.conj(9_22), 9_64, complex.conj(81_97), complex.conj(20_81), 20_54, 53_80, 10_89, complex.conj(31_89), 31_104, 43_65, 65_96
+#72_105, complex.conj(88_105), complex.conj(22_112), complex.conj(9_22), 9_64, 20_54, 53_80, 10_89, complex.conj(31_89), 31_104, 43_65, 65_96
 
-#88_105, complex.conj(72_105), 22_112, 9_22, complex.conj(9_64), 81_97, 20_81, complex.conj(20_54), complex.conj(53_80), complex.conj(10_89), 31_89, complex.conj(31_104), complex.conj(43_65), complex.conj(65_96)
+#88_105, complex.conj(72_105), 22_112, 9_22, complex.conj(9_64), complex.conj(20_54), complex.conj(53_80), complex.conj(10_89), 31_89, complex.conj(31_104), complex.conj(43_65), complex.conj(65_96)
 
-#complex.conj(64_88), 64_80, complex.conj(9_105), 9_53, 53_104, complex.conj(22_72), complex.conj(20_22), 20_31, 31_96, complex.conj(81_112), 81_89, complex.conj(65_89), complex.conj(10_97), 10_43
+#complex.conj(64_88), 64_80, complex.conj(9_105), 9_53, 53_104, complex.conj(22_72), complex.conj(20_22), 20_31, 31_96, complex.conj(65_89), complex.conj(10_97), 10_43
 
-#64_88, complex.conj(64_80), 9_105, complex.conj(9_53), complex.conj(53_104), 22_72, 20_22, complex.conj(20_31), complex.conj(31_96), 81_112, complex.conj(81_89), 65_89, 10_97, complex.conj(10_43)
+#64_88, complex.conj(64_80), 9_105, complex.conj(9_53), complex.conj(53_104), 22_72, 20_22, complex.conj(20_31), complex.conj(31_96), 65_89, 10_97, complex.conj(10_43)
 
-#72_97, complex.conj(81_105), complex.conj(10_22), complex.conj(20_88), 9_89, 20_43, complex.conj(31_64), 53_65, 80_96
+#72_97, complex.conj(10_22), complex.conj(20_88), 9_89, 20_43, complex.conj(31_64), 53_65, 80_96
 
-#complex.conj(72_97), 81_105, 10_22, 20_88, complex.conj(9_89), complex.conj(20_43), 31_64, complex.conj(53_65), complex.conj(80_96)
+#complex.conj(72_97), 10_22, 20_88, complex.conj(9_89), complex.conj(20_43), 31_64, complex.conj(53_65), complex.conj(80_96)
 
-#72_88, complex.conj(9_112), 22_64, complex.conj(20_97), complex.conj(53_81), 20_81, 10_31, 89_104, 43_96
+#72_88, complex.conj(9_112), 22_64, complex.conj(20_97), 10_31, 89_104, 43_96
 
-#complex.conj(72_88), 9_112, complex.conj(22_64), 20_97, 53_81, complex.conj(20_81), complex.conj(10_31), complex.conj(89_104), complex.conj(43_96)
+#complex.conj(72_88), 9_112, complex.conj(22_64), 20_97, complex.conj(10_31), complex.conj(89_104), complex.conj(43_96)
 
-#complex.conj(80_88), complex.conj(53_105), 9_104, complex.conj(20_72), 22_31, 20_96, complex.conj(89_112), complex.conj(65_81), complex.conj(43_97)
+#complex.conj(80_88), complex.conj(53_105), 9_104, complex.conj(20_72), 22_31, 20_96, complex.conj(89_112), complex.conj(43_97)
 
-#80_88, 53_105, complex.conj(9_104), 20_72, complex.conj(22_31), complex.conj(20_96), 89_112, 65_81, 43_97
+#80_88, 53_105, complex.conj(9_104), 20_72, complex.conj(22_31), complex.conj(20_96), 89_112, 43_97
 
 
 import matplotlib
@@ -44,7 +44,8 @@ def getstokes(data_dir):
 		pass
 	else:
 		os.makedirs("/data4/paper/rkb/stokesgifstorage/")
-	baseline = ['72_112', '22_81', '9_20', '20_89', '80_104']
+	#baseline = ['72_112', '9_20', '20_89', '80_104']
+	#
 	for i in np.arange(len(baseline)):
 		baseline_1 = baseline[i]
 		for j in np.arange(len(baseline)):
@@ -119,7 +120,7 @@ def getstokes(data_dir):
 				# plt.colorbar()
 
 				#plt.show()
-				plt.savefig("/data4/paper/rkb/stokesgifstorage/"+ '{}, {}.png'.format(baseline_1, baseline_2))
+				plt.savefig("/data4/paper/rkb/stokesgifstorage/"+ '{}, {}; time is {}.png'.format(baseline_1, baseline_2))
 				plt.clf()
 	images = glob.glob('/data4/paper/rkb/stokesgifstorage/*.png')
 	gif = []
