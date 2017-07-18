@@ -121,62 +121,62 @@ def avgfreqall(data_dir):
 				v_real = avg_freq_i_real,
 				v_imag = avg_freq_i_imag)
 
-def avgfreqcalc(data_dir, antstr):
-	xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
-	xy_data = glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR']))
-	yx_data = glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR']))
-	yy_data = glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR']))
+# def avgfreqcalc(data_dir, antstr):
+# 	xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
+# 	xy_data = glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR']))
+# 	yx_data = glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR']))
+# 	yy_data = glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR']))
 
-	ant_i, ant_j = map(int, antstr.split('_'))
+# 	ant_i, ant_j = map(int, antstr.split('_'))
 
-	# initialize average power
-	avg_freq = None
-	n_avg = 0
-	# loop over files
+# 	# initialize average power
+# 	avg_freq = None
+# 	n_avg = 0
+# 	# loop over files
 
-	for i in np.arange(len(xx_data)):
-		t_xx, d_xx, f_xx = capo.miriad.read_files([xx_data[i]], antstr=antstr, polstr='xx', verbose=True)
-		t_yy, d_yy, f_yy = capo.miriad.read_files([yy_data[i]], antstr=antstr, polstr='yy', verbose=True)
-		vis_xx = d_xx[(ant_i, ant_j)]['xx']
-		vis_yy = d_yy[(ant_i, ant_j)]['yy']
-		channels = vis_xx.shape[1]
-		if avg_freq is None:
-			avg_freq = np.zeros((vis_xx.shape[1]))
-		if stokes == "I":
-			stokes_I = vis_xx + vis_yy
-			for it in range(vis_xx.shape[0]):    
-				avg_freq_i_real += (stokes_I[it, :])
-				n_avg += 1
-		elif stokes == "Q":
-			stokes_Q = vis_xx - vis_yy
-			for it in range(vis_xx.shape[0]):    
-				avg_freq += (stokes_Q[it, :])
-				n_avg += 1
-	elif stokes == "V" or stokes == "U":
-		for i in np.arange(len(xy_data)):
-			t_xy, d_xy, f_xy = capo.miriad.read_files([xy_data[i]], antstr=antstr, polstr='xy', verbose=True)
-			t_yx, d_yx, f_yx = capo.miriad.read_files([yx_data[i]], antstr=antstr, polstr='yx', verbose=True)
+# 	for i in np.arange(len(xx_data)):
+# 		t_xx, d_xx, f_xx = capo.miriad.read_files([xx_data[i]], antstr=antstr, polstr='xx', verbose=True)
+# 		t_yy, d_yy, f_yy = capo.miriad.read_files([yy_data[i]], antstr=antstr, polstr='yy', verbose=True)
+# 		vis_xx = d_xx[(ant_i, ant_j)]['xx']
+# 		vis_yy = d_yy[(ant_i, ant_j)]['yy']
+# 		channels = vis_xx.shape[1]
+# 		if avg_freq is None:
+# 			avg_freq = np.zeros((vis_xx.shape[1]))
+# 		if stokes == "I":
+# 			stokes_I = vis_xx + vis_yy
+# 			for it in range(vis_xx.shape[0]):    
+# 				avg_freq_i_real += (stokes_I[it, :])
+# 				n_avg += 1
+# 		elif stokes == "Q":
+# 			stokes_Q = vis_xx - vis_yy
+# 			for it in range(vis_xx.shape[0]):    
+# 				avg_freq += (stokes_Q[it, :])
+# 				n_avg += 1
+# 	elif stokes == "V" or stokes == "U":
+# 		for i in np.arange(len(xy_data)):
+# 			t_xy, d_xy, f_xy = capo.miriad.read_files([xy_data[i]], antstr=antstr, polstr='xy', verbose=True)
+# 			t_yx, d_yx, f_yx = capo.miriad.read_files([yx_data[i]], antstr=antstr, polstr='yx', verbose=True)
 
-			vis_xy = d_xy[(ant_i, ant_j)]['xy']
-			vis_yx = d_yx[(ant_i, ant_j)]['yx']
-			channels = vis_xy.shape[1]
-			if avg_freq is None:
-				avg_freq = np.zeros((vis_xy.shape[1]))
-			if stokes == "U":
-				stokes_U = vis_xy + vis_yx
-				for it in range(vis_xy.shape[0]):    
-					avg_freq += (stokes_U[it, :])
-					n_avg += 1
-			elif stokes == "V":
-				stokes_V = np.imag(vis_xy) - np.imag(vis_yx)
-				for it in range(vis_yx.shape[0]):    
-					avg_freq += np.abs(stokes_V[it, :])
-					n_avg += 1
+# 			vis_xy = d_xy[(ant_i, ant_j)]['xy']
+# 			vis_yx = d_yx[(ant_i, ant_j)]['yx']
+# 			channels = vis_xy.shape[1]
+# 			if avg_freq is None:
+# 				avg_freq = np.zeros((vis_xy.shape[1]))
+# 			if stokes == "U":
+# 				stokes_U = vis_xy + vis_yx
+# 				for it in range(vis_xy.shape[0]):    
+# 					avg_freq += (stokes_U[it, :])
+# 					n_avg += 1
+# 			elif stokes == "V":
+# 				stokes_V = np.imag(vis_xy) - np.imag(vis_yx)
+# 				for it in range(vis_yx.shape[0]):    
+# 					avg_freq += np.abs(stokes_V[it, :])
+# 					n_avg += 1
 			
 
-	# finish averaging
-	avg_freq = np.abs(avg_freq/n_avg)
-	return avg_freq, channels
+# 	# finish averaging
+# 	avg_freq = np.abs(avg_freq/n_avg)
+# 	return avg_freq, channels
 
 def avgfreqcalc2(data_dir, antstr, stokes):
 	xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
