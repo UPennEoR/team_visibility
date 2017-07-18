@@ -110,6 +110,7 @@ def avgfreqall(data_dir):
 				avg_freq_u_imag = avg_freq_u_imag/n_avg
 				avg_freq_v_real = avg_freq_i_real/n_avg
 				avg_freq_v_imag = avg_freq_v_imag/n_avg
+				print (avg_freq_v_imag)
 
 
 				np.savez(my_path+new_folder+'/'+'zen.2457746.avgstokes.{}.{}.{}.npz'.format(it,slope,antstr1),
