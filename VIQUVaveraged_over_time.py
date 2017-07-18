@@ -140,18 +140,18 @@ def avgfreqcalc(data_dir, antstr):
 		vis_xx = d_xx[(ant_i, ant_j)]['xx']
 		vis_yy = d_yy[(ant_i, ant_j)]['yy']
 		channels = vis_xx.shape[1]
-			if avg_freq is None:
-				avg_freq = np.zeros((vis_xx.shape[1]))
-			if stokes == "I":
-				stokes_I = vis_xx + vis_yy
-				for it in range(vis_xx.shape[0]):    
-					avg_freq_i_real += (stokes_I[it, :])
-					n_avg += 1
-			elif stokes == "Q":
-				stokes_Q = vis_xx - vis_yy
-				for it in range(vis_xx.shape[0]):    
-					avg_freq += (stokes_Q[it, :])
-					n_avg += 1
+		if avg_freq is None:
+			avg_freq = np.zeros((vis_xx.shape[1]))
+		if stokes == "I":
+			stokes_I = vis_xx + vis_yy
+			for it in range(vis_xx.shape[0]):    
+				avg_freq_i_real += (stokes_I[it, :])
+				n_avg += 1
+		elif stokes == "Q":
+			stokes_Q = vis_xx - vis_yy
+			for it in range(vis_xx.shape[0]):    
+				avg_freq += (stokes_Q[it, :])
+				n_avg += 1
 	elif stokes == "V" or stokes == "U":
 		for i in np.arange(len(xy_data)):
 			t_xy, d_xy, f_xy = capo.miriad.read_files([xy_data[i]], antstr=antstr, polstr='xy', verbose=True)
