@@ -45,9 +45,9 @@ def getstokes(data_dir):
 	else:
 		os.makedirs("/data4/paper/rkb/stokesgifstorage/")
 	baseline = ['64_88', '64_80', '9_105', '9_53', '53_104', '22_72', '20_22']
-	for i in len(baseline):
+	for i in np.arange(len(baseline)):
 		baseline_1 = baseline[i]
-		for j in enumerate(baseline):
+		for j in np.arange(len(baseline)):
 			baseline_2 = baseline[j]
 			if baseline_1 != baseline_2:
 				ant_i1, ant_j1 = map(int, baseline_1.split('_'))
