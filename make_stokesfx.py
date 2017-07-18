@@ -82,8 +82,7 @@ def getstokes(data_dir):
 				plt.title('yy Visibility')
 				plt.xlabel('Frequency bin')
 				plt.colorbar()
-				fig = plt.figure()
-				fig.suptitle('{0} - {1}'.format(baseline_1, baseline_2))
+				plt.suptitle('{0} - {1}'.format(baseline_1, baseline_2))
 
 				# vis_xx = np.abs(d_xx[(ant_i, ant_j)]['xx'])**2
 				# vis_yy = np.abs(d_yy[(ant_i, ant_j)]['yy'])**2
