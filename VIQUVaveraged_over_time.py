@@ -20,7 +20,7 @@ def avgfreqall(data_dir):
 	antstr_all = []
 
 	for it in keys:
-		x = sorted(set(baselines[i]), key=itemgetter(2))
+		x = sorted(set(baselines[it]), key=itemgetter(2))
 		print('i=', it)
 		new_folder =  'zen.2457746.npzstorage{}'.format(i)
 		os.makedirs(my_path + new_folder) #\t is tab in name
@@ -42,7 +42,7 @@ def avgfreqall(data_dir):
 	avg_freq_v_imag = None
 	n_avg = 0
 
-	
+
 	for i in np.arange(len(xx_data)):
 			print (i,end=" ")
 			#print("Reading {}...".format(xx_data[i]))
