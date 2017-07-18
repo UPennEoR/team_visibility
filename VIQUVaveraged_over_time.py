@@ -17,7 +17,7 @@ def avgfreqall(data_dir):
 	yx_data = sorted(glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR'])))
 	yy_data = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
 
-	antstr_all = []
+	antstr_all = ''
 
 	for it in keys:
 		x = sorted(set(baselines[it]), key=itemgetter(2))
