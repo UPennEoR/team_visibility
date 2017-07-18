@@ -71,7 +71,7 @@ def getstokes(data_dir):
 				plt.xlabel('Frequency bin')
 				plt.ylabel('LST')
 				plt.subplot(142)
-				plt.imshow(np.log10(np.abs(d_xy1[(ant_i1, ant_j1)]['xy']))-np.log10(np.abs(d_xy2[(ant_i2, ant_j2)]['xy']))), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
+				plt.imshow(np.log10(np.abs(d_xy1[(ant_i1, ant_j1)]['xy']))-np.log10(np.abs(d_xy2[(ant_i2, ant_j2)]['xy'])), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
 				plt.title('xy Visibility')
 				plt.xlabel('Frequency bin')
 				plt.ylabel('LST')
