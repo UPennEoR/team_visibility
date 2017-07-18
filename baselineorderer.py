@@ -31,6 +31,7 @@ def get_baselines(ex_ants=[]):
 	determines the baseline and places them in the dictionary.
 	excludes antennae with z-position < 0 or if in ex_ants list
 	"""
+	antennae = cal.prms['antpos_ideal']
 	baselines = {}
 
 
