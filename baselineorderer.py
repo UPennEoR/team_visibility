@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.constants as sc
 import aipy
-sys.path.append('/data4/paper/rkb/hsa7458_v001.py')
+import hsa7458_v001 as cal
 
 def calculate_baseline(antennae, pair):
 	"""
@@ -27,14 +27,6 @@ def calculate_baseline(antennae, pair):
 	ps = (pair[0],pair[1],"%.2f" % slope)
 	return "%.1f" % baseline,ps
 def get_baselines(ex_ants=[]):
-	calfile = open("/data4/paper/rkb/hsa7458_v001.py")
-	try:
-		print 'reading, %s'%calfile
-		exec("import {cfile} as cal".format(cfile=calfile))
-		antennae = cal.prms['antpos_ideal']
-	except ImportError:
-		raise Exception("Unable to import {cfile}.".format(cfile=calfile))
-	calfile.close()
 	"""
 	determines the baseline and places them in the dictionary.
 	excludes antennae with z-position < 0 or if in ex_ants list
