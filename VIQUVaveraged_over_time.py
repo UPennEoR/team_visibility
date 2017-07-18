@@ -31,6 +31,7 @@ def avgfreqall(data_dir):
 			antstr_all += "%s_%s," % (x[elem][0], x[elem][1])
 			
 	antstr_all = antstr_all[:-1]
+	print (antstr_all)
 	avg_freq_i_real = None
 	avg_freq_q_real = None
 	avg_freq_u_real = None
