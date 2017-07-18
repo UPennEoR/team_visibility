@@ -30,98 +30,98 @@ def avgfreqall(data_dir):
 			slope = x[elem][2]
 			antstr_all += "%s_%s," % (x[elem][0], x[elem][1])
 			
-	antstr_all = antstr_all[:-1]
-	print (antstr_all)
-	avg_freq_i_real = None
-	avg_freq_q_real = None
-	avg_freq_u_real = None
-	avg_freq_v_real = None
+			antstr_all = antstr_all[:-1]
+			print (antstr_all)
+			avg_freq_i_real = None
+			avg_freq_q_real = None
+			avg_freq_u_real = None
+			avg_freq_v_real = None
 
-	avg_freq_i_imag = None
-	avg_freq_q_imag = None
-	avg_freq_u_imag = None
-	avg_freq_v_imag = None
-	n_avg = 0
-
-
-	for i in np.arange(len(xx_data)):
-			print (i,end=" ")
-			#print("Reading {}...".format(xx_data[i]))
-			t_xx, d_xx, f_xx = capo.miriad.read_files([xx_data[i]], antstr=antstr_all, polstr='xx')
-			#print("Reading {}...".format(xy_data[i]))
-			t_xy, d_xy, f_xy = capo.miriad.read_files([xy_data[i]], antstr=antstr_all, polstr='xy')
-			#print("Reading {}...".format(yx_data[i]))
-			t_yx, d_yx, f_yx = capo.miriad.read_files([yx_data[i]], antstr=antstr_all, polstr='yx')
-			#print("Reading {}...".format(yy_data[i]))
-			t_yy, d_yy, f_yy = capo.miriad.read_files([yy_data[i]], antstr=antstr_all, polstr='yy')
-
-			vis_xx = d_xx[(ant_i, ant_j)]['xx']
-			vis_yy = d_yy[(ant_i, ant_j)]['yy']
-			vis_yx = d_yx[(ant_i, ant_j)]['yx']
-			vis_xy = d_xy[(ant_i, ant_j)]['xy']
+			avg_freq_i_imag = None
+			avg_freq_q_imag = None
+			avg_freq_u_imag = None
+			avg_freq_v_imag = None
+			n_avg = 0
 
 
-			stokes_I = vis_xx + vis_yy
-			stokes_Q = vis_xx - vis_yy
-			stokes_U = vis_xy + vis_yx
-			stokes_V = 1j*vis_xy - 1j*vis_yx
+			for i in np.arange(len(xx_data)):
+					print (i,end=" ")
+					#print("Reading {}...".format(xx_data[i]))
+					t_xx, d_xx, f_xx = capo.miriad.read_files([xx_data[i]], antstr=antstr_all, polstr='xx')
+					#print("Reading {}...".format(xy_data[i]))
+					t_xy, d_xy, f_xy = capo.miriad.read_files([xy_data[i]], antstr=antstr_all, polstr='xy')
+					#print("Reading {}...".format(yx_data[i]))
+					t_yx, d_yx, f_yx = capo.miriad.read_files([yx_data[i]], antstr=antstr_all, polstr='yx')
+					#print("Reading {}...".format(yy_data[i]))
+					t_yy, d_yy, f_yy = capo.miriad.read_files([yy_data[i]], antstr=antstr_all, polstr='yy')
+
+					vis_xx = d_xx[(ant_i, ant_j)]['xx']
+					vis_yy = d_yy[(ant_i, ant_j)]['yy']
+					vis_yx = d_yx[(ant_i, ant_j)]['yx']
+					vis_xy = d_xy[(ant_i, ant_j)]['xy']
 
 
-			stokes_I_real = stokes_I.real
-			stokes_I_imag = stokes_I.imag
-			stokes_Q_real = stokes_Q.real
-			stokes_Q_imag = stokes_Q.imag
-			stokes_U_real = stokes_U.real
-			stokes_U_imag = stokes_U.imag
-			stokes_V_real = stokes_V.real
-			stokes_V_imag = stokes_V.imag
+					stokes_I = vis_xx + vis_yy
+					stokes_Q = vis_xx - vis_yy
+					stokes_U = vis_xy + vis_yx
+					stokes_V = 1j*vis_xy - 1j*vis_yx
 
 
-			if avg_freq_i_real is None:
-				avg_freq_i_real = np.zeros((vis_xx.shape[1]))
-				avg_freq_i_imag = np.zeros((vis_xx.shape[1]))
-				avg_freq_q_real = np.zeros((vis_xx.shape[1]))
-				avg_freq_q_imag = np.zeros((vis_xx.shape[1]))
-				avg_freq_u_real = np.zeros((vis_xx.shape[1]))
-				avg_freq_u_imag = np.zeros((vis_xx.shape[1]))
-				avg_freq_v_real = np.zeros((vis_xx.shape[1]))
-				avg_freq_v_imag = np.zeros((vis_xx.shape[1]))
+					stokes_I_real = stokes_I.real
+					stokes_I_imag = stokes_I.imag
+					stokes_Q_real = stokes_Q.real
+					stokes_Q_imag = stokes_Q.imag
+					stokes_U_real = stokes_U.real
+					stokes_U_imag = stokes_U.imag
+					stokes_V_real = stokes_V.real
+					stokes_V_imag = stokes_V.imag
 
 
-			for a in range(vis_xx.shape[0]):
-				avg_freq_i_real += stokes_I_real[a, :]
-				avg_freq_i_imag += stokes_I_imag[a, :]
-				avg_freq_q_real += stokes_Q_real[a, :]
-				avg_freq_q_imag += stokes_Q_imag[a, :]
-				avg_freq_u_real += stokes_U_real[a, :]
-				avg_freq_u_imag += stokes_U_imag[a, :]
-				avg_freq_v_real += stokes_V_real[a, :]
-				avg_freq_v_imag += stokes_V_imag[a, :]
-
-				n_avg += 1
+					if avg_freq_i_real is None:
+						avg_freq_i_real = np.zeros((vis_xx.shape[1]))
+						avg_freq_i_imag = np.zeros((vis_xx.shape[1]))
+						avg_freq_q_real = np.zeros((vis_xx.shape[1]))
+						avg_freq_q_imag = np.zeros((vis_xx.shape[1]))
+						avg_freq_u_real = np.zeros((vis_xx.shape[1]))
+						avg_freq_u_imag = np.zeros((vis_xx.shape[1]))
+						avg_freq_v_real = np.zeros((vis_xx.shape[1]))
+						avg_freq_v_imag = np.zeros((vis_xx.shape[1]))
 
 
-					   # finish averaging
-				avg_freq_i_real = avg_freq_i_real/n_avg
-				avg_freq_i_imag = avg_freq_i_imag/n_avg
-				avg_freq_q_real = avg_freq_q_real/n_avg
-				avg_freq_q_imag = avg_freq_q_imag/n_avg
-				avg_freq_u_real = avg_freq_u_real/n_avg
-				avg_freq_u_imag = avg_freq_u_imag/n_avg
-				avg_freq_v_real = avg_freq_i_real/n_avg
-				avg_freq_v_imag = avg_freq_v_imag/n_avg
-				print (avg_freq_v_imag)
+					for a in range(vis_xx.shape[0]):
+						avg_freq_i_real += stokes_I_real[a, :]
+						avg_freq_i_imag += stokes_I_imag[a, :]
+						avg_freq_q_real += stokes_Q_real[a, :]
+						avg_freq_q_imag += stokes_Q_imag[a, :]
+						avg_freq_u_real += stokes_U_real[a, :]
+						avg_freq_u_imag += stokes_U_imag[a, :]
+						avg_freq_v_real += stokes_V_real[a, :]
+						avg_freq_v_imag += stokes_V_imag[a, :]
+
+						n_avg += 1
 
 
-				np.savez(my_path+new_folder+'/'+'zen.2457746.avgstokes.{}.{}.npz'.format(it,slope),
-				i_real = avg_freq_i_real,
-				i_imag = avg_freq_i_imag,
-				q_real = avg_freq_q_real,
-				q_imag = avg_freq_q_imag,
-				u_real = avg_freq_u_real,
-				u_imag = avg_freq_u_imag,
-				v_real = avg_freq_i_real,
-				v_imag = avg_freq_i_imag)
+							   # finish averaging
+						avg_freq_i_real = avg_freq_i_real/n_avg
+						avg_freq_i_imag = avg_freq_i_imag/n_avg
+						avg_freq_q_real = avg_freq_q_real/n_avg
+						avg_freq_q_imag = avg_freq_q_imag/n_avg
+						avg_freq_u_real = avg_freq_u_real/n_avg
+						avg_freq_u_imag = avg_freq_u_imag/n_avg
+						avg_freq_v_real = avg_freq_i_real/n_avg
+						avg_freq_v_imag = avg_freq_v_imag/n_avg
+						print (avg_freq_v_imag)
+
+
+						np.savez(my_path+new_folder+'/'+'zen.2457746.avgstokes.{}.{}.npz'.format(it,slope),
+						i_real = avg_freq_i_real,
+						i_imag = avg_freq_i_imag,
+						q_real = avg_freq_q_real,
+						q_imag = avg_freq_q_imag,
+						u_real = avg_freq_u_real,
+						u_imag = avg_freq_u_imag,
+						v_real = avg_freq_i_real,
+						v_imag = avg_freq_i_imag)
 
 # def avgfreqcalc(data_dir, antstr):
 # 	xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
