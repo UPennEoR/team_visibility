@@ -64,7 +64,6 @@ def getstokes(data_dir):
 				t_xy2, d_xy2, f_xy2 = capo.miriad.read_files(xy_data, antstr=baseline_2, polstr='xy')
 				t_yx2, d_yx2, f_yx2 = capo.miriad.read_files(yx_data, antstr=baseline_2, polstr='yx')
 				t_yy2, d_yy2, f_yy2 = capo.miriad.read_files(yy_data, antstr=baseline_2, polstr='yy')
-
 				plt.subplot(141)
 				plt.imshow(np.log10(np.abs(d_xx1[(ant_i1, ant_j1)]['xx']))-np.log10(np.abs(d_xx2[(ant_i2, ant_j2)]['xx'])), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
 				plt.title('xx Visibility')
@@ -74,17 +73,17 @@ def getstokes(data_dir):
 				plt.imshow(np.log10(np.abs(d_xy1[(ant_i1, ant_j1)]['xy']))-np.log10(np.abs(d_xy2[(ant_i2, ant_j2)]['xy'])), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
 				plt.title('xy Visibility')
 				plt.xlabel('Frequency bin')
-				plt.ylabel('LST')
 				plt.subplot(143)
 				plt.imshow(np.log10(np.abs(d_yx1[(ant_i1, ant_j1)]['yx']))-np.log10(np.abs(d_yx2[(ant_i2, ant_j2)]['yx'])), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
 				plt.title('yx Visibility')
 				plt.xlabel('Frequency bin')
-				plt.ylabel('LST')
 				plt.subplot(144)
 				plt.imshow(np.log10(np.abs(d_yy1[(ant_i1, ant_j1)]['yy']))-np.log10(np.abs(d_yy2[(ant_i2, ant_j2)]['yy'])), aspect='auto', vmax=0, vmin=-6, cmap='viridis')
 				plt.title('yy Visibility')
 				plt.xlabel('Frequency bin')
-				plt.ylabel('LST')
+				plt.colorbar()
+				fig = plt.figure()
+				fig.suptitle('{} - {}').format(baseline_1, baseline_2)
 
 				# vis_xx = np.abs(d_xx[(ant_i, ant_j)]['xx'])**2
 				# vis_yy = np.abs(d_yy[(ant_i, ant_j)]['yy'])**2
