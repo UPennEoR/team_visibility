@@ -27,11 +27,7 @@ def avgfreqall(data_dir):
 			ant_j = x[elem][1]
 			slope = x[elem][2]
 			antlist.append("%s_%s" % (x[elem][0], x[elem][1]))
-			if len(antstr_all) <= 4:
-				antstr_all += "{}_{}".format(x[elem][0], x[elem][1]) + ","
-			else:
-				antstr_all += "," + "{}_{}".format(x[elem][0], x[elem][1])
-			
+			antstr_all += "{}_{}".format(x[elem][0], x[elem][1]) + ","
 			antstr_all = antstr_all[:-1]
 			print (antstr_all)
 			avg_freq_i_real = None
