@@ -16,6 +16,7 @@ def avgfreqall(data_dir):
 	xy_data = sorted(glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR'])))
 	yx_data = sorted(glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR'])))
 	yy_data = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
+	avgstokes_dict = {}
 
 	antstr_all = ''
 	antlist = []
@@ -76,8 +77,6 @@ def avgfreqall(data_dir):
 				stokes_U_imag = stokes_U.imag
 				stokes_V_real = stokes_V.real
 				stokes_V_imag = stokes_V.imag
-
-avgstokes_dict = {}
 
 
 		
