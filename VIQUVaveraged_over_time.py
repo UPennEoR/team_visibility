@@ -26,7 +26,7 @@ def avgfreqall(data_dir):
 			ant_j = x[elem][1]
 			slope = x[elem][2]
 			if len(antstr_all) <= 5:
-				antstr_all += "%s_%s" % (x[elem][0], x[elem][1])
+				antstr_all += "%s_%s"+"," % (x[elem][0], x[elem][1])
 			else:
 				antstr_all += "," + "%s_%s" % (x[elem][0], x[elem][1])
 			
