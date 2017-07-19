@@ -19,7 +19,7 @@ def avgfreqall(data_dir):
 	antstr_all = ''
 
 	for it in keys:
-		x = sorted(set(key[it]), key=itemgetter(2))
+		x = sorted(set(keys[it]), key=itemgetter(2))
 		for elem, antstr in enumerate(x):
 			ant_i = x[elem][0]
 			ant_j = x[elem][1]
