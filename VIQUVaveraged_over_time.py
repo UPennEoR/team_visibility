@@ -18,13 +18,14 @@ def avgfreqall(data_dir):
 	yy_data = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
 
 	antstr_all = ''
-
+	antlist = []
 	for it in keys:
 		x = sorted(set(baselines[it]), key=itemgetter(2))
 		for elem, antstr in enumerate(x):
 			ant_i = x[elem][0]
 			ant_j = x[elem][1]
 			slope = x[elem][2]
+			antlist.append("%s_%s" % (x[elem][0], x[elem][1]))
 			if len(antstr_all) <= 4:
 				antstr_all += "{}_{}".format(x[elem][0], x[elem][1]) + ","
 			else:
@@ -60,11 +61,11 @@ def avgfreqall(data_dir):
 				vis_yy = d_yy[(ant_i, ant_j)]['yy']
 				vis_yx = d_yx[(ant_i, ant_j)]['yx']
 				vis_xy = d_xy[(ant_i, ant_j)]['xy']
-				for i in baselines:
-					stokes_I = vis_xx + vis_yy
-					stokes_Q = vis_xx - vis_yy
-					stokes_U = vis_xy + vis_yx
-					stokes_V = 1j*vis_xy - 1j*vis_yx
+				
+				stokes_I = vis_xx + vis_yy
+				stokes_Q = vis_xx - vis_yy
+				stokes_U = vis_xy + vis_yx
+				stokes_V = 1j*vis_xy - 1j*vis_yx
 
 
 				stokes_I_real = stokes_I.real
@@ -75,6 +76,11 @@ def avgfreqall(data_dir):
 				stokes_U_imag = stokes_U.imag
 				stokes_V_real = stokes_V.real
 				stokes_V_imag = stokes_V.imag
+
+avgstokes_dict = {}
+
+
+		
 
 
 				if avg_freq_i_real is None:
@@ -89,39 +95,42 @@ def avgfreqall(data_dir):
 
 
 				for i in range(vis_xx.shape[0]):
-					avg_freq_i_real += stokes_I_real[a, :]
-					avg_freq_i_imag += stokes_I_imag[a, :]
-					avg_freq_q_real += stokes_Q_real[a, :]
-					avg_freq_q_imag += stokes_Q_imag[a, :]
-					avg_freq_u_real += stokes_U_real[a, :]
-					avg_freq_u_imag += stokes_U_imag[a, :]
-					avg_freq_v_real += stokes_V_real[a, :]
-					avg_freq_v_imag += stokes_V_imag[a, :]
+					avgstokes_dict['%s' %(antstr)]={}
+					avgstokes_dict['%s' %(antstr)]['i_real']+= stokes_I_real[i, :]
+					avgstokes_dict['%s' %(antstr)]['i_imag']+= stokes_I_imag[i, :]
+					avgstokes_dict['%s' %(antstr)]['q_real']+= stokes_Q_real[i, :]
+					avgstokes_dict['%s' %(antstr)]['q_imag']+= stokes_Q_imag[i, :]
+					avgstokes_dict['%s' %(antstr)]['u_real']+= stokes_U_real[i, :]
+					avgstokes_dict['%s' %(antstr)]['u_imag']+= stokes_U_imag[i, :]
+					avgstokes_dict['%s' %(antstr)]['v_real']+= stokes_V_real[i, :]
+					avgstokes_dict['%s' %(antstr)]['v_imag']+= stokes_V_imag[i, :]
+
+
 
 					n_avg += 1
 
 
-						   # finish averaging
-					avg_freq_i_real = avg_freq_i_real/n_avg
-					avg_freq_i_imag = avg_freq_i_imag/n_avg
-					avg_freq_q_real = avg_freq_q_real/n_avg
-					avg_freq_q_imag = avg_freq_q_imag/n_avg
-					avg_freq_u_real = avg_freq_u_real/n_avg
-					avg_freq_u_imag = avg_freq_u_imag/n_avg
-					avg_freq_v_real = avg_freq_i_real/n_avg
-					avg_freq_v_imag = avg_freq_v_imag/n_avg
-					print (avg_freq_v_imag)
+				n_avg = n_avg * vis_xx.shape[0]		   # finish averaging
+				avg_freq_i_real = avg_freq_i_real/n_avg
+				avg_freq_i_imag = avg_freq_i_imag/n_avg
+				avg_freq_q_real = avg_freq_q_real/n_avg
+				avg_freq_q_imag = avg_freq_q_imag/n_avg
+				avg_freq_u_real = avg_freq_u_real/n_avg
+				avg_freq_u_imag = avg_freq_u_imag/n_avg
+				avg_freq_v_real = avg_freq_i_real/n_avg
+				avg_freq_v_imag = avg_freq_v_imag/n_avg
+				print (avg_freq_v_imag)
 
 
-					np.savez(my_path+'/'+'zen.2457746.avgstokes.{}.{}.npz'.format(it,slope),
-					i_real = avg_freq_i_real,
-					i_imag = avg_freq_i_imag,
-					q_real = avg_freq_q_real,
-					q_imag = avg_freq_q_imag,
-					u_real = avg_freq_u_real,
-					u_imag = avg_freq_u_imag,
-					v_real = avg_freq_i_real,
-					v_imag = avg_freq_i_imag)
+				np.savez(my_path+'/'+'zen.2457746.avgstokes.{}.{}.npz'.format(it,slope),
+				i_real = avg_freq_i_real,
+				i_imag = avg_freq_i_imag,
+				q_real = avg_freq_q_real,
+				q_imag = avg_freq_q_imag,
+				u_real = avg_freq_u_real,
+				u_imag = avg_freq_u_imag,
+				v_real = avg_freq_i_real,
+				v_imag = avg_freq_i_imag)
 
 # def avgfreqcalc(data_dir, antstr):
 # 	xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
