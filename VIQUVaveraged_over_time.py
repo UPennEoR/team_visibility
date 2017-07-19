@@ -108,16 +108,16 @@ def avgfreqall(data_dir):
 
 					n_avg += 1
 
-
+				for elem, antstr in enumerate(antlist):
 				n_avg = n_avg * vis_xx.shape[0]		   # finish averaging
-				avg_freq_i_real = avg_freq_i_real/n_avg
-				avg_freq_i_imag = avg_freq_i_imag/n_avg
-				avg_freq_q_real = avg_freq_q_real/n_avg
-				avg_freq_q_imag = avg_freq_q_imag/n_avg
-				avg_freq_u_real = avg_freq_u_real/n_avg
-				avg_freq_u_imag = avg_freq_u_imag/n_avg
-				avg_freq_v_real = avg_freq_i_real/n_avg
-				avg_freq_v_imag = avg_freq_v_imag/n_avg
+				avg_freq_i_real = avgstokes_dict['%s' %(antstr)]['i_real']/n_avg
+				avg_freq_i_imag = avgstokes_dict['%s' %(antstr)]['i_imag']n_avg
+				avg_freq_q_real = avgstokes_dict['%s' %(antstr)]['q_real']/n_avg
+				avg_freq_q_imag = avgstokes_dict['%s' %(antstr)]['q_imag']/n_avg
+				avg_freq_u_real = avgstokes_dict['%s' %(antstr)]['u_real']/n_avg
+				avg_freq_u_imag = avgstokes_dict['%s' %(antstr)]['u_imag']/n_avg
+				avg_freq_v_real = avgstokes_dict['%s' %(antstr)]['v_real']/n_avg
+				avg_freq_v_imag = avgstokes_dict['%s' %(antstr)]['v_imag']/n_avg
 				print (avg_freq_v_imag)
 
 
