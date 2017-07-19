@@ -111,7 +111,7 @@ def avgfreqall(data_dir):
 				for elem, antstr in enumerate(antlist):
 						   # finish averaging
 					avg_freq_i_real = avgstokes_dict['%s' %(antstr)]['i_real']/n_avg
-					avg_freq_i_imag = avgstokes_dict['%s' %(antstr)]['i_imag']n_avg
+					avg_freq_i_imag = avgstokes_dict['%s' %(antstr)]['i_imag']/n_avg
 					avg_freq_q_real = avgstokes_dict['%s' %(antstr)]['q_real']/n_avg
 					avg_freq_q_imag = avgstokes_dict['%s' %(antstr)]['q_imag']/n_avg
 					avg_freq_u_real = avgstokes_dict['%s' %(antstr)]['u_real']/n_avg
