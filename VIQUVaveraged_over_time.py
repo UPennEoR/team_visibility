@@ -90,7 +90,7 @@ def avgfreqall(data_dir):
 
 
 				for i in range(vis_xx.shape[0]):
-					avgstokes_dict['%s' %(antstr)]={}
+					avgstokes_dict['{}'.format(antstr)]={}
 					avgstokes_dict['%s' %(antstr)]['i_real']+= stokes_I_real[i, :]
 					avgstokes_dict['%s' %(antstr)]['i_imag']+= stokes_I_imag[i, :]
 					avgstokes_dict['%s' %(antstr)]['q_real']+= stokes_Q_real[i, :]
