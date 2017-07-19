@@ -91,14 +91,14 @@ def avgfreqall(data_dir):
 
 				for i in range(vis_xx.shape[0]):
 					avgstokes_dict['{}'.format(antstr)]={}
-					avgstokes_dict['%s' %(antstr)]['i_real']+= stokes_I_real[i, :]
-					avgstokes_dict['%s' %(antstr)]['i_imag']+= stokes_I_imag[i, :]
-					avgstokes_dict['%s' %(antstr)]['q_real']+= stokes_Q_real[i, :]
-					avgstokes_dict['%s' %(antstr)]['q_imag']+= stokes_Q_imag[i, :]
-					avgstokes_dict['%s' %(antstr)]['u_real']+= stokes_U_real[i, :]
-					avgstokes_dict['%s' %(antstr)]['u_imag']+= stokes_U_imag[i, :]
-					avgstokes_dict['%s' %(antstr)]['v_real']+= stokes_V_real[i, :]
-					avgstokes_dict['%s' %(antstr)]['v_imag']+= stokes_V_imag[i, :]
+					avgstokes_dict['{}'.format(antstr)]['i_real']+= stokes_I_real[i, :]
+					avgstokes_dict['{}'.format(antstr)]['i_imag']+= stokes_I_imag[i, :]
+					avgstokes_dict['{}'.format(antstr)]['q_real']+= stokes_Q_real[i, :]
+					avgstokes_dict['{}'.format(antstr)]['q_imag']+= stokes_Q_imag[i, :]
+					avgstokes_dict['{}'.format(antstr)]['u_real']+= stokes_U_real[i, :]
+					avgstokes_dict['{}'.format(antstr)]['u_imag']+= stokes_U_imag[i, :]
+					avgstokes_dict['{}'.format(antstr)]['v_real']+= stokes_V_real[i, :]
+					avgstokes_dict['{}'.format(antstr)]['v_imag']+= stokes_V_imag[i, :]
 
 
 
@@ -106,14 +106,14 @@ def avgfreqall(data_dir):
 				n_avg = n_avg * vis_xx.shape[0]	
 				for elem, antstr in enumerate(antlist):
 						   # finish averaging
-					avg_freq_i_real = avgstokes_dict['%s' %(antstr)]['i_real']/n_avg
-					avg_freq_i_imag = avgstokes_dict['%s' %(antstr)]['i_imag']/n_avg
-					avg_freq_q_real = avgstokes_dict['%s' %(antstr)]['q_real']/n_avg
-					avg_freq_q_imag = avgstokes_dict['%s' %(antstr)]['q_imag']/n_avg
-					avg_freq_u_real = avgstokes_dict['%s' %(antstr)]['u_real']/n_avg
-					avg_freq_u_imag = avgstokes_dict['%s' %(antstr)]['u_imag']/n_avg
-					avg_freq_v_real = avgstokes_dict['%s' %(antstr)]['v_real']/n_avg
-					avg_freq_v_imag = avgstokes_dict['%s' %(antstr)]['v_imag']/n_avg
+					avg_freq_i_real = avgstokes_dict['{}'.format(antstr)]['i_real']/n_avg
+					avg_freq_i_imag = avgstokes_dict['{}'.format(antstr)]['i_imag']/n_avg
+					avg_freq_q_real = avgstokes_dict['{}'.format(antstr)]['q_real']/n_avg
+					avg_freq_q_imag = avgstokes_dict['{}'.format(antstr)]['q_imag']/n_avg
+					avg_freq_u_real = avgstokes_dict['{}'.format(antstr)]['u_real']/n_avg
+					avg_freq_u_imag = avgstokes_dict['{}'.format(antstr)]['u_imag']/n_avg
+					avg_freq_v_real = avgstokes_dict['{}'.format(antstr)]['v_real']/n_avg
+					avg_freq_v_imag = avgstokes_dict['{}'.format(antstr)]['v_imag']/n_avg
 					print (avg_freq_v_imag)
 
 
