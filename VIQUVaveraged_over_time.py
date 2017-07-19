@@ -85,7 +85,7 @@ def avgfreqall(data_dir):
 					avg_freq_v_imag = np.zeros((len(baselines), 8, 1024))
 
 
-				if ('%s' %(antstr) not in avgstokes_dict)::
+				if ('%s' %(antstr) not in avgstokes_dict):
 					avgstokes_dict['{}'.format(antstr)]={}
 					avgstokes_dict['{}'.format(antstr)]['i_real']= stokes_I_real[i, :]
 					avgstokes_dict['{}'.format(antstr)]['i_imag']= stokes_I_imag[i, :]
