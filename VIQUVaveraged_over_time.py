@@ -111,7 +111,7 @@ def avgfreqall(data_dir):
 						n_avg += 1
 				elif (x is False):
 					faulty.append([antstr,i,avgstokes_dict['%s' %(antstr)]['i_real'].shape])
-            		continue
+					continue
 				n_avg = n_avg * vis_xx.shape[0]	
 				for elem, antstr in enumerate(antlist):
 						   # finish averaging
