@@ -79,14 +79,14 @@ def avgfreqall(data_dir):
 
 
 				if avg_freq_i_real is None:
-					avg_freq_i_real = np.zeros(len(keys), 8, 1024)
-					avg_freq_i_imag = np.zeros(len(keys), 8, 1024)
-					avg_freq_q_real = np.zeros(len(keys), 8, 1024)
-					avg_freq_q_imag = np.zeros(len(keys), 8, 1024)
-					avg_freq_u_real = np.zeros(len(keys), 8, 1024)
-					avg_freq_u_imag = np.zeros(len(keys), 8, 1024)
-					avg_freq_v_real = np.zeros(len(keys), 8, 1024)
-					avg_freq_v_imag = np.zeros(len(keys), 8, 1024)
+					avg_freq_i_real = np.zeros(len(baselines), 8, 1024)
+					avg_freq_i_imag = np.zeros(len(baselines), 8, 1024)
+					avg_freq_q_real = np.zeros(len(baselines), 8, 1024)
+					avg_freq_q_imag = np.zeros(len(baselines), 8, 1024)
+					avg_freq_u_real = np.zeros(len(baselines), 8, 1024)
+					avg_freq_u_imag = np.zeros(len(baselines), 8, 1024)
+					avg_freq_v_real = np.zeros(len(baselines), 8, 1024)
+					avg_freq_v_imag = np.zeros(len(baselines), 8, 1024)
 
 
 				for i in range(vis_xx.shape[0]):
