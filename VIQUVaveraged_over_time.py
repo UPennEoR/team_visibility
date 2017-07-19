@@ -28,8 +28,6 @@ def avgfreqall(data_dir):
 			slope = x[elem][2]
 			antlist.append("%s_%s" % (x[elem][0], x[elem][1]))
 			antstr_all += "{}_{}".format(x[elem][0], x[elem][1]) + ","
-			antstr_all = antstr_all[:-1]
-			print (antstr_all)
 			avg_freq_i_real = None
 			avg_freq_q_real = None
 			avg_freq_u_real = None
@@ -41,6 +39,8 @@ def avgfreqall(data_dir):
 			avg_freq_v_imag = None
 			n_avg = 0
 
+		antstr_all = antstr_all[:-1]
+		print (antstr_all)
 
 		for i in np.arange(len(xx_data)):
 				print (i,end=" ")
