@@ -56,72 +56,72 @@ def avgfreqall(data_dir):
 				t_yy, d_yy, f_yy = capo.miriad.read_files(yy_data, antstr=antstr_all, polstr='yy')
 
 				print (d_xx)
-				# vis_xx = d_xx[(ant_i, ant_j)]['xx']
-				# vis_yy = d_yy[(ant_i, ant_j)]['yy']
-				# vis_yx = d_yx[(ant_i, ant_j)]['yx']
-				# vis_xy = d_xy[(ant_i, ant_j)]['xy']
-				# for i in keys:
-				# 	stokes_I = vis_xx + vis_yy
-				# 	stokes_Q = vis_xx - vis_yy
-				# 	stokes_U = vis_xy + vis_yx
-				# 	stokes_V = 1j*vis_xy - 1j*vis_yx
+				vis_xx = d_xx[(ant_i, ant_j)]['xx']
+				vis_yy = d_yy[(ant_i, ant_j)]['yy']
+				vis_yx = d_yx[(ant_i, ant_j)]['yx']
+				vis_xy = d_xy[(ant_i, ant_j)]['xy']
+				for i in baselines:
+					stokes_I = vis_xx + vis_yy
+					stokes_Q = vis_xx - vis_yy
+					stokes_U = vis_xy + vis_yx
+					stokes_V = 1j*vis_xy - 1j*vis_yx
 
 
-				# stokes_I_real = stokes_I.real
-				# stokes_I_imag = stokes_I.imag
-				# stokes_Q_real = stokes_Q.real
-				# stokes_Q_imag = stokes_Q.imag
-				# stokes_U_real = stokes_U.real
-				# stokes_U_imag = stokes_U.imag
-				# stokes_V_real = stokes_V.real
-				# stokes_V_imag = stokes_V.imag
+				stokes_I_real = stokes_I.real
+				stokes_I_imag = stokes_I.imag
+				stokes_Q_real = stokes_Q.real
+				stokes_Q_imag = stokes_Q.imag
+				stokes_U_real = stokes_U.real
+				stokes_U_imag = stokes_U.imag
+				stokes_V_real = stokes_V.real
+				stokes_V_imag = stokes_V.imag
 
 
-				# if avg_freq_i_real is None:
-				# 	avg_freq_i_real = np.zeros(len(keys), 8, 1024)
-				# 	avg_freq_i_imag = np.zeros(len(keys), 8, 1024)
-				# 	avg_freq_q_real = np.zeros(len(keys), 8, 1024)
-				# 	avg_freq_q_imag = np.zeros(len(keys), 8, 1024)
-				# 	avg_freq_u_real = np.zeros(len(keys), 8, 1024)
-				# 	avg_freq_u_imag = np.zeros(len(keys), 8, 1024)
-				# 	avg_freq_v_real = np.zeros(len(keys), 8, 1024)
-				# 	avg_freq_v_imag = np.zeros(len(keys), 8, 1024)
+				if avg_freq_i_real is None:
+					avg_freq_i_real = np.zeros(len(keys), 8, 1024)
+					avg_freq_i_imag = np.zeros(len(keys), 8, 1024)
+					avg_freq_q_real = np.zeros(len(keys), 8, 1024)
+					avg_freq_q_imag = np.zeros(len(keys), 8, 1024)
+					avg_freq_u_real = np.zeros(len(keys), 8, 1024)
+					avg_freq_u_imag = np.zeros(len(keys), 8, 1024)
+					avg_freq_v_real = np.zeros(len(keys), 8, 1024)
+					avg_freq_v_imag = np.zeros(len(keys), 8, 1024)
 
 
-				# for i in range(vis_xx.shape[0]):
-				# 	avg_freq_i_real += stokes_I_real[a, :]
-				# 	avg_freq_i_imag += stokes_I_imag[a, :]
-				# 	avg_freq_q_real += stokes_Q_real[a, :]
-				# 	avg_freq_q_imag += stokes_Q_imag[a, :]
-				# 	avg_freq_u_real += stokes_U_real[a, :]
-				# 	avg_freq_u_imag += stokes_U_imag[a, :]
-				# 	avg_freq_v_real += stokes_V_real[a, :]
-				# 	avg_freq_v_imag += stokes_V_imag[a, :]
+				for i in range(vis_xx.shape[0]):
+					avg_freq_i_real += stokes_I_real[a, :]
+					avg_freq_i_imag += stokes_I_imag[a, :]
+					avg_freq_q_real += stokes_Q_real[a, :]
+					avg_freq_q_imag += stokes_Q_imag[a, :]
+					avg_freq_u_real += stokes_U_real[a, :]
+					avg_freq_u_imag += stokes_U_imag[a, :]
+					avg_freq_v_real += stokes_V_real[a, :]
+					avg_freq_v_imag += stokes_V_imag[a, :]
 
-				# 	n_avg += 1
-
-
-				# 		   # finish averaging
-				# 	avg_freq_i_real = avg_freq_i_real/n_avg
-				# 	avg_freq_i_imag = avg_freq_i_imag/n_avg
-				# 	avg_freq_q_real = avg_freq_q_real/n_avg
-				# 	avg_freq_q_imag = avg_freq_q_imag/n_avg
-				# 	avg_freq_u_real = avg_freq_u_real/n_avg
-				# 	avg_freq_u_imag = avg_freq_u_imag/n_avg
-				# 	avg_freq_v_real = avg_freq_i_real/n_avg
-				# 	avg_freq_v_imag = avg_freq_v_imag/n_avg
-				# 	print (avg_freq_v_imag)
+					n_avg += 1
 
 
-				# 	np.savez(my_path+new_folder+'/'+'zen.2457746.avgstokes.{}.{}.npz'.format(it,slope),
-				# 	i_real = avg_freq_i_real,
-				# 	i_imag = avg_freq_i_imag,
-				# 	q_real = avg_freq_q_real,
-				# 	q_imag = avg_freq_q_imag,
-				# 	u_real = avg_freq_u_real,
-				# 	u_imag = avg_freq_u_imag,
-				# 	v_real = avg_freq_i_real,
-				# 	v_imag = avg_freq_i_imag)
+						   # finish averaging
+					avg_freq_i_real = avg_freq_i_real/n_avg
+					avg_freq_i_imag = avg_freq_i_imag/n_avg
+					avg_freq_q_real = avg_freq_q_real/n_avg
+					avg_freq_q_imag = avg_freq_q_imag/n_avg
+					avg_freq_u_real = avg_freq_u_real/n_avg
+					avg_freq_u_imag = avg_freq_u_imag/n_avg
+					avg_freq_v_real = avg_freq_i_real/n_avg
+					avg_freq_v_imag = avg_freq_v_imag/n_avg
+					print (avg_freq_v_imag)
+
+
+					np.savez(my_path+'/'+'zen.2457746.avgstokes.{}.{}.npz'.format(it,slope),
+					i_real = avg_freq_i_real,
+					i_imag = avg_freq_i_imag,
+					q_real = avg_freq_q_real,
+					q_imag = avg_freq_q_imag,
+					u_real = avg_freq_u_real,
+					u_imag = avg_freq_u_imag,
+					v_real = avg_freq_i_real,
+					v_imag = avg_freq_i_imag)
 
 # def avgfreqcalc(data_dir, antstr):
 # 	xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
