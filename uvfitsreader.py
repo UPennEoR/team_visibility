@@ -39,13 +39,13 @@ def uvreader3(data_dir):
 	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
-		data = UV.get_data('rr')
+		data = UV.get_data('xx')
 		print(data.shape)
 
 def uvreader4(data_dir):
 	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
-		data = UV.get_data(53, 97, 'rr')  # data for ant1=1, ant2=2, pol='rr'
+		data = UV.get_data(53, 97, 'xx')  # data for ant1=1, ant2=2, pol='rr'
 	times = UV.get_times(53, 97)  # times corresponding to 0th axis in data
 
