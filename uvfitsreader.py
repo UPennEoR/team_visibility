@@ -4,11 +4,11 @@ import glob
 UV = UVData()
 
 def uvreader(data_dir):
-	uvfits_file = sorted(glob.glob(''.join([data_dir, 'zen.2457746.40356.HH.uvc.vis.uvfits'])))
-	UV.read_uvfits(uvfits_file)
-	#UV.write_miriad('day2_TDEM0003_10s_norx_1src_1spw.uv')  # write out the miriad file
-	print(UV.get_ants())  # All unique antennas in data
-	print(UV.get_baseline_nums())  # All baseline nums in data
-	print(UV.get_antpairs())  # All (ordered) antenna pairs in data (same info as baseline_nums)
-	print(UV.get_antpairpols)  # All antenna pairs and polariations.
-
+	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	for uvfits_file in datafiles:
+		UV.read_uvfits(uvfits_file)
+		data = UV.get_data(97, 112)
+		print(data.shape)
+		data2 = UV.get_data(UV.antnums_to_baseline(97,112))
+		print(np.all(data == data2))
+		plt.imshow(np.abs(data, data2))
