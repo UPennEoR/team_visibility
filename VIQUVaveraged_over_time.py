@@ -12,6 +12,7 @@ def avgfreqall(data_dir):
 	keys = sorted(get_baselines(ex_ants=[81]))
 	baselines = get_baselines(ex_ants=[81])
 	my_path = '/data4/paper/rkb/'
+	t0 = time.time()
 	xx_data = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
 	xy_data = sorted(glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR'])))
 	yx_data = sorted(glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR'])))
@@ -21,120 +22,113 @@ def avgfreqall(data_dir):
 	antstr_all = ''
 	antlist = []
 	n_avg = len(xx_data)
-	for it in keys:
+	for i in keys:
 		x = sorted(set(baselines[it]), key=itemgetter(2))
 		for elem, antstr in enumerate(x):
-			ant_i = x[elem][0]
-			ant_j = x[elem][1]
-			slope = x[elem][2]
 			antlist.append("%s_%s" % (x[elem][0], x[elem][1]))
 			antstr_all += "{}_{}".format(x[elem][0], x[elem][1]) + ","
-			avg_freq_i_real = None
-			avg_freq_q_real = None
-			avg_freq_u_real = None
-			avg_freq_v_real = None
 
-			avg_freq_i_imag = None
-			avg_freq_q_imag = None
-			avg_freq_u_imag = None
-			avg_freq_v_imag = None
+	n_avg = len(xx_data)*vis_xx.shape[0]
+	avgstokes_dict={}
 
-		antstr_all = antstr_all[:-1]
-		print (antstr_all)
+	for i in range(len(xx_data)):
+		print (i,end=" ")
+		#print("Reading {}...".format(xx_data[i]))
+		t_xx, d_xx, f_xx = capo.miriad.read_files(xx_data, antstr=antstr_all, polstr='xx')
+		#print("Reading {}...".format(xy_data[i]))
+		t_xy, d_xy, f_xy = capo.miriad.read_files(xy_data, antstr=antstr_all, polstr='xy')
+		#print("Reading {}...".format(yx_data[i]))
+		t_yx, d_yx, f_yx = capo.miriad.read_files(yx_data, antstr=antstr_all, polstr='yx')
+		#print("Reading {}...".format(yy_data[i]))
+		t_yy, d_yy, f_yy = capo.miriad.read_files(yy_data, antstr=antstr_all, polstr='yy')
 
-		for i in np.arange(len(xx_data)):
-				print (i,end=" ")
-				#print("Reading {}...".format(xx_data[i]))
-				t_xx, d_xx, f_xx = capo.miriad.read_files(xx_data, antstr=antstr_all, polstr='xx')
-				#print("Reading {}...".format(xy_data[i]))
-				t_xy, d_xy, f_xy = capo.miriad.read_files(xy_data, antstr=antstr_all, polstr='xy')
-				#print("Reading {}...".format(yx_data[i]))
-				t_yx, d_yx, f_yx = capo.miriad.read_files(yx_data, antstr=antstr_all, polstr='yx')
-				#print("Reading {}...".format(yy_data[i]))
-				t_yy, d_yy, f_yy = capo.miriad.read_files(yy_data, antstr=antstr_all, polstr='yy')
+		for elem,antstr in enumerate(antlist_all):
+			#print (antstr)
+			ant_i, ant_j = map(int, antstr.split('_'))
+			
+			
+			vis_xx = d_xx[(ant_i, ant_j)]['xx']
+			#print ("vis_xx",vis_xx.shape)
+			vis_yy = d_yy[(ant_i, ant_j)]['yy']
+			vis_yx = d_yx[(ant_i, ant_j)]['yx']
+			vis_xy = d_xy[(ant_i, ant_j)]['xy']
 
-				print (d_xx)
-				vis_xx = d_xx[(ant_i, ant_j)]['xx']
-				vis_yy = d_yy[(ant_i, ant_j)]['yy']
-				vis_yx = d_yx[(ant_i, ant_j)]['yx']
-				vis_xy = d_xy[(ant_i, ant_j)]['xy']
+			stokes_I = vis_xx + vis_yy
+			#print ('stokes_I',stokes_I.shape)
+			stokes_Q = vis_xx - vis_yy
+			stokes_U = vis_xy + vis_yx
+			stokes_V = 1j*vis_xy - 1j*vis_yx
+
+			stokes_I_real = stokes_I.real
+			stokes_I_imag = stokes_I.imag
+			stokes_Q_real = stokes_Q.real
+			stokes_Q_imag = stokes_Q.imag
+			stokes_U_real = stokes_U.real
+			stokes_U_imag = stokes_U.imag
+			stokes_V_real = stokes_V.real
+			stokes_V_imag = stokes_V.imag
+		
+		
+
+			if ('%s' %(antstr) not in avgstokes_dict):
+				avgstokes_dict['%s' %(antstr)]={}
 				
-				stokes_I = vis_xx + vis_yy
-				stokes_Q = vis_xx - vis_yy
-				stokes_U = vis_xy + vis_yx
-				stokes_V = 1j*vis_xy - 1j*vis_yx
+				avgstokes_dict['%s' %(antstr)]['i_real'] = np.zeros((vis_xx.shape[1]))
+				avgstokes_dict['%s' %(antstr)]['i_imag'] = np.zeros((vis_xx.shape[1]))
+				avgstokes_dict['%s' %(antstr)]['q_real'] = np.zeros((vis_xx.shape[1]))
+				avgstokes_dict['%s' %(antstr)]['q_imag'] = np.zeros((vis_xx.shape[1]))
+				avgstokes_dict['%s' %(antstr)]['u_real'] = np.zeros((vis_xx.shape[1]))
+				avgstokes_dict['%s' %(antstr)]['u_imag'] = np.zeros((vis_xx.shape[1]))
+				avgstokes_dict['%s' %(antstr)]['v_real'] = np.zeros((vis_xx.shape[1]))
+				avgstokes_dict['%s' %(antstr)]['v_imag'] = np.zeros((vis_xx.shape[1]))
+			
+				for it in range(vis_xx.shape[0]):
+					avgstokes_dict['%s' %(antstr)]['i_real'] += stokes_I_real[it,:]
+					avgstokes_dict['%s' %(antstr)]['i_imag'] += stokes_I_imag[it,:]
+					avgstokes_dict['%s' %(antstr)]['q_real'] += stokes_Q_real[it,:]
+					avgstokes_dict['%s' %(antstr)]['q_imag'] += stokes_Q_imag[it,:]
+					avgstokes_dict['%s' %(antstr)]['u_real'] += stokes_U_real[it,:]
+					avgstokes_dict['%s' %(antstr)]['u_imag'] += stokes_U_imag[it,:]
+					avgstokes_dict['%s' %(antstr)]['v_real'] += stokes_V_real[it,:]
+					avgstokes_dict['%s' %(antstr)]['v_imag'] += stokes_V_imag[it,:]
+		
+		
+		
+			else : 
+			
+				for it in range(vis_xx.shape[0]):
+					avgstokes_dict['%s' %(antstr)]['i_real'] += stokes_I_real[it,:]
+					avgstokes_dict['%s' %(antstr)]['i_imag'] += stokes_I_imag[it,:]
+					avgstokes_dict['%s' %(antstr)]['q_real'] += stokes_Q_real[it,:]
+					avgstokes_dict['%s' %(antstr)]['q_imag'] += stokes_Q_imag[it,:]
+					avgstokes_dict['%s' %(antstr)]['u_real'] += stokes_U_real[it,:]
+					avgstokes_dict['%s' %(antstr)]['u_imag'] += stokes_U_imag[it,:]
+					avgstokes_dict['%s' %(antstr)]['v_real'] += stokes_V_real[it,:]
+					avgstokes_dict['%s' %(antstr)]['v_imag'] += stokes_V_imag[it,:]
+			
+		
+		
+		#print ('avgstokeIshape',avgstokes_dict['%s' %(antstr)]['i_real'].shape)
+		
+	
+	
+	for elem,antstr in enumerate(antlist_all):    
+		avgstokes_dict['%s' %(antstr)]['i_real'] /= n_avg
+		avgstokes_dict['%s' %(antstr)]['i_imag'] /= n_avg
+		avgstokes_dict['%s' %(antstr)]['q_real'] /= n_avg
+		avgstokes_dict['%s' %(antstr)]['q_imag'] /= n_avg
+		avgstokes_dict['%s' %(antstr)]['u_real'] /= n_avg
+		avgstokes_dict['%s' %(antstr)]['u_imag'] /= n_avg
+		avgstokes_dict['%s' %(antstr)]['v_real'] /= n_avg
+		avgstokes_dict['%s' %(antstr)]['v_imag'] /= n_avg
+	np.savez(my_path+'zen.2457746.avgstokes.npz',
+	avgstokes_dict = avgstokes_dict)
+	print ("faulty",faulty)
+	t1 = time.time()
 
+	total = t1-t0
+	print (total,"secs")
 
-				stokes_I_real = stokes_I.real
-				stokes_I_imag = stokes_I.imag
-				stokes_Q_real = stokes_Q.real
-				stokes_Q_imag = stokes_Q.imag
-				stokes_U_real = stokes_U.real
-				stokes_U_imag = stokes_U.imag
-				stokes_V_real = stokes_V.real
-				stokes_V_imag = stokes_V.imag
-
-				if avg_freq_i_real is None:
-					avg_freq_i_real = np.zeros((len(baselines), 8, 1024))
-					avg_freq_i_imag = np.zeros((len(baselines), 8, 1024))
-					avg_freq_q_real = np.zeros((len(baselines), 8, 1024))
-					avg_freq_q_imag = np.zeros((len(baselines), 8, 1024))
-					avg_freq_u_real = np.zeros((len(baselines), 8, 1024))
-					avg_freq_u_imag = np.zeros((len(baselines), 8, 1024))
-					avg_freq_v_real = np.zeros((len(baselines), 8, 1024))
-					avg_freq_v_imag = np.zeros((len(baselines), 8, 1024))
-
-
-				if ('{}'.format(antstr) not in avgstokes_dict):
-					avgstokes_dict['{}'.format(antstr)]={}
-					avgstokes_dict['{}'.format(antstr)]['i_real']= stokes_I_real[i, :]
-					avgstokes_dict['{}'.format(antstr)]['i_imag']= stokes_I_imag[i, :]
-					avgstokes_dict['{}'.format(antstr)]['q_real']= stokes_Q_real[i, :]
-					avgstokes_dict['{}'.format(antstr)]['q_imag']= stokes_Q_imag[i, :]
-					avgstokes_dict['{}'.format(antstr)]['u_real']= stokes_U_real[i, :]
-					avgstokes_dict['{}'.format(antstr)]['u_imag']= stokes_U_imag[i, :]
-					avgstokes_dict['{}'.format(antstr)]['v_real']= stokes_V_real[i, :]
-					avgstokes_dict['{}'.format(antstr)]['v_imag']= stokes_V_imag[i, :]
-
-				x = avgstokes_dict['{}'.format(antstr)]['i_real'].shape == stokes_I.shape
-				if (x is True):
-					for i in range(vis_xx.shape[0]):
-						avgstokes_dict['{}'.format(antstr)]={}
-						avgstokes_dict['{}'.format(antstr)]['i_real']+= stokes_I_real[i, :]
-						avgstokes_dict['{}'.format(antstr)]['i_imag']+= stokes_I_imag[i, :]
-						avgstokes_dict['{}'.format(antstr)]['q_real']+= stokes_Q_real[i, :]
-						avgstokes_dict['{}'.format(antstr)]['q_imag']+= stokes_Q_imag[i, :]
-						avgstokes_dict['{}'.format(antstr)]['u_real']+= stokes_U_real[i, :]
-						avgstokes_dict['{}'.format(antstr)]['u_imag']+= stokes_U_imag[i, :]
-						avgstokes_dict['{}'.format(antstr)]['v_real']+= stokes_V_real[i, :]
-						avgstokes_dict['{}'.format(antstr)]['v_imag']+= stokes_V_imag[i, :]
-						n_avg += 1
-				elif (x is False):
-					faulty.append([antstr,i,avgstokes_dict['{}'.format(antstr)]['i_real'].shape])
-					continue
-				n_avg = n_avg * vis_xx.shape[0]	
-				for elem, antstr in enumerate(antlist):
-						   # finish averaging
-					avg_freq_i_real = avgstokes_dict['{}'.format(antstr)]['i_real']/n_avg
-					avg_freq_i_imag = avgstokes_dict['{}'.format(antstr)]['i_imag']/n_avg
-					avg_freq_q_real = avgstokes_dict['{}'.format(antstr)]['q_real']/n_avg
-					avg_freq_q_imag = avgstokes_dict['{}'.format(antstr)]['q_imag']/n_avg
-					avg_freq_u_real = avgstokes_dict['{}'.format(antstr)]['u_real']/n_avg
-					avg_freq_u_imag = avgstokes_dict['{}'.format(antstr)]['u_imag']/n_avg
-					avg_freq_v_real = avgstokes_dict['{}'.format(antstr)]['v_real']/n_avg
-					avg_freq_v_imag = avgstokes_dict['{}'.format(antstr)]['v_imag']/n_avg
-					print (avg_freq_v_imag)
-
-
-				np.savez(my_path+'/'+'zen.2457746.avgstokes.{}.{}.npz'.format(it,slope),
-				i_real = avg_freq_i_real,
-				i_imag = avg_freq_i_imag,
-				q_real = avg_freq_q_real,
-				q_imag = avg_freq_q_imag,
-				u_real = avg_freq_u_real,
-				u_imag = avg_freq_u_imag,
-				v_real = avg_freq_i_real,
-				v_imag = avg_freq_i_imag)
 
 # def avgfreqcalc(data_dir, antstr):
 # 	xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
