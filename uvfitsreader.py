@@ -1,6 +1,9 @@
+import matplotlib
+matplotlib.use('Agg')
 from pyuvdata import UVData
 import numpy as np
 import glob
+import matplotlib.pyplot as plt
 UV = UVData()
 
 def uvreader(data_dir):
@@ -12,3 +15,4 @@ def uvreader(data_dir):
 		data2 = UV.get_data(UV.antnums_to_baseline(53,97))
 		print(np.all(data == data2))
 		plt.imshow(np.abs(data, data2))
+		plt.savefig("/data4/paper/rkb/"+ "uvreadertest.png")
