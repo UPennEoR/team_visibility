@@ -14,5 +14,5 @@ def uvreader(data_dir):
 		print(data.shape)
 		data2 = UV.get_data(UV.antnums_to_baseline(53,97))
 		print(np.all(data == data2))
-		plt.imshow(np.abs(data, data2))
-		plt.savefig("/data4/paper/rkb/"+ "uvreadertest.png")
+		# plt.imshow(np.abs(data, data2))
+		# plt.savefig("/data4/paper/rkb/"+ "uvreadertest.png")
