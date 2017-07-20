@@ -6,7 +6,7 @@ import glob
 from baselineorderer import get_baselines
 import os
 from operator import itemgetter
-
+import time
 
 def avgfreqall(data_dir):
 	keys = sorted(get_baselines(ex_ants=[81]))
