@@ -8,6 +8,7 @@ UV = UVData()
 
 def uvreader(data_dir):
 	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	i = 0
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
 		data = UV.get_data(53, 97)
@@ -22,5 +23,6 @@ def uvreader(data_dir):
 		# data2 = UV.get_data(UV.antnums_to_baseline(53,97))
 		# print(np.all(data == data2))
 		# plt.imshow(np.abs(data, data2))
-		plt.savefig("/data4/paper/rkb/uvreadertest"+ "uvreadertest{}.png".format(uvfits_file))
+		i += 1
+		plt.savefig("/data4/paper/rkb/uvreadertest"+ "uvreadertest{}.png".format(i))
 		plt.clf()
