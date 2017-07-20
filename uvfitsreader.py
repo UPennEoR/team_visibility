@@ -47,5 +47,6 @@ def uvreader4(data_dir):
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
 		data = UV.get_data(53, 97, 'xx')  # data for ant1=1, ant2=2, pol='rr'
-	times = UV.get_times(53, 97)  # times corresponding to 0th axis in data
+		print(data.shape)
+		times = UV.get_times(53, 97)  # times corresponding to 0th axis in data
 
