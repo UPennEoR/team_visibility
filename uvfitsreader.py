@@ -11,10 +11,10 @@ def uvreader(data_dir):
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
 		data = UV.get_data(53, 97)
-		xx_data = data[:,:,1]
-		xy_data = data[:,:,2]
-		yx_data = data[:,:,3]
-		yy_data = data[:,:,4]
+		xx_data = data[:,:,0]
+		xy_data = data[:,:,1]
+		yx_data = data[:,:,2]
+		yy_data = data[:,:,3]
 		vis_xx = xx_data - yy_data
 		plt.imshow((np.log10(np.abs(vis_xx))),aspect='auto', vmax=0, vmin=-6, cmap='viridis')
 		#print(xx_data.shape)
