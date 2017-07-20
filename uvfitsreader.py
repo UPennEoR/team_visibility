@@ -24,5 +24,5 @@ def uvreader(data_dir):
 		# print(np.all(data == data2))
 		# plt.imshow(np.abs(data, data2))
 		i += 1
-		plt.savefig("/data4/paper/rkb/uvreadertest"+ "uvreadertest{}.png".format(i))
+		plt.savefig("/data4/paper/rkb/uvreadertest/"+ "uvreadertest{}.png".format(i))
 		plt.clf()
