@@ -11,7 +11,7 @@ def uvreader(data_dir):
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
 		data = UV.get_data(53, 97)
-		xx_data = data[::,1]
+		xx_data = data[:,:,1]
 		print(xx_data.shape)
 		# print(data.shape)
 		# data2 = UV.get_data(UV.antnums_to_baseline(53,97))
