@@ -4,7 +4,7 @@ import glob
 UV = UVData()
 
 def uvreader(data_dir):
-	uvfits_file = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	uvfits_file = sorted(glob.glob(''.join([data_dir, 'zen.2457746.40356.HH.uvc.vis.uvfits'])))
 	UV.read_uvfits(uvfits_file)
 	#UV.write_miriad('day2_TDEM0003_10s_norx_1src_1spw.uv')  # write out the miriad file
 	print(UV.get_ants())  # All unique antennas in data
