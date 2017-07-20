@@ -29,7 +29,7 @@ def uvreader(data_dir):
 
 def uvreader2(data_dir):
 	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
-	total_array = np.empty(56, 1024, 4)
+	total_array = np.empty([56, 1024, 4])
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
 		data = UV.get_data(53, 97)
