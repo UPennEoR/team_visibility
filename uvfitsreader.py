@@ -22,4 +22,5 @@ def uvreader(data_dir):
 		# data2 = UV.get_data(UV.antnums_to_baseline(53,97))
 		# print(np.all(data == data2))
 		# plt.imshow(np.abs(data, data2))
-		plt.savefig("/data4/paper/rkb/"+ "uvreadertest.png")
+		plt.savefig("/data4/paper/rkb/uvreadertest"+ "uvreadertest.png{}".format(uvfits_file))
+		plt.clf()
