@@ -1,5 +1,6 @@
 from pyuvdata import UVData
 import numpy as np
+import glob
 UV = UVData()
 
 def uvreader(data_dir):
