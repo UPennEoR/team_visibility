@@ -23,7 +23,7 @@ def avgfreqall(data_dir):
 	antlist = []
 	n_avg = len(xx_data)
 	for i in keys:
-		x = sorted(set(baselines[it]), key=itemgetter(2))
+		x = sorted(set(baselines[i]), key=itemgetter(2))
 		for elem, antstr in enumerate(x):
 			antlist.append("%s_%s" % (x[elem][0], x[elem][1]))
 			antstr_all += "{}_{}".format(x[elem][0], x[elem][1]) + ","
