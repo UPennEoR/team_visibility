@@ -12,9 +12,14 @@ def uvreader(data_dir):
 		UV.read_uvfits(uvfits_file)
 		data = UV.get_data(53, 97)
 		xx_data = data[:,:,1]
-		print(xx_data.shape)
+		xy_data = data[:,:,2]
+		yx_data = data[:,:,3]
+		yy_data = data[:,:,4]
+		vis_xx = xx_data - yy_data
+		plt.imshow((np.log10(np.abs(vis_xx))),aspect='auto', vmax=0, vmin=-6, cmap='viridis')
+		#print(xx_data.shape)
 		# print(data.shape)
 		# data2 = UV.get_data(UV.antnums_to_baseline(53,97))
 		# print(np.all(data == data2))
 		# plt.imshow(np.abs(data, data2))
-		# plt.savefig("/data4/paper/rkb/"+ "uvreadertest.png")
+		plt.savefig("/data4/paper/rkb/"+ "uvreadertest.png")
