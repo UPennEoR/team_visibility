@@ -64,8 +64,8 @@ def uvreader5(data_dir):
 			yy_data = data[:,:,3]
 			vis_xx = xx_data - yy_data
 			plt.imshow((np.log10(np.abs(vis_xx))),aspect='auto', vmax=0, vmin=-6, cmap='viridis')
-			plt.xlabel(frequency)
-			plt.ylabel(LST)
+			plt.xlabel('frequency')
+			plt.ylabel('LST')
 			plt.title("{}, {}".format(baseline, uvfits_file))
 			plt.clf()
 			plt.savefig("/data4/paper/rkb/uvreadertest/"+"uvreaderallantpair{},{}.png".format(baseline,uvfits_file))
