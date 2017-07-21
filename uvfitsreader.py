@@ -48,20 +48,16 @@ def uvreader3(data_dir):
 def uvreader5(data_dir):
 	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	total_array = np.empty([56, 1024, 4])
+	antpairfile = datafiles[0]
+	UV.read_uvfits(antpairfile)
+	antpairall = UV.get_antpairs()
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
-		print(UV.get_antpairs())  # All (ordered) antenna pairs in data (same info as baseline_nums)
-
-	# for key, data in UV.antpairpol_iter():
-
-
-	# for uvfits_file in datafiles:
-	# 	UV.read_uvfits(uvfits_file)
-	# 	for baseline in allpairs:
-	# 		data = UV.get_data(baseline)
-	# 		print (data)
-		#np.concatenate((total_array, data), axis=0)
-	#print (total_array)
+		for baseline in antpairall:
+			data = UV.get_data(baseline)
+			print (data)
+		# np.concatenate((total_array, data), axis=0)
+	# print (total_array)
 	#np.save("/data4/paper/rkb/zenuvfitssave.vis.uvfits", total_array)
 
 
