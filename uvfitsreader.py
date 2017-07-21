@@ -68,6 +68,7 @@ def uvreader5(data_dir):
 			plt.ylabel('LST')
 			plt.title("{}, {}".format(baseline, uvfits_file))
 			plt.clf()
+			uvfits_file = uvfits_file.strip(data_dir)
 			plt.savefig("/data4/paper/rkb/uvreadertest/"+"uvreaderallantpair{},{}.png".format(baseline,uvfits_file))
 		# np.concatenate((total_array, data), axis=0)
 	# print (total_array)
