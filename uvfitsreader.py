@@ -80,7 +80,7 @@ def uvreader5(data_dir):
             plt.title("{}, {}".format(baseline, uvfits_file))
             plt.clf()
             uvfits_file = uvfits_file.strip(data_dir)
-            plt.savefig("/data4/paper/rkb/uvreadertest/" +
+            plt.savefig("/data4/paper/rkb/uvreaderstorage/" +
                         "uvreaderallantpair{},{}.png".format(baseline, uvfits_file))
         # np.concatenate((total_array, data), axis=0)
     # print (total_array)
@@ -98,7 +98,6 @@ def uvreader4(data_dir):
 
 
 def uvreader6(data_dir):
-    UV = UVData()
     datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc'])))
     for miriad_file in datafiles:
         if UV.data_array is None:
