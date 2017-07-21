@@ -4,6 +4,7 @@ from pyuvdata import UVData
 import numpy as np
 import glob
 import matplotlib.pyplot as plt
+import os
 UV = UVData()
 
 
@@ -55,18 +56,34 @@ def uvreader3(data_dir):
 
 
 def uvreader5(data_dir):
+    if os.path.isdir("/data4/paper/rkb/uvreaderstorage/"):
+        pass
+    else:
+        os.makedirs("/data4/paper/rkb/uvreaderstorage/")
     datafiles = sorted(
         glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
     total_array = np.empty([56, 1024, 4])
-    #allpairs = UV.get_antpairs()
-    print (UV.get_antpairs())
-    # for uvfits_file in datafiles:
-    # 	UV.read_uvfits(uvfits_file)
-    # 	for baseline in allpairs:
-    #       data = UV.get_data(baseline)
-    #       print (data)
-    #       np.concatenate((total_array, data), axis=0)
-    #print (total_array)
+    antpairfile = datafiles[0]
+    UV.read_uvfits(antpairfile)
+    antpairall = UV.get_antpairs()
+    for uvfits_file in datafiles:
+        UV.read_uvfits(uvfits_file)
+        for baseline in antpairall:
+            data = UV.get_data(baseline)
+            xx_data = data[:, :, 0]
+            yy_data = data[:, :, 3]
+            vis_xx = xx_data - yy_data
+            plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
+                       vmax=0, vmin=-6, cmap='viridis')
+            plt.xlabel('frequency')
+            plt.ylabel('LST')
+            plt.title("{}, {}".format(baseline, uvfits_file))
+            plt.clf()
+            uvfits_file = uvfits_file.strip(data_dir)
+            plt.savefig("/data4/paper/rkb/uvreadertest/" +
+                        "uvreaderallantpair{},{}.png".format(baseline, uvfits_file))
+        # np.concatenate((total_array, data), axis=0)
+    # print (total_array)
     #np.save("/data4/paper/rkb/zenuvfitssave.vis.uvfits", total_array)
 
 
