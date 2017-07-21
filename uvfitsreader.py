@@ -34,17 +34,21 @@ def uvreader(data_dir):
 
 
 def uvreader2(data_dir):
-	datafiles = sorted(
-		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	if os.path.isdir("/data4/paper/rkb/uvreaderarraystorage/"):
+		pass
+	else:
+		os.makedirs("/data4/paper/rkb/uvreaderarraystorage/")
+	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	total_array = np.empty([56, 1024, 4])
+	antpairfile = datafiles[0]
+	UV.read_uvfits(antpairfile)
+	antpairall = UV.get_antpairs()
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
-		baseline = (53, 97)
-		data = UV.get_data(baseline)
-		print (data)
-		total_array = np.concatenate((total_array, data), axis=0)
-		print (total_array)
-		np.save("/data4/paper/rkb/zenuvfitssave{}.vis.uvfits".format(baseline), total_array)
+		for baseline in antpairall:
+			data = UV.get_data(baseline)
+			total_array = np.concatenate((total_array, data), axis=0)
+			np.save("/data4/paper/rkb/zenuvfitssave{}.vis.uvfits".format(baseline), total_array)
 
 
 def uvreader3(data_dir):
@@ -63,7 +67,6 @@ def uvreader5(data_dir):
 		os.makedirs("/data4/paper/rkb/uvreaderstorage/")
 	datafiles = sorted(
 		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
-	total_array = np.empty([56, 1024, 4])
 	antpairfile = datafiles[0]
 	UV.read_uvfits(antpairfile)
 	antpairall = UV.get_antpairs()
