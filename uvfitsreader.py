@@ -49,7 +49,11 @@ def uvreader5(data_dir):
 	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	total_array = np.empty([56, 1024, 4])
 	#allpairs = UV.get_antpairs()
-	print (UV.get_antpairs())
+	print(UV.get_ants())  # All unique antennas in data
+	print(UV.get_baseline_nums())  # All baseline nums in data
+	print(UV.get_antpairs())  # All (ordered) antenna pairs in data (same info as baseline_nums)
+	print(UV.get_antpairpols)  # All antenna pairs and polariations.
+
 	# for uvfits_file in datafiles:
 	# 	UV.read_uvfits(uvfits_file)
 	# 	for baseline in allpairs:
