@@ -34,7 +34,8 @@ def uvreader2(data_dir):
 		UV.read_uvfits(uvfits_file)
 		data = UV.get_data(53, 97)
 		np.concatenate((total_array, data), axis=0)
-	np.save("/data4/paper/rkb/zenuvfitssave.vis.uvfits", total_array)
+	print (total_array)
+	#np.save("/data4/paper/rkb/zenuvfitssave.vis.uvfits", total_array)
 
 def uvreader3(data_dir):
 	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
