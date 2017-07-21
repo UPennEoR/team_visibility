@@ -41,8 +41,8 @@ def uvreader2(data_dir):
         UV.read_uvfits(uvfits_file)
         data = UV.get_data(53, 97)
         print (data)
-        np.concatenate((total_array, data), axis=0)
-    #print (total_array)
+        total_array = np.concatenate((total_array, data), axis=0)
+    	print (total_array)
     #np.save("/data4/paper/rkb/zenuvfitssave.vis.uvfits", total_array)
 
 
@@ -78,10 +78,11 @@ def uvreader5(data_dir):
             plt.xlabel('frequency')
             plt.ylabel('LST')
             plt.title("{}, {}".format(baseline, uvfits_file))
-            plt.clf()
             uvfits_file = uvfits_file.strip(data_dir)
             plt.savefig("/data4/paper/rkb/uvreaderstorage/" +
                         "uvreaderallantpair{},{}.png".format(baseline, uvfits_file))
+			plt.clf()
+
         # np.concatenate((total_array, data), axis=0)
     # print (total_array)
     #np.save("/data4/paper/rkb/zenuvfitssave.vis.uvfits", total_array)
