@@ -39,11 +39,12 @@ def uvreader2(data_dir):
 	total_array = np.empty([56, 1024, 4])
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
-		data = UV.get_data(53, 97)
+		baseline = (53, 97)
+		data = UV.get_data(baseline)
 		print (data)
 		total_array = np.concatenate((total_array, data), axis=0)
 		print (total_array)
-	#np.save("/data4/paper/rkb/zenuvfitssave.vis.uvfits", total_array)
+		np.save("/data4/paper/rkb/zenuvfitssave{}.vis.uvfits".format(baseline), total_array)
 
 
 def uvreader3(data_dir):
