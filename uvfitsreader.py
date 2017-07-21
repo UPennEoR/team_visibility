@@ -48,7 +48,7 @@ def uvreader2(data_dir):
 		for baseline in antpairall:
 			data = UV.get_data(baseline)
 			total_array = np.concatenate((total_array, data), axis=0)
-			np.save("/data4/paper/rkb/zenuvfitssave{}.vis.uvfits".format(baseline), total_array)
+			np.save("/data4/paper/rkb/uvreaderarraystorage/zenuvfitssave{}.vis.uvfits".format(baseline), total_array)
 
 
 def uvreader3(data_dir):
