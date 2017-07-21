@@ -33,6 +33,7 @@ def uvreader2(data_dir):
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
 		data = UV.get_data(53, 97)
+		print (data)
 		np.concatenate((total_array, data), axis=0)
 	print (total_array)
 	#np.save("/data4/paper/rkb/zenuvfitssave.vis.uvfits", total_array)
