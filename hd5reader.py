@@ -12,6 +12,7 @@ dgrp = f["/Data"]
 dset_nu = dgrp["nu"]
 nu = np.asarray(dset_nu)
 dset_xi = dgrp["xi"]
+xi = np.asarray(dset_xi)
 
 xi_stokes = xi[:2]
 print (xi_stokes)
