@@ -5,3 +5,6 @@ f = h5py.File(fn, 'r')
 
 for key in f.keys():
 	print(key)
+dgrp = f["/Data"]
+for key in dgrp.keys():
+	print(key)
