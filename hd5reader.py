@@ -8,7 +8,7 @@ import os
 fn = '/home/plaplant/global_signal/Output/HERA/beam_zenith/xi_nu_phi.hdf5'
 f = h5py.File(fn, 'r')
 
-
+dgrp = f["/Data"]
 dset_nu = dgrp["nu"]
 nu = np.asarray(dset_nu)
 dset_xi = dgrp("xi")
