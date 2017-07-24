@@ -74,10 +74,10 @@ def uvreader5(data_dir):
 		UV.read_uvfits(uvfits_file)
 		for baseline in antpairall:
 			xx_data = UV.get_data(baseline[0], baseline[1], 'xx')
-			print (xx_data)
 			data = UV.get_data(baseline)
 			xx_data2 = data[:, :, 0]
-			print (xx_data2)
+			if xx_data == xx_data2:
+				print('it is the same')
 			yy_data = data[:, :, 3]
 			vis_xx = xx_data - yy_data
 			plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
