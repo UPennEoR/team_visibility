@@ -14,8 +14,9 @@ nu = np.asarray(dset_nu)
 dset_xi = dgrp["xi"]
 xi = np.asarray(dset_xi)
 
-xi_stokes = xi[:2]
+xi_stokes = xi[0, :, 0, 0]
 print (xi_stokes)
+
 # for baselin_sep in xi:
 
 # xi = np.asarray(dset_xi)
