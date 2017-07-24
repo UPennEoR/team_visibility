@@ -78,16 +78,16 @@ def uvreader5(data_dir):
 			xy_data2 = data[:, :, 1]
 			if np.array_equal(xy_data, xy_data2) == True:
 				print('it is the same')
-			yy_data = data[:, :, 3]
-			vis_xx = xx_data - yy_data
-			plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
-					   vmax=0, vmin=-6, cmap='viridis')
-			plt.xlabel('frequency')
-			plt.ylabel('LST')
-			plt.title("{}, {}".format(baseline, uvfits_file))
-			uvfits_file = uvfits_file.strip(data_dir)
-			plt.savefig("/data4/paper/rkb/uvreaderstorage/" +"uvreaderallantpair{},{}.png".format(baseline, uvfits_file))
-			plt.clf()
+			# yy_data = data[:, :, 3]
+			# vis_xx = xx_data - yy_data
+			# plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
+			# 		   vmax=0, vmin=-6, cmap='viridis')
+			# plt.xlabel('frequency')
+			# plt.ylabel('LST')
+			# plt.title("{}, {}".format(baseline, uvfits_file))
+			# uvfits_file = uvfits_file.strip(data_dir)
+			# plt.savefig("/data4/paper/rkb/uvreaderstorage/" +"uvreaderallantpair{},{}.png".format(baseline, uvfits_file))
+			# plt.clf()
 
 		# np.concatenate((total_array, data), axis=0)
 	# print (total_array)
