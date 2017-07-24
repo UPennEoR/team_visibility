@@ -51,23 +51,22 @@ def baselinetest(fn):
 	xi_angle = xi[0, 0, :, 0]
 	for index2 in enumerate(np.nditer(xi_angle)):
 		for index in enumerate(np.nditer(xi_baseline)):
-			xi_plot = xi[index[0], 0, 0, : ]
+			xi_plot = xi[index[0], 0, index2[0], : ]
 			ax= plt.subplot(411)
 			ax.set_title("Stokes I")
 			ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
 			ax.set_ylim([0, 0.00015])
-			xi_plot = xi[index[0], 1, 0, : ]
+			xi_plot = xi[index[0], 1, index2[0], : ]
 			ax= plt.subplot(412)
 			ax.set_title("Stokes Q")
 			ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
 			ax.set_ylim([0, 0.00015])
-			xi_plot = xi[index[0], 2, 0, : ]
+			xi_plot = xi[index[0], 2, index2[0], : ]
 			ax= plt.subplot(413)
 			ax.set_title("Stokes U")
 			ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
 			ax.set_ylim([0, 0.00015])
-			xi_plot = xi[index[0], 3, 0, : ]
-			xi_plot = xi[index[0], 3, 0, : ]
+			xi_plot = xi[index[0], 3, index2[0], : ]
 			ax= plt.subplot(414)
 			ax.set_title("Stokes V")
 			ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
