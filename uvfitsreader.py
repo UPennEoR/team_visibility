@@ -75,7 +75,7 @@ def uvreader5(data_dir):
 		for baseline in antpairall:
 			xy_data = UV.get_data(baseline[0], baseline[1], 'xy')
 			data = UV.get_data(baseline)
-			xy_data2 = data[:, :, 0]
+			xy_data2 = data[:, :, 1]
 			if np.array_equal(xy_data, xy_data2) == True:
 				print('it is the same')
 			else:
