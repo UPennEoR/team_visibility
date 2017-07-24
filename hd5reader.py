@@ -35,10 +35,10 @@ def stokescreator(stokes):
 	plt.savefig('/data4/paper/rkb/hd5saves/hd5test1.png')
 
 def baselinetest(fn):
-	if os.path.isdir("/data4/paper/rkb/hd5saves/"):
+	if os.path.isdir("/data4/paper/rkb/hd5savesgif/"):
 		pass
 	else:
-		os.makedirs("/data4/paper/rkb/hd5saves/")
+		os.makedirs("/data4/paper/rkb/hd5savesgif/")
 	f = h5py.File(fn, 'r')
 	dgrp = f["/Data"]
 	dset_nu = dgrp["nu"]
@@ -46,34 +46,43 @@ def baselinetest(fn):
 	dset_xi = dgrp["xi"]
 	xi = np.asarray(dset_xi)
 	xi_baseline = xi[:,3, 0, 0]
-	for index in enumerate(np.nditer(xi_baseline)):
-		xi_plot = xi[index[0], 0, 0, : ]
-		ax= plt.subplot(411)
-		ax.set_title("Stokes I")
-		ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
-		ax.set_ylim([0, 0.00015])
-		xi_plot = xi[index[0], 1, 0, : ]
-		ax= plt.subplot(412)
-		ax.set_title("Stokes Q")
-		ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
-		ax.set_ylim([0, 0.00015])
-		xi_plot = xi[index[0], 2, 0, : ]
-		ax= plt.subplot(413)
-		ax.set_title("Stokes U")
-		ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
-		ax.set_ylim([0, 0.00015])
-		xi_plot = xi[index[0], 3, 0, : ]
-		xi_plot = xi[index[0], 3, 0, : ]
-		ax= plt.subplot(414)
-		ax.set_title("Stokes V")
-		ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
-		ax.set_ylim([0, 0.00015])
+	xi_angle = xi[0, 0, :, 0]
+	for index2 in enumerate(np.nditer(xi_angle)):
+		for index in enumerate(np.nditer(xi_baseline)):
+			xi_plot = xi[index[0], 0, 0, : ]
+			ax= plt.subplot(411)
+			ax.set_title("Stokes I")
+			ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
+			ax.set_ylim([0, 0.00015])
+			xi_plot = xi[index[0], 1, 0, : ]
+			ax= plt.subplot(412)
+			ax.set_title("Stokes Q")
+			ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
+			ax.set_ylim([0, 0.00015])
+			xi_plot = xi[index[0], 2, 0, : ]
+			ax= plt.subplot(413)
+			ax.set_title("Stokes U")
+			ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
+			ax.set_ylim([0, 0.00015])
+			xi_plot = xi[index[0], 3, 0, : ]
+			xi_plot = xi[index[0], 3, 0, : ]
+			ax= plt.subplot(414)
+			ax.set_title("Stokes V")
+			ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
+			ax.set_ylim([0, 0.00015])
+		plt.tight_layout()
+		plt.legend(loc="best")
+		plt.xlabel('Frequency (MHz)')
+		plt.ylabel('Avg Power')
+		plt.savefig('/data4/paper/rkb/hd5savesgif/hd5stokesQ{}.png'.format(index2))
+	images = glob.glob('/data4/paper/rkb/hd5savesgif/*.png')
+	gif = []
+	for filename in images:
+		gif.append(imageio.imread(filename))
+	imageio.mimsave('/data4/paper/rkb/hd5.gif', gif,fps=1)
+	shutil.rmtree('/data4/paper/rkb/hd5savesgif/')
 
-	plt.tight_layout()
-	plt.legend(loc="best")
-	plt.xlabel('Frequency (MHz)')
-	plt.ylabel('Avg Power')
-	plt.savefig('/data4/paper/rkb/hd5saves/hd5stokesQ2.png')
+
 
 	# compare sam's plots against .vis.uvfits file data!
 
