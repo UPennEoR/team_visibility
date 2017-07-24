@@ -52,7 +52,7 @@ def baselinetest(fn):
 	plt.legend()
 	plt.xlabel('Frequency (MHz)')
 	plt.ylabel('Avg Power')
-	plt.savefig('/data4/paper/rkb/hd5saves/hd5test2.png')
+	plt.savefig('/data4/paper/rkb/hd5saves/hd5stokesI.png')
 
 	# compare sam's plots against .vis.uvfits file data!
 
