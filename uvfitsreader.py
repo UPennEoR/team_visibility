@@ -78,7 +78,7 @@ def uvreader5(data_dir):
 			yy_data = data[:, :, 1]
 			xy_data = data[:, :, 2]
 			yx_data = data[:, :, 3]
-			averager = xx_data[0,:, :, :]
+			averager = xx_data[0,:, :]
 			for i in np.nditer(averager):
 				print(i)
 			# plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
