@@ -51,17 +51,17 @@ def baselinetest(fn):
 		ax= plt.subplot(411)
 		ax.set_title("Stokes I")
 		ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
-		ax.setylim([0, 0.00015])
+		ax.set_ylim([0, 0.00015])
 		xi_plot = xi[index[0], 1, 0, : ]
 		ax= plt.subplot(412)
 		ax.set_title("Stokes Q")
 		ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
-		ax.setylim([0, 0.00015])
+		ax.set_ylim([0, 0.00015])
 		xi_plot = xi[index[0], 2, 0, : ]
 		ax= plt.subplot(413)
 		ax.set_title("Stokes U")
 		ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
-		ax.setylim([0, 0.00015])
+		ax.set_ylim([0, 0.00015])
 		xi_plot = xi[index[0], 3, 0, : ]
 		xi_plot = xi[index[0], 3, 0, : ]
 		ax= plt.subplot(414)
