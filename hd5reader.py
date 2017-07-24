@@ -46,8 +46,9 @@ def baselinetest(fn):
 	dset_xi = dgrp["xi"]
 	xi = np.asarray(dset_xi)
 	xi_baseline = xi[:, 0, 0, 0]
-	for i in np.nditer(xi_baseline):
-		xi_plot = xi[i, 0, 0, 0, : ]
+	y = []
+	for index, i in enumerate(np.nditer(xi_baseline)):
+		xi_plot = xi[index, 0, 0, 0, : ]
 		plt.plot(nu, np.abs(xi_stokes), linestyle='-', label="{}".format(i))
 	plt.legend()
 	plt.xlabel('Frequency (MHz)')
