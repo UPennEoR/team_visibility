@@ -67,7 +67,7 @@ def baselinetest(fn):
 		ax= plt.subplot(414)
 		ax.set_title("Stokes V")
 		ax.plot(nu, np.abs(xi_plot), linestyle='-', label="{}".format(index[0]))
-		ax.setylim([0, 0.00015])
+		ax.set_ylim([0, 0.00015])
 
 	plt.tight_layout()
 	plt.legend(loc="best")
