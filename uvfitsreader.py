@@ -73,15 +73,13 @@ def uvreader5(data_dir):
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
 		for baseline in antpairall:
-			yy_data = UV.get_data(baseline[0], baseline[1], 'yy')
 			data = UV.get_data(baseline)
-			yy_data2 = data[:, :, 1]
-			if np.array_equal(yy_data, yy_data2) == True:
-				print('it is the same')
-			else:
-				print('not the same')
-			# yy_data = data[:, :, 3]
-			# vis_xx = xx_data - yy_data
+			xx_data = data[:, :, 0]
+			print(xx_data.shape())
+			yy_data = data[:, :, 1]
+			xy_data = data[:, :, 2]
+			yx_data = data[:, :, 3]
+			vis_xx = xx_data - yy_data
 			# plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
 			# 		   vmax=0, vmin=-6, cmap='viridis')
 			# plt.xlabel('frequency')
