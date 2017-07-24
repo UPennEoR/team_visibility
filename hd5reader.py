@@ -20,7 +20,7 @@ dset_xi = dgrp["xi"]
 xi = np.asarray(dset_xi)
 xi_stokesI = xi[0, 1, 0, :]
 plt.plot(nu, xi_stokesI.real, color='b', linestyle='-', label="I real")
-plt.plot(nu, xi_stokesI.imag, color='b', linestyle='-', label="I real")
+plt.plot(nu, xi_stokesI.imag, color='b', linestyle='-', label="I imag")
 plt.legend()
 plt.savefig('/data4/paper/rkb/hd5saves/hd5test1.png')
 
