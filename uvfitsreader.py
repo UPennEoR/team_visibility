@@ -75,11 +75,12 @@ def uvreader5(data_dir):
 		for baseline in antpairall:
 			data = UV.get_data(baseline)
 			xx_data = data[:, :, 0]
-			print(xx_data.shape)
 			yy_data = data[:, :, 1]
 			xy_data = data[:, :, 2]
 			yx_data = data[:, :, 3]
-			vis_xx = xx_data - yy_data
+			averager = xx_data[0,:, :, :]
+			for i in np.nditer(averager):
+				print(i)
 			# plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
 			# 		   vmax=0, vmin=-6, cmap='viridis')
 			# plt.xlabel('frequency')
