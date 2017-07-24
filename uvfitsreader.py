@@ -69,21 +69,22 @@ def uvreader5(data_dir):
 	antpairfile = datafiles[0]
 	UV.read_uvfits(antpairfile)
 	antpairall = UV.get_antpairs()
-	for uvfits_file in datafiles:
-		UV.read_uvfits(uvfits_file)
-		for baseline in antpairall:
-			data = UV.get_data(baseline)
-			xx_data = data[:, :, 0]
-			yy_data = data[:, :, 3]
-			vis_xx = xx_data - yy_data
-			plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
-					   vmax=0, vmin=-6, cmap='viridis')
-			plt.xlabel('frequency')
-			plt.ylabel('LST')
-			plt.title("{}, {}".format(baseline, uvfits_file))
-			uvfits_file = uvfits_file.strip(data_dir)
-			plt.savefig("/data4/paper/rkb/uvreaderstorage/" +"uvreaderallantpair{},{}.png".format(baseline, uvfits_file))
-			plt.clf()
+	print (antpairall)
+	# for uvfits_file in datafiles:
+	# 	UV.read_uvfits(uvfits_file)
+	# 	for baseline in antpairall:
+	# 		data = UV.get_data(baseline)
+	# 		xx_data = data[:, :, 0]
+	# 		yy_data = data[:, :, 3]
+	# 		vis_xx = xx_data - yy_data
+	# 		plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
+	# 				   vmax=0, vmin=-6, cmap='viridis')
+	# 		plt.xlabel('frequency')
+	# 		plt.ylabel('LST')
+	# 		plt.title("{}, {}".format(baseline, uvfits_file))
+	# 		uvfits_file = uvfits_file.strip(data_dir)
+	# 		plt.savefig("/data4/paper/rkb/uvreaderstorage/" +"uvreaderallantpair{},{}.png".format(baseline, uvfits_file))
+	# 		plt.clf()
 
 		# np.concatenate((total_array, data), axis=0)
 	# print (total_array)
