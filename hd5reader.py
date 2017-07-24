@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import os
 import glob
 import imageio
+import shutil
+
 
 def stokescreator(stokes):
 	if os.path.isdir("/data4/paper/rkb/hd5saves/"):
