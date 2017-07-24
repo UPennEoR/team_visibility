@@ -47,13 +47,12 @@ def baselinetest(fn):
 	xi = np.asarray(dset_xi)
 	xi_baseline = xi[:, 0, 0, 0]
 	for index in enumerate(np.nditer(xi_baseline)):
-		print (index[0])
-	# 	xi_plot = xi[index, 0, 0, 0, : ]
-	# 	plt.plot(nu, np.abs(xi_stokes), linestyle='-', label="{}".format(index))
-	# plt.legend()
-	# plt.xlabel('Frequency (MHz)')
-	# plt.ylabel('Avg Power')
-	# plt.savefig('/data4/paper/rkb/hd5saves/hd5test2.png')
+		xi_plot = xi[index[0], 0, 0, 0, : ]
+		plt.plot(nu, np.abs(xi_stokes), linestyle='-', label="{}".format(index[0]))
+	plt.legend()
+	plt.xlabel('Frequency (MHz)')
+	plt.ylabel('Avg Power')
+	plt.savefig('/data4/paper/rkb/hd5saves/hd5test2.png')
 
 	# compare sam's plots against .vis.uvfits file data!
 
