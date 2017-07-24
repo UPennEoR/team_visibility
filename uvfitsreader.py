@@ -76,7 +76,7 @@ def uvreader5(data_dir):
 			xx_data = UV.get_data(baseline[0], baseline[1], 'xx')
 			data = UV.get_data(baseline)
 			xx_data2 = data[:, :, 0]
-			if xx_data == xx_data2:
+			if np.array_equal(xx_data, xx_data2) == True:
 				print('it is the same')
 			yy_data = data[:, :, 3]
 			vis_xx = xx_data - yy_data
