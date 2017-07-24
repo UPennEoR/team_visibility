@@ -82,7 +82,6 @@ def baselinetest(fn):
 		plt.figure(figsize=(10, 15))
 		fig = gcf()
 		fig.suptitle('tauh = {}'.format(index2[1]))
-		plt.tight_layout()
 		plt.savefig('/data4/paper/rkb/hd5savesgif/hd5stokesQ{}.png'.format(index2))
 		plt.clf()
 	images = glob.glob('/data4/paper/rkb/hd5savesgif/*.png')
