@@ -47,8 +47,9 @@ def baselinetest(fn):
 	xi = np.asarray(dset_xi)
 	xi_baseline = xi[:, 0, 0, 0]
 	for index in enumerate(np.nditer(xi_baseline)):
-		xi_plot = xi[index[0], 0, 0, 0, : ]
-		plt.plot(nu, np.abs(xi_stokes), linestyle='-', label="{}".format(index[0]))
+		if index[0] < 7:
+			xi_plot = xi[index[0], 0, 0, 0, : ]
+			plt.plot(nu, np.abs(xi_stokes), linestyle='-', label="{}".format(index[0]))
 	plt.legend()
 	plt.xlabel('Frequency (MHz)')
 	plt.ylabel('Avg Power')
