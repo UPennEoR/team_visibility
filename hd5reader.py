@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 import glob
+import imageio
 
 def stokescreator(stokes):
 	if os.path.isdir("/data4/paper/rkb/hd5saves/"):
@@ -34,6 +35,10 @@ def stokescreator(stokes):
 	plt.savefig('/data4/paper/rkb/hd5saves/hd5test1.png')
 
 def baselinetest(fn):
+	if os.path.isdir("/data4/paper/rkb/hd5saves/"):
+		pass
+	else:
+		os.makedirs("/data4/paper/rkb/hd5saves/")
 	f = h5py.File(fn, 'r')
 	dgrp = f["/Data"]
 	dset_nu = dgrp["nu"]
@@ -41,7 +46,14 @@ def baselinetest(fn):
 	dset_xi = dgrp["xi"]
 	xi = np.asarray(dset_xi)
 	xi_baseline = xi[:, 0, 0, 0]
-	print (xi_baseline)
+	for i in xi_baseline:
+		xi_plot = xi[i, 0, 0, 0, : ]
+		plt.plot(nu, np.abs(xi_stokes), linestyle='-', label="{}".format(i))
+	plt.legend()
+	plt.xlabel('Frequency (MHz)')
+	plt.ylabel('Xi')
+	plt.savefig('/data4/paper/rkb/hd5saves/hd5test2.png')
+
 
 
 # for baselin_sep in xi:
