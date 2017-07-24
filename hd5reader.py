@@ -46,7 +46,7 @@ def baselinetest(fn):
 	dset_xi = dgrp["xi"]
 	xi = np.asarray(dset_xi)
 	xi_baseline = xi[:, 0, 0, 0]
-	for i in xi_baseline:
+	for i in range(xi_baseline):
 		xi_plot = xi[i, 0, 0, 0, : ]
 		plt.plot(nu, np.abs(xi_stokes), linestyle='-', label="{}".format(i))
 	plt.legend()
