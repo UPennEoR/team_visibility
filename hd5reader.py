@@ -77,6 +77,7 @@ def baselinetest(fn):
 		plt.xlabel('Frequency (MHz)')
 		plt.ylabel('Avg Power')
 		plt.savefig('/data4/paper/rkb/hd5savesgif/hd5stokesQ{}.png'.format(index2))
+		plt.clf()
 	images = glob.glob('/data4/paper/rkb/hd5savesgif/*.png')
 	gif = []
 	for filename in images:
