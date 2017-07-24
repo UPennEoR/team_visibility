@@ -73,7 +73,7 @@ def uvreader5(data_dir):
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
 		for baseline in antpairall:
-			baseline = ' '.join(map(baseline))
+			baseline = ','.join(map(str, baseline))
 			xx_data = UV.get_data(baseline, 'xx')
 			print (xx_data)
 			data = UV.get_data(baseline)
