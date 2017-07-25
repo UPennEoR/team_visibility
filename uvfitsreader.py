@@ -97,6 +97,7 @@ def uvtimeavgreader(data_dir):
 	antpairfile = datafiles[0]
 	UV.read_uvfits(antpairfile)
 	antpairall = UV.get_antpairs()
+	avg = 0
 	# xxdatafiles = sorted(
 	# 	glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
 	# yydatafiles = sorted(
