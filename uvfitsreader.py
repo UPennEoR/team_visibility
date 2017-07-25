@@ -94,6 +94,7 @@ def uvtimeavgreader(data_dir):
 		os.makedirs("/data4/paper/rkb/uvreaderstorage/")
 	datafiles = sorted(
 		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	antpairfile = datafiles[0]
 	UV.read_uvfits(antpairfile)
 	antpairall = UV.get_antpairs()
 	# xxdatafiles = sorted(
