@@ -74,7 +74,6 @@ def uvreader5(data_dir):
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
 		for baseline in antpairall:
-			t_avg=[0]
 			data = UV.get_data(baseline)
 			xx_data = data[:, :, 0]
 			yy_data = data[:, :, 1]
@@ -84,8 +83,7 @@ def uvreader5(data_dir):
 			for i in np.nditer(averager):
 				avg += i
 			n_avg = avg/len(np.nditer(averager))
-			t_avg.append(n_avg)
-			plt.plot(t_avg)
+			plt.plot(n_avg)
 			plt.xlabel('frequency')
 			plt.savefig("/data4/paper/rkb/uvreaderstorage/testgraph{}.png".format(baseline))
 			plt.clf()
