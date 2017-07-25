@@ -105,16 +105,16 @@ def uvtimeavgreader(data_dir):
 		UV.read_miriad(miriad_file)
 		for baseline in antpairall:
 			data = UV.get_data(baseline)
-			xx_data = data[:, :, 0]
-			yy_data = data[:, :, 1]
-			xy_data = data[:, :, 2]
-			yx_data = data[:, :, 3]
-			vis_xx = xx_data - yy_data
-			averager = stokesI[:,0]
-			for index, element in enumerate(np.nditer(averager[0])):
-				avg += stokesI[:,index]
-			n_avg = avg/len(np.nditer(averager))
-			plt.plot(n_avg)
+			print(data.shape)
+			# yy_data = data[:, :, 1]
+			# xy_data = data[:, :, 2]
+			# yx_data = data[:, :, 3]
+			# vis_xx = xx_data - yy_data
+			# averager = stokesI[:,0]
+			# for index, element in enumerate(np.nditer(averager[0])):
+			# 	avg += stokesI[:,index]
+			# n_avg = avg/len(np.nditer(averager))
+			# plt.plot(n_avg)
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
 		for baseline in antpairall:
