@@ -69,6 +69,7 @@ def uvreader5(data_dir):
 	antpairfile = datafiles[0]
 	UV.read_uvfits(antpairfile)
 	antpairall = UV.get_antpairs()
+	avg = 0
 	#print (antpairall)
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
@@ -80,7 +81,9 @@ def uvreader5(data_dir):
 			yx_data = data[:, :, 3]
 			averager = xx_data[0,:]
 			for i in np.nditer(averager):
-				print(i)
+				avg += i
+			n_avg = avg/len(np.nditer(averager))
+			plt.plot(n_avg)
 			# plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
 			# 		   vmax=0, vmin=-6, cmap='viridis')
 			# plt.xlabel('frequency')
