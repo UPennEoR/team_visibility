@@ -109,14 +109,15 @@ def uvtimeavgreader(data_dir):
 			xy_data = data[:, :, 2]
 			yx_data = data[:, :, 3]
 			averager = xx_data[0,:]
-			for i in np.nditer(averager):
-				avg += i
-			n_avg = avg/len(np.nditer(averager))
-			print(n_avg)
-			plt.plot(n_avg)
-			plt.xlabel('frequency')
-			plt.savefig("/data4/paper/rkb/uvreaderstorage/testgraph{}.png".format(baseline))
-			plt.clf()
+			print averager.shape()
+			# for i in np.nditer(averager[0]):
+			# 	avg += i
+			# n_avg = avg/len(np.nditer(averager))
+			# print(n_avg)
+			# plt.plot(n_avg)
+			# plt.xlabel('frequency')
+			# plt.savefig("/data4/paper/rkb/uvreaderstorage/testgraph{}.png".format(baseline))
+			# plt.clf()
 #pull out vis. THere shouldn't be any variation between identical baselines. Average over time. THen, overplot with the avged over time uvc files 
 			# plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
 			# 		   vmax=0, vmin=-6, cmap='viridis')
