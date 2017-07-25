@@ -89,6 +89,8 @@ def uvreader5(data_dir):
 			plt.xlabel('frequency')
 			plt.savefig("/data4/paper/rkb/uvreaderstorage/testgraph{}.png".format(baseline))
 			plt.clf()
+			t_avg=[0]
+
 			# plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
 			# 		   vmax=0, vmin=-6, cmap='viridis')
 			# plt.xlabel('frequency')
