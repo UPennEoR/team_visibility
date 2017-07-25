@@ -84,7 +84,7 @@ def uvreader5(data_dir):
 			for i in np.nditer(averager):
 				avg += i
 			n_avg = avg/len(np.nditer(averager))
-			t_avg = t_avg.append(n_avg)
+			t_avg.append(n_avg)
 			print(t_avg)
 		# plt.plot(t_avg)
 		# plt.savefig("/data4/paper/rkb/uvreaderstorage/testgraph{}.png".format(baseline))
