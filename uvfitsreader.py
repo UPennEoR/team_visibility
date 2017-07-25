@@ -101,7 +101,7 @@ def uvtimeavgreader(data_dir):
 	antpairall = UV.get_antpairs()
 	avg = 0
 	#print (antpairall)
-	for uvfits_file in datafiles2:
+	for miriad_file in datafiles2:
 		UV.read_miriad(miriad_file)
 		for baseline in antpairall:
 			xx_data = data[:, :, 0]
