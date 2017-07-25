@@ -170,12 +170,12 @@ def uvtimeavgreader2(data_dir):
 				avg += stokesI[:,index]
 			n_avg = avg/len(np.nditer(averager))
 			plt.plot(n_avg)
-		plt.xlabel('frequency')
-		plt.ylabel('avg power')
-		uvfits_file = uvfits_file.strip(data_dir)
-		plt.title('UV Avged over Time {} {}'.format(baseline, uvfits_file))
-		plt.savefig("/data4/paper/rkb/uvreaderstorage/modelvisavgedtime{}{}.png".format(baseline, uvfits_file))
-		plt.clf()
+			plt.xlabel('frequency')
+			plt.ylabel('avg power')
+			uvfits_file = uvfits_file.strip(data_dir)
+			plt.title('UV Avged over Time {} {}'.format(baseline, uvfits_file))
+			plt.savefig("/data4/paper/rkb/uvreaderstorage/modelvisavgedtime{}{}.png".format(baseline, uvfits_file))
+			plt.clf()
 
 def uvreader4(data_dir):
 	datafiles = sorted(
