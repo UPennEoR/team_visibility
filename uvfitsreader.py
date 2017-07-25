@@ -145,7 +145,37 @@ def uvtimeavgreader(data_dir):
 		# np.concatenate((total_array, data), axis=0)
 	# print (total_array)
 	#np.save("/data4/paper/rkb/zenuvfitssave.vis.uvfits", total_array)
-
+def uvtimeavgreader2(data_dir):
+	if os.path.isdir("/data4/paper/rkb/uvreaderstorage/"):
+		pass
+	else:
+		os.makedirs("/data4/paper/rkb/uvreaderstorage/")
+	datafiles = sorted(
+		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	antpairfile = datafiles[0]
+	UV.read_uvfits(antpairfile)
+	antpairall = UV.get_antpairs()
+	avg = 0
+	for uvfits_file in datafiles:
+		UV.read_uvfits(uvfits_file)
+		for baseline in antpairall:
+			data = UV.get_data(baseline)
+			xx_data = data[:, :, 0]
+			yy_data = data[:, :, 1]
+			xy_data = data[:, :, 2]
+			yx_data = data[:, :, 3]
+			stokesI = xx_data-yy_data
+			averager = stokesI[:,0]
+			for index, element in enumerate(np.nditer(averager[0])):
+				avg += stokesI[:,index]
+			n_avg = avg/len(np.nditer(averager))
+			plt.plot(n_avg)
+		plt.xlabel('frequency')
+		plt.ylabel('avg power')
+		uvfits_file = uvfits_file.strip(data_dir)
+		plt.title('UV Avged over Time {} {}'.format(baseline, uvfits_file))
+		plt.savefig("/data4/paper/rkb/uvreaderstorage/modelvisavgedtime{}{}.png".format(baseline, uvfits_file))
+		plt.clf()
 
 def uvreader4(data_dir):
 	datafiles = sorted(
