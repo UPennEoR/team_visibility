@@ -94,28 +94,28 @@ def uvtimeavgreader(data_dir):
 		os.makedirs("/data4/paper/rkb/uvreaderstorage/")
 	datafiles = sorted(
 		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
-	xxdatafiles = sorted(
-		glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
-	yydatafiles = sorted(
-		glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
-	antpairfile = datafiles[0]
-	UV.read_uvfits(antpairfile)
-	antpairall = UV.get_antpairs()
-	avg = 0
-	for miriad_file in xxdatafiles:
-		UV.read_miriad(miriad_file)
-		for baseline in antpairall:
-			xxdata = UV.get_data(baseline)
-			for miriad_file in yydatafiles:
-				UV.read_miriad(miriad_file)
-				for baseline in antpairall:
-					yydata = UV.get_data(baseline)
-					stokesI = xxdata+yydata
-					averager = xxdata[:,0]
-					for index, element in enumerate(np.nditer(averager[0])):
-						avg += stokesI[:,index]
-					n_avg = avg/len(np.nditer(averager))
-					plt.plot(n_avg)
+	# xxdatafiles = sorted(
+	# 	glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
+	# yydatafiles = sorted(
+	# 	glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
+	# antpairfile = datafiles[0]
+	# UV.read_uvfits(antpairfile)
+	# antpairall = UV.get_antpairs()
+	# avg = 0
+	# for miriad_file in xxdatafiles:
+	# 	UV.read_miriad(miriad_file)
+	# 	for baseline in antpairall:
+	# 		xxdata = UV.get_data(baseline)
+	# 		for miriad_file in yydatafiles:
+	# 			UV.read_miriad(miriad_file)
+	# 			for baseline in antpairall:
+	# 				yydata = UV.get_data(baseline)
+	# 				stokesI = xxdata+yydata
+	# 				averager = xxdata[:,0]
+	# 				for index, element in enumerate(np.nditer(averager[0])):
+	# 					avg += stokesI[:,index]
+	# 				n_avg = avg/len(np.nditer(averager))
+	# 	plt.plot(n_avg)
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
 		for baseline in antpairall:
