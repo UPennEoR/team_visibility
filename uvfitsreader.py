@@ -108,25 +108,24 @@ def uvtimeavgreader(data_dir):
 			yy_data = data[:, :, 1]
 			xy_data = data[:, :, 2]
 			yx_data = data[:, :, 3]
-			averager = xx_data[0,:]
-			print (averager.shape)
-			# for i in np.nditer(averager[0]):
-			# 	avg += i
-			# n_avg = avg/len(np.nditer(averager))
-			# print(n_avg)
-			# plt.plot(n_avg)
-			# plt.xlabel('frequency')
-			# plt.savefig("/data4/paper/rkb/uvreaderstorage/testgraph{}.png".format(baseline))
-			# plt.clf()
-#pull out vis. THere shouldn't be any variation between identical baselines. Average over time. THen, overplot with the avged over time uvc files 
-			# plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
-			# 		   vmax=0, vmin=-6, cmap='viridis')
-			# plt.xlabel('frequency')
-			# plt.ylabel('LST')
-			# plt.title("{}, {}".format(baseline, uvfits_file))
-			# uvfits_file = uvfits_file.strip(data_dir)
-			# plt.savefig("/data4/paper/rkb/uvreaderstorage/" +"uvreaderallantpair{},{}.png".format(baseline, uvfits_file))
-			# plt.clf()
+			averager = xx_data[:,0]
+			print(averager.shape)
+			for i in np.nditer(averager[0]):
+				avg += i
+			n_avg = avg/len(np.nditer(averager))
+			plt.plot(n_avg)
+			plt.xlabel('frequency')
+			plt.savefig("/data4/paper/rkb/uvreaderstorage/testgraph{}.png".format(baseline))
+			plt.clf()
+pull out vis. THere shouldn't be any variation between identical baselines. Average over time. THen, overplot with the avged over time uvc files 
+			plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
+					   vmax=0, vmin=-6, cmap='viridis')
+			plt.xlabel('frequency')
+			plt.ylabel('LST')
+			plt.title("{}, {}".format(baseline, uvfits_file))
+			uvfits_file = uvfits_file.strip(data_dir)
+			plt.savefig("/data4/paper/rkb/uvreaderstorage/" +"uvreaderallantpair{},{}.png".format(baseline, uvfits_file))
+			plt.clf()
 
 		# np.concatenate((total_array, data), axis=0)
 	# print (total_array)
