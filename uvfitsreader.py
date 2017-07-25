@@ -110,7 +110,7 @@ def uvtimeavgreader(data_dir):
 			yx_data = data[:, :, 3]
 			vis_xx = xx_data-yy_data
 			averager = vis_xx[:,0]
-			for i in np.nditer(averager[0]):
+			for i in enumerate(np.nditer(averager[0])):
 				avg += vis_xx[:,i]
 			n_avg = avg/len(np.nditer(averager))
 			plt.plot(n_avg)
