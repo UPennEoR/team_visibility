@@ -112,6 +112,7 @@ def uvtimeavgreader(data_dir):
 			for i in np.nditer(averager):
 				avg += i
 			n_avg = avg/len(np.nditer(averager))
+			print(n_avg)
 			plt.plot(n_avg)
 			plt.xlabel('frequency')
 			plt.savefig("/data4/paper/rkb/uvreaderstorage/testgraph{}.png".format(baseline))
