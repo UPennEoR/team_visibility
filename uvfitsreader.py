@@ -113,7 +113,7 @@ def uvtimeavgreader(data_dir):
 					stokesI = xxdata+yydata
 					averager = xxdata[:,0]
 					for index, element in enumerate(np.nditer(averager[0])):
-						avg += data[:,index]
+						avg += stokesI[:,index]
 					n_avg = avg/len(np.nditer(averager))
 					plt.plot(n_avg)
 	for uvfits_file in datafiles:
