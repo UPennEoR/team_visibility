@@ -58,8 +58,37 @@ def uvreader3(data_dir):
 		data = UV.get_data('xx')
 		print(data.shape)
 
+def uvwaterfallreader(data_dir):
+	if os.path.isdir("/data4/paper/rkb/uvreaderwaterfallstorage/"):
+		pass
+	else:
+		os.makedirs("/data4/paper/rkb/uvreaderwaterfallstorage/")
+	datafiles = sorted(
+		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	datafiles = sorted(
+		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	antpairfile = datafiles[0]
+	UV.read_uvfits(antpairfile)
+	antpairall = UV.get_antpairs()
+	for uvfits_file in datafiles:
+		UV.read_uvfits(uvfits_file)
+		for baseline in antpairall:
+			data = UV.get_data(baseline)
+			xx_data = data[:, :, 0]
+			yy_data = data[:, :, 1]
+			xy_data = data[:, :, 2]
+			yx_data = data[:, :, 3]
+			vis_xx = xx_data - yy_data
+			plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
+					   vmax=0, vmin=-6, cmap='viridis')
+			plt.xlabel('frequency')
+			plt.ylabel('LST')
+			plt.title("{}, {}".format(baseline, uvfits_file))
+			uvfits_file = uvfits_file.strip(data_dir)
+			plt.savefig("/data4/paper/rkb/uvreaderwaterfallstorage/" +"uvreaderallantpair{},{}.png".format(baseline, uvfits_file))
+			plt.clf()
 
-def uvreader5(data_dir):
+def uvtimeavgreader(data_dir):
 	if os.path.isdir("/data4/paper/rkb/uvreaderstorage/"):
 		pass
 	else:
@@ -87,7 +116,7 @@ def uvreader5(data_dir):
 			plt.xlabel('frequency')
 			plt.savefig("/data4/paper/rkb/uvreaderstorage/testgraph{}.png".format(baseline))
 			plt.clf()
-
+#pull out vis. THere shouldn't be any variation between identical baselines. Average over time. THen, overplot with the avged over time uvc files 
 			# plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
 			# 		   vmax=0, vmin=-6, cmap='viridis')
 			# plt.xlabel('frequency')
