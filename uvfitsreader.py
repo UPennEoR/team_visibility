@@ -115,7 +115,7 @@ def uvtimeavgreader(data_dir):
 					for index, element in enumerate(np.nditer(averager[0])):
 						avg += data[:,index]
 					n_avg = avg/len(np.nditer(averager))
-						plt.plot(n_avg)
+					plt.plot(n_avg)
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
 		for baseline in antpairall:
