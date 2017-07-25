@@ -65,11 +65,10 @@ def uvwaterfallreader(data_dir):
 		os.makedirs("/data4/paper/rkb/uvreaderwaterfallstorage/")
 	datafiles = sorted(
 		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
-	datafiles = sorted(
-		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	antpairfile = datafiles[0]
 	UV.read_uvfits(antpairfile)
 	antpairall = UV.get_antpairs()
+
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
 		for baseline in antpairall:
@@ -95,11 +94,26 @@ def uvtimeavgreader(data_dir):
 		os.makedirs("/data4/paper/rkb/uvreaderstorage/")
 	datafiles = sorted(
 		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	datafiles2 = sorted(
+		glob.glob(''.join([data_dir, 'zen.*.HH.uvcORR'])))
 	antpairfile = datafiles[0]
 	UV.read_uvfits(antpairfile)
 	antpairall = UV.get_antpairs()
 	avg = 0
 	#print (antpairall)
+	for uvfits_file in datafiles2:
+		UV.read_miriad(miriad_file)
+		for baseline in antpairall:
+			xx_data = data[:, :, 0]
+			yy_data = data[:, :, 1]
+			xy_data = data[:, :, 2]
+			yx_data = data[:, :, 3]
+			vis_xx = xx_data - yy_data
+			averager = stokesI[:,0]
+			for index, element in enumerate(np.nditer(averager[0])):
+				avg += stokesI[:,index]
+			n_avg = avg/len(np.nditer(averager))
+			plt.plot(n_avg)
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
 		for baseline in antpairall:
@@ -109,15 +123,17 @@ def uvtimeavgreader(data_dir):
 			xy_data = data[:, :, 2]
 			yx_data = data[:, :, 3]
 			vis_xx = xx_data-yy_data
-			averager = vis_xx[:,0]
+			averager = stokesI[:,0]
 			for index, element in enumerate(np.nditer(averager[0])):
-				avg += vis_xx[:,index]
+				avg += stokesI[:,index]
 			n_avg = avg/len(np.nditer(averager))
 			plt.plot(n_avg)
-			plt.xlabel('frequency')
-			uvfits_file = uvfits_file.strip(data_dir)
-			plt.savefig("/data4/paper/rkb/uvreaderstorage/testgraph{}{}.png".format(baseline, uvfits_file))
-			plt.clf()
+		plt.xlabel('frequency')
+		plt.ylabel('avg power')
+		uvfits_file = uvfits_file.strip(data_dir)
+		plt.title('UV Avged over Time {} {}'.format(baseline, uvfits_file))
+		plt.savefig("/data4/paper/rkb/uvreaderstorage/modelvisavgedtime{}{}.png".format(baseline, uvfits_file))
+		plt.clf()
 #pull out vis. THere shouldn't be any variation between identical baselines. Average over time. THen, overplot with the avged over time uvc files 
 
 		# np.concatenate((total_array, data), axis=0)
