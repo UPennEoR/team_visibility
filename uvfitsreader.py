@@ -85,10 +85,10 @@ def uvreader5(data_dir):
 				avg += i
 			n_avg = avg/len(np.nditer(averager))
 			t_avg.append(n_avg)
-			print(t_avg)
-		# plt.plot(t_avg)
-		# plt.savefig("/data4/paper/rkb/uvreaderstorage/testgraph{}.png".format(baseline))
-		# plt.clf()
+			plt.plot(t_avg)
+			plt.xlabel('frequency')
+			plt.savefig("/data4/paper/rkb/uvreaderstorage/testgraph{}.png".format(baseline))
+			plt.clf()
 			# plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
 			# 		   vmax=0, vmin=-6, cmap='viridis')
 			# plt.xlabel('frequency')
