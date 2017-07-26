@@ -146,8 +146,8 @@ def uvtimeavgreader(data_dir):
 			ax.plot(stokesIavg[:, i])
 	uvdatafiles = sorted(
 		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
-	uvxxdatalist = np.empty((56, 1024))
-	uvyydatalist = np.empty((56, 1024))
+	uvxxdatalist = np.empty((56, 1024), dtype=np.complex128)
+	uvyydatalist = np.empty((56, 1024), dtype=np.complex128)
 	for uvfits_file in datafiles:
 		UV.read_uvfits(uvfits_file)
 		data = UV.get_data(antpairall[1])
