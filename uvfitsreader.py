@@ -101,11 +101,11 @@ def uvtimeavgreader(data_dir):
 	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
 	yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
 	
-	xxdatalist = np.empty((1024, 27, 56))
-	xxdatalist2 = np.empty((1024, 27, 56))
+	xxdatalist = np.empty((56, 1024))
+	xxdatalist2 = np.empty((56, 1024))
 
-	yydatalist = np.empty((1024, 27, 56))
-	yydatalist2 = np.empty((1024, 27, 56))
+	yydatalist = np.empty((56, 1024))
+	yydatalist2 = np.empty((56, 1024))
 
 	for miriad_file in xxdatafiles:
 		UV.read_miriad(miriad_file)
