@@ -50,13 +50,12 @@ def uvreader2(data_dir):
 			total_array = np.concatenate((total_array, data), axis=0)
 			np.save("/data4/paper/rkb/uvreaderarraystorage/zenuvfitssave{}.vis.uvfits".format(baseline), total_array)
 			total_array = np.empty([56, 1024, 4])
-def uvreader3(data_dir):
+def uvantpairgetter(data_dir):
 	datafiles = sorted(
 		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
-	for uvfits_file in datafiles:
-		UV.read_uvfits(uvfits_file)
-		data = UV.get_data('xx')
-		print(data.shape)
+	antpairfile = datafiles[0]
+	UV.read_uvfits(antpairfile)
+	antpairall = UV.get_antpairs()
 
 def uvwaterfallreader(data_dir):
 	if os.path.isdir("/data4/paper/rkb/uvreaderwaterfallstorage/"):
@@ -143,7 +142,7 @@ def uvtimeavgreader(data_dir):
 	ax=plt.gca()
 	ax.set_ylim(-0.25, 0.25)
 	for i, element in enumerate(averager):
-			ax.plot(stokesIavg[:, i])
+			ax.plot(np.real(stokesIavg[:, i]))
 	uvdatafiles = sorted(
 		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	uvxxdatalist = np.empty((56, 1024), dtype=np.complex128)
@@ -166,7 +165,7 @@ def uvtimeavgreader(data_dir):
 	uvstokesI = uvxxdatalist+uvyydatalist
 	uvstokesItotal= np.sum(uvstokesI, axis=0)
 	uvstokesIavg = uvstokesItotal/n_avg
-	ax.plot(uvstokesIavg, 'g-', linewidth=3)
+	ax.plot(np.real(uvstokesIavg), 'g-', linewidth=3)
 	ax.set_ylabel("Average Power")
 	ax.set_xlabel("Frequency (MHz)")
 	# uvdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
