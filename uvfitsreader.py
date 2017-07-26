@@ -143,13 +143,9 @@ def uvtimeavgreader(data_dir):
 	stokesIavg = stokesItotal/n_avg
 	print(stokesIavg.shape)
 	averager = stokesIavg[:, 0]
-	for i, index in np.nditer(averager):
+	for i, index in enumerate(np.nditer(averager)):
 		plt.plot(stokesIavg[:, index])
 	plt.savefig("/data4/paper/rkb/testtesttest.png")
-	# averager = stokes[:, 0]
-	# avgstokesI = stokesI/len(xxdatafiles)
-	# plt.plot(avgstokesI)
-	# miriad_file = miriad_file.strip(data_dir)
 	# plt.title('ActualUV Avged Over Time {} {}'.format(baseline, miriad_file))
 	# for uvfits_file in datafiles:
 	# 	UV.read_uvfits(uvfits_file)
