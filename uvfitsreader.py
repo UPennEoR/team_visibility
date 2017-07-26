@@ -136,12 +136,12 @@ def uvtimeavgreader(data_dir):
 	stokesI = xxdatalist2+yydatalist2
 	print(stokesI.shape)
 	#collapse in time:
-	stokesItotal= np.sum(stokesI, axis=1)
+	stokesItotal= np.sum(stokesI, axis=0)
 	print(stokesItotal.shape)
 	#avg:
 	n_avg = len(xxdatafiles)*56
 	stokesIavg = stokesItotal/n_avg
-	print(stokesIavg.shape)
+	print(stokesIavg.shape) 
 	# averager = stokes[:, 0]
 	# avgstokesI = stokesI/len(xxdatafiles)
 	# plt.plot(avgstokesI)
