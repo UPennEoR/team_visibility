@@ -111,7 +111,6 @@ def uvtimeavgreader(data_dir):
 		UV.read_miriad(miriad_file)
 		for baseline in antpairall:
 			xxdata = UV.get_data(baseline)
-			print (xxdata.shape)
 			np.hstack((xxdatalist, xxdata))
 		xxdatalist2 += xxdatalist
 	for miriad_file in yydatafiles:
