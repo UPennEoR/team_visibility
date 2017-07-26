@@ -110,14 +110,20 @@ def uvtimeavgreader(data_dir):
 	for miriad_file in xxdatafiles:
 		UV.read_miriad(miriad_file)
 		for baseline in antpairall:
-			xxdata = UV.get_data(baseline)
-			np.hstack((xxdatalist, xxdata))
+			if xxdata.shape != (56, 1024):
+				pass
+			else:
+				xxdata = UV.get_data(baseline)
+				np.hstack((xxdatalist, xxdata))
 		xxdatalist2 += xxdatalist
 	for miriad_file in yydatafiles:
 		UV.read_miriad(miriad_file)
 		for baseline in antpairall:
-			yydata = UV.get_data(baseline)
-			np.hstack((yydatalist, yydata))
+			if yydata.shape != (56, 1024):
+				pass
+			else:
+				yydata = UV.get_data(baseline)
+				np.hstack((yydatalist, yydata))
 		yydatalist2 += yydatalist
 	stokesI = xxdatalist2+yydatalist2
 	print(stokesI.shape)
