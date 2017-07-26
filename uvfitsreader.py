@@ -100,12 +100,8 @@ def uvtimeavgreader(data_dir):
 	avg = 0
 	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
 	yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
-	
 	xxdatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
-
-	
 	yydatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
-
 	for miriad_file in xxdatafiles:
 		UV.read_miriad(miriad_file)
 		xxdatalist = np.empty((56, 1024))
@@ -145,9 +141,18 @@ def uvtimeavgreader(data_dir):
 	averager = stokesIavg[0, :]
 	print(averager.shape)
 	ax=plt.gca()
-	ax.set_ylim(-1, 1)
+	ax.set_ylim(-0.25, 0.25)
 	for i, element in enumerate(averager):
 			ax.plot(stokesIavg[:, i])
+	# uvdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	# for uvfits_file in datafiles:
+	# 	UV.read_uvfits(uvfits_file)
+	# 	data = UV.get_data(antpairall[1])
+	# 	xx_data = data[:, :, 0]
+	# 	yy_data = data[:, :, 1]
+	# 	xy_data = data[:, :, 2]
+	# 	yx_data = data[:, :, 3]
+	# 	stokesI = xx_data-yy_data
 	plt.savefig("/data4/paper/rkb/testtesttest.png")
 	# plt.title('ActualUV Avged Over Time {} {}'.format(baseline, miriad_file))
 	# for uvfits_file in datafiles:
