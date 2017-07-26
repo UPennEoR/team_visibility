@@ -144,8 +144,8 @@ def uvtimeavgreader(data_dir):
 	print(stokesIavg.shape)
 	averager = stokesIavg[0, :]
 	print(averager.shape)
-	# for i, element in enumerate(np.nditer(averager[0])):
-	# 		plt.plot(stokesIavg[:, i-1])
+	for i, element in enumerate(averager):
+			plt.plot(stokesIavg[:, i-1])
 	# plt.savefig("/data4/paper/rkb/testtesttest.png")
 	# plt.title('ActualUV Avged Over Time {} {}'.format(baseline, miriad_file))
 	# for uvfits_file in datafiles:
