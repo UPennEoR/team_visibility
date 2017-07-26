@@ -114,7 +114,8 @@ def uvtimeavgreader(data_dir):
 			if xxdata.shape != (56, 1024):
 				pass
 			else:
-				np.dstack((xxdatalist, xxdata))
+				xxdatalist = np.dstack((xxdatalist, xxdata))
+		print (xxdatalist.shape)
 		xxdatalist2 += xxdatalist
 	for miriad_file in yydatafiles:
 		UV.read_miriad(miriad_file)
@@ -123,7 +124,7 @@ def uvtimeavgreader(data_dir):
 			if yydata.shape != (56, 1024):
 				pass
 			else:
-				np.dstack((yydatalist, yydata))
+				yydatalist = np.dstack((yydatalist, yydata))
 		yydatalist2 += yydatalist
 	stokesI = xxdatalist2+yydatalist2
 	print(stokesI.shape)
