@@ -56,7 +56,7 @@ def uvantpairgetter(data_dir):
 	antpairfile = datafiles[0]
 	UV.read_uvfits(antpairfile)
 	antpairall = UV.get_antpairs()
-
+	print (antpairall)
 def uvwaterfallreader(data_dir):
 	if os.path.isdir("/data4/paper/rkb/uvreaderwaterfallstorage/"):
 		pass
