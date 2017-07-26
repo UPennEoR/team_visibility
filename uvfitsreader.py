@@ -155,8 +155,14 @@ def uvtimeavgreader(data_dir):
 		yy_data = data[:, :, 1]
 		xy_data = data[:, :, 2]
 		yx_data = data[:, :, 3]
-		uvxxdatalist += xx_data
-		uvyydatalist += yy_data
+		if xxdata.shape != (56, 1024, 28):
+			pass
+		else:
+			uvxxdatalist += xx_data
+		if yydata.shape != (56, 1024, 28):
+			pass
+		else:
+			uvyydatalist += yy_data
 	uvstokesI = uvxxdatalist+uvyydatalist
 	uvstokesItotal= np.sum(uvstokesI, axis=0)
 	uvstokesIavg = uvstokesItotal/n_avg
