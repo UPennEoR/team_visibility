@@ -142,9 +142,8 @@ def uvtimeavgreader(data_dir):
 	n_avg = len(xxdatafiles)*56
 	stokesIavg = stokesItotal/n_avg
 	print(stokesIavg.shape)
-	averager = stokesIavg[:, 0]
+	averager = stokesIavg[0, :]
 	print(averager.shape)
-	print(averager[0].shape)
 	# for i, element in enumerate(np.nditer(averager[0])):
 	# 		plt.plot(stokesIavg[:, i-1])
 	# plt.savefig("/data4/paper/rkb/testtesttest.png")
