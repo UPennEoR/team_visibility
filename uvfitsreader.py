@@ -129,12 +129,19 @@ def uvtimeavgreader(data_dir):
 				pass
 			else:
 				yydatalist = np.dstack((yydatalist, yydata))
-		if xxdatalist.shape != (56, 1024, 28):
+		if yydatalist.shape != (56, 1024, 28):
 			pass
 		else:
 			yydatalist2 += yydatalist
 	stokesI = xxdatalist2+yydatalist2
 	print(stokesI.shape)
+	#collapse in time:
+	stokesItotal= np.sum(stokesI, axis=1)
+	print(stokesItotal.shape)
+	#avg:
+	n_avg = len(xxdatafiles)*56
+	stokesIavg = stokesItotal/n_avg
+	print(stokesIavg.shape)
 	# averager = stokes[:, 0]
 	# avgstokesI = stokesI/len(xxdatafiles)
 	# plt.plot(avgstokesI)
