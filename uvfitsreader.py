@@ -144,6 +144,24 @@ def uvtimeavgreader(data_dir):
 	ax.set_ylim(-0.25, 0.25)
 	for i, element in enumerate(averager):
 			ax.plot(stokesIavg[:, i])
+	uvdatafiles = sorted(
+		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	uvxxdatalist = np.empty((56, 1024))
+	uvyydatalist = np.empty((56, 1024))
+	for uvfits_file in datafiles:
+		UV.read_uvfits(uvfits_file)
+		data = UV.get_data(antpairall[1])
+		xx_data = data[:, :, 0]
+		yy_data = data[:, :, 1]
+		xy_data = data[:, :, 2]
+		yx_data = data[:, :, 3]
+		uvxxdatalist += xx_data
+		uvyydatalist += yy_data
+	uvstokesI = uvxxdatalist+uvyydatalist
+	uvstokesItotal= np.sum(uvstokesI, axis=0)
+	uvstokesIavg = uvstokesItotal/n_avg
+	ax.plot(uvstokesIavg, linewidth="3.0")
+
 	# uvdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	# for uvfits_file in datafiles:
 	# 	UV.read_uvfits(uvfits_file)
