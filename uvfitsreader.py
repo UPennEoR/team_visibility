@@ -92,54 +92,59 @@ def uvtimeavgreader(data_dir):
 		pass
 	else:
 		os.makedirs("/data4/paper/rkb/uvreaderstorage/")
-	datafiles = sorted(
-		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	antpairfile = datafiles[0]
 	UV.read_uvfits(antpairfile)
 	antpairall = UV.get_antpairs()
 	avg = 0
-	# xxdatafiles = sorted(
-	# 	glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
-	# yydatafiles = sorted(
-	# 	glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
-	# antpairfile = datafiles[0]
-	# UV.read_uvfits(antpairfile)
-	# antpairall = UV.get_antpairs()
-	# avg = 0
-	# for miriad_file in xxdatafiles:
-	# 	UV.read_miriad(miriad_file)
-	# 	for baseline in antpairall:
-	# 		xxdata = UV.get_data(baseline)
-	# 		for miriad_file in yydatafiles:
-	# 			UV.read_miriad(miriad_file)
-	# 			for baseline in antpairall:
-	# 				yydata = UV.get_data(baseline)
-	# 				stokesI = xxdata+yydata
-	# 				averager = xxdata[:,0]
-	# 				for index, element in enumerate(np.nditer(averager[0])):
-	# 					avg += stokesI[:,index]
-	# 				n_avg = avg/len(np.nditer(averager))
-	# 	plt.plot(n_avg)
-	for uvfits_file in datafiles:
-		UV.read_uvfits(uvfits_file)
+	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
+	yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
+	antpairfile = datafiles[0]
+	xxdatalist = np.empty(1024 *len(antpairall))
+	xxdatalist2 = np.empty(1024 *len(antpairall))
+
+	yydatalist = np.empty(1024*len(antpairall))
+	yydatalist2 = np.empty(1024*len(antpairall))
+
+	for miriad_file in xxdatafiles:
+		UV.read_miriad(miriad_file)
 		for baseline in antpairall:
-			data = UV.get_data(baseline)
-			xx_data = data[:, :, 0]
-			yy_data = data[:, :, 1]
-			xy_data = data[:, :, 2]
-			yx_data = data[:, :, 3]
-			stokesI = xx_data-yy_data
-			averager = stokesI[:,0]
-			for index, element in enumerate(np.nditer(averager[0])):
-				avg += stokesI[:,index]
-			n_avg = avg/len(np.nditer(averager))
-			plt.plot(n_avg)
-		plt.xlabel('frequency')
-		plt.ylabel('avg power')
-		uvfits_file = uvfits_file.strip(data_dir)
-		plt.title('UV Avged over Time {} {}'.format(baseline, uvfits_file))
-		plt.savefig("/data4/paper/rkb/uvreaderstorage/modelvisavgedtime{}{}.png".format(baseline, uvfits_file))
-		plt.clf()
+			xxdata = UV.get_data(baseline)
+			np.vstack(xxdatalist, xxdata)
+		xxdatalist2 += xxdatalist
+	for miriad_file in yydatafiles:
+		UV.read_miriad(miriad_file)
+		for baseline in antpairall:
+			yydata = UV.get_data(baseline)
+			np.vstack(yydatalist, yydata)
+		yydatalist2 += yydatalist
+	stokesI = xxdatalist2+yydatalist2
+	print(stokesI.shape)
+	# averager = stokes[:, 0]
+	# avgstokesI = stokesI/len(xxdatafiles)
+	# plt.plot(avgstokesI)
+	# miriad_file = miriad_file.strip(data_dir)
+	# plt.title('ActualUV Avged Over Time {} {}'.format(baseline, miriad_file))
+	# for uvfits_file in datafiles:
+	# 	UV.read_uvfits(uvfits_file)
+	# 	for baseline in antpairall:
+	# 		data = UV.get_data(baseline)
+	# 		xx_data = data[:, :, 0]
+	# 		yy_data = data[:, :, 1]
+	# 		xy_data = data[:, :, 2]
+	# 		yx_data = data[:, :, 3]
+	# 		stokesI = xx_data-yy_data
+	# 		averager = stokesI[:,0]
+	# 		for index, element in enumerate(np.nditer(averager[0])):
+	# 			avg += stokesI[:,index]
+	# 		n_avg = avg/len(np.nditer(averager))
+	# 		plt.plot(n_avg)
+	# 		plt.xlabel('frequency')
+	# 		plt.ylabel('avg power')
+	# 		uvfits_file = uvfits_file.strip(data_dir)
+	# 		plt.title('UV Avged over Time {} {}'.format(baseline, uvfits_file))
+	# 		plt.savefig("/data4/paper/rkb/uvreaderstorage/modelvisavgedtime{}{}.png".format(baseline, uvfits_file))
+	# 		plt.clf()
 #pull out vis. THere shouldn't be any variation between identical baselines. Average over time. THen, overplot with the avged over time uvc files 
 
 		# np.concatenate((total_array, data), axis=0)
