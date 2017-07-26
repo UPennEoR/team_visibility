@@ -101,7 +101,7 @@ def uvtimeavgreader(data_dir):
 	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
 	yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
 	
-	xxdatalist = np.empty(27, 1024)
+	xxdatalist = np.empty((27, 1024))
 	xxdatalist2 = np.empty(27, 1024)
 
 	yydatalist = np.empty(27, 1024)
