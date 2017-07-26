@@ -103,8 +103,8 @@ def uvtimeavgreader(data_dir):
 	xxdatalist = np.empty(len(antpairall), 1024)
 	xxdatalist2 = np.empty(len(antpairall), 1024)
 
-	yydatalist = np.empty(len(antpairall), 1024)
-	yydatalist2 = np.empty(len(antpairall), 1024)
+	yydatalist = np.empty_like(len(antpairall)* 1024)
+	yydatalist2 = np.empty_like(len(antpairall)* 1024)
 
 	for miriad_file in xxdatafiles:
 		UV.read_miriad(miriad_file)
