@@ -166,8 +166,9 @@ def uvtimeavgreader(data_dir):
 	uvstokesI = uvxxdatalist+uvyydatalist
 	uvstokesItotal= np.sum(uvstokesI, axis=0)
 	uvstokesIavg = uvstokesItotal/n_avg
-	ax.plot(uvstokesIavg, linewidth="3.0")
-
+	ax.plot(uvstokesIavg, linewidth="10.0")
+	ax.set_ylabel(Average Power)
+	ax.set_xlabel(Frequency (MHz))
 	# uvdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	# for uvfits_file in datafiles:
 	# 	UV.read_uvfits(uvfits_file)
