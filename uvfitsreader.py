@@ -139,9 +139,8 @@ def uvtimeavgreader(data_dir):
 	print(stokesIavg.shape)
 	averager = stokesIavg[0, :]
 	print(averager.shape)
-	ax=plt.gca()
+	ax1 = plt.subplot(121)
 	ax.set_ylim(-0.25, 0.25)
-	plt.subplot(121)
 	for i, element in enumerate(averager):
 			ax.plot(np.real(stokesIavg[:, i]))
 	uvdatafiles = sorted(
@@ -166,17 +165,17 @@ def uvtimeavgreader(data_dir):
 	uvstokesI = uvxxdatalist+uvyydatalist
 	uvstokesItotal= np.sum(uvstokesI, axis=0)
 	uvstokesIavg = uvstokesItotal/n_avg
-	ax.plot(np.real(uvstokesIavg), 'g-', linewidth=3)
-	ax.set_ylabel("Average Power")
-	ax.set_xlabel("Frequency (MHz)")
-	plt.title("Real")
-	plt.subplot(122)
+	ax.plot(np.real(uvstokesIavg), 'g-', linewidth=3, label="modeldata")
+	ax1.set_ylabel("Average Power")
+	ax1.set_xlabel("Frequency (MHz)")
+	ax.set_title("Real")
+	ax2 = plt.subplot(122)
 	for i, element in enumerate(averager):
 			ax.plot(np.imag(stokesIavg[:, i]))
-	ax.plot(np.imag(uvstokesIavg), 'g-', linewidth=3, label="modeldata")
-	ax.set_xlabel("Frequency (MHz)")
-	plt.title("Imaginary")
-	plt.legend()
+	ax2.plot(np.imag(uvstokesIavg), 'g-', linewidth=3, label="modeldata")
+	ax2.set_xlabel("Frequency (MHz)")
+	ax.set_title("Imaginary")
+	ax.legend()
 	fig = plt.gcf()
 	fig.suptitle("Stokes I Avg over Time")
 	# uvdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
