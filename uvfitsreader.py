@@ -76,12 +76,12 @@ def uvwaterfallreader(data_dir):
 			yy_data = data[:, :, 1]
 			xy_data = data[:, :, 2]
 			yx_data = data[:, :, 3]
-			vis_xx = xx_data - yy_data
-			plt.imshow((np.log10(np.abs(vis_xx))), aspect='auto',
+			stokesI = xx_data + yy_data
+			plt.imshow((np.log10(np.abs(stokesI))), aspect='auto',
 					   vmax=0, vmin=-6, cmap='viridis')
 			plt.xlabel('frequency')
 			plt.ylabel('LST')
-			plt.title("{}, {}".format(baseline, uvfits_file))
+			plt.title("{}, {} Stokes I".format(baseline, uvfits_file))
 			uvfits_file = uvfits_file.strip(data_dir)
 			plt.savefig("/data4/paper/rkb/uvreaderwaterfallstorage/" +"uvreaderallantpair{},{}.png".format(baseline, uvfits_file))
 			plt.clf()
@@ -239,16 +239,18 @@ def uvtimeavgreader2(data_dir):
 			else:
 				yydatalist += yy_data
 		stokesI = xx_data-yy_data
+		print (stokesI.shape)
 		stokesItotal= np.sum(stokesI, axis=0)
+		print (stokesItotal.shape)
 		for index, element in enumerate(np.nditer(stokesItotal[0])):
 			avg += stokesI[:,index]
 		n_avg = avg/len(np.nditer(stokesItotal))
+		print (n_avg.shape)
 		plt.plot(np.real(n_avg), 'g-', label="imaginary")
 		plt.plot(np.imag(n_avg), label="real")
 		plt.legend()
 		plt.xlabel('frequency')
 		plt.ylabel('avg power')
-		uvfits_file = uvfits_file.strip(data_dir)
 		plt.title('Model UV Avged over Time {} {}'.format(baseline, uvfits_file))
 		plt.savefig("/data4/paper/rkb/uvreader2storage/modelvisavgedtime{}{}.png".format(baseline, uvfits_file))
 		plt.clf()
