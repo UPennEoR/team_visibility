@@ -77,16 +77,15 @@ def uvwaterfallstacker(data_dir):
 			UV.read_uvfits(uvfits_file)
 			data = UV.get_data(baseline)
 			xx_data = data[:, :, 0]
-			print (xx_data.shape)
 			yy_data = data[:, :, 1]
 			xy_data = data[:, :, 2]
 			yx_data = data[:, :, 3]
 			
-			if xx_data.shape != (56, 1024, 28):
+			if xx_data.shape != (56, 1024):
 				pass
 			else:
 				xxdatalist = np.hstack((xxdatalist, xx_data))
-			if yy_data.shape != (56, 1024, 28):
+			if yy_data.shape != (56, 1024):
 				pass
 			else:
 				yydatalist = np.hstack((yydatalist, yy_data))
