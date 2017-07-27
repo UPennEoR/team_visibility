@@ -57,6 +57,47 @@ def uvantpairgetter(data_dir):
 	UV.read_uvfits(antpairfile)
 	antpairall = UV.get_antpairs()
 	print (antpairall)
+
+def uvwaterfallstacker(data_dir):
+	if os.path.isdir("/data4/paper/rkb/uvreaderwaterfallstacker/"):
+		pass
+	else:
+		os.makedirs("/data4/paper/rkb/uvreaderwaterfallstacker/")
+
+	datafiles = sorted(
+		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	antpairfile = datafiles[0]
+	UV.read_uvfits(antpairfile)
+	antpairall = UV.get_antpairs()
+	for baseline in antpairall:
+		avg = 0
+		xxdatalist = np.empty((56, 1024), dtype=np.complex128)
+		yydatalist = np.empty((56, 1024), dtype=np.complex128)
+		for uvfits_file in datafiles:
+			UV.read_uvfits(uvfits_file)
+			data = UV.get_data(baseline)
+			xx_data = data[:, :, 0]
+			yy_data = data[:, :, 1]
+			xy_data = data[:, :, 2]
+			yx_data = data[:, :, 3]
+			
+			if xx_data.shape != (56, 1024, 28):
+				pass
+			else:
+				xxdatalist += xx_data
+			if yy_data.shape != (56, 1024, 28):
+				pass
+			else:
+				yydatalist += yy_data
+		stokesI = xx_data+yy_data
+		plt.imshow((np.log10(np.abs(stokesI))), aspect='auto',
+					   vmax=0, vmin=-6, cmap='viridis')
+		plt.xlabel('frequency')
+		plt.ylabel('LST')
+		plt.title("{}, {} Stokes I".format(baseline, uvfits_file))
+		uvfits_file = uvfits_file.strip(data_dir)
+		plt.savefig("/data4/paper/rkb/uvreaderwaterfallstacker/" +"uvreaderallantpair{},{}.png".format(baseline, uvfits_file))
+		plt.clf()
 def uvwaterfallreader(data_dir):
 	if os.path.isdir("/data4/paper/rkb/uvreaderwaterfallstorage/"):
 		pass
@@ -161,15 +202,16 @@ def uvtimeavgreader(data_dir):
 	uvstokesIavg = uvstokesItotal/n_avg
 	ax1.plot(np.real(uvstokesIavg), 'g-', linewidth=3, label="modeldata")
 	ax1.set_ylabel("Average Power")
-	ax1.set_xlabel("Frequency (MHz)")
 	ax1.set_title("Real")
 	ax2 = plt.subplot(212)
 	for i, element in enumerate(averager):
 			ax2.plot(np.imag(stokesIavg[:, i]))
 	ax2.plot(np.imag(uvstokesIavg), 'g-', linewidth=3, label="modeldata")
 	ax2.set_xlabel("Frequency (MHz)")
+	ax1.set_ylabel("Average Power")
 	ax2.set_title("Imaginary")
 	ax2.legend()
+	plt.tight_layout()
 	fig = plt.gcf()
 	fig.suptitle("Stokes I Avg over Time")
 	# uvdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
@@ -238,7 +280,7 @@ def uvtimeavgreader2(data_dir):
 				pass
 			else:
 				yydatalist += yy_data
-		stokesI = xx_data-yy_data
+		stokesI = xx_data+yy_data
 		print (stokesI.shape)
 		stokesItotal= np.sum(stokesI, axis=0)
 		print (stokesItotal.shape)
