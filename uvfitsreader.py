@@ -177,7 +177,7 @@ def uvtimeavgreader(data_dir):
 	ax.set_xlabel("Frequency (MHz)")
 	plt.title("Imaginary")
 	plt.legend()
-	fig = gcf()
+	fig = plt.gcf()
 	fig.suptitle("Stokes I Avg over Time")
 	# uvdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	# for uvfits_file in datafiles:
