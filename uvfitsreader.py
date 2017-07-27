@@ -209,10 +209,10 @@ def uvtimeavgreader(data_dir):
 	# print (total_array)
 	#np.save("/data4/paper/rkb/zenuvfitssave.vis.uvfits", total_array)
 def uvtimeavgreader2(data_dir):
-	if os.path.isdir("/data4/paper/rkb/uvreaderstorage/"):
+	if os.path.isdir("/data4/paper/rkb/uvreader2storage/"):
 		pass
 	else:
-		os.makedirs("/data4/paper/rkb/uvreaderstorage/")
+		os.makedirs("/data4/paper/rkb/uvreader2storage/")
 	datafiles = sorted(
 		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	antpairfile = datafiles[0]
@@ -242,7 +242,7 @@ def uvtimeavgreader2(data_dir):
 		plt.ylabel('avg power')
 		uvfits_file = uvfits_file.strip(data_dir)
 		plt.title('UV Avged over Time {} {}'.format(baseline, uvfits_file))
-		plt.savefig("/data4/paper/rkb/uvreaderstorage/modelvisavgedtime{}{}.png".format(baseline, uvfits_file))
+		plt.savefig("/data4/paper/rkb/uvreader2storage/modelvisavgedtime{}{}.png".format(baseline, uvfits_file))
 		plt.clf()
 
 def uvreader4(data_dir):
