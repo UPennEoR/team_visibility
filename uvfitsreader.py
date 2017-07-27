@@ -84,11 +84,11 @@ def uvwaterfallstacker(data_dir):
 			if xx_data.shape != (56, 1024):
 				pass
 			else:
-				xxdatalist = np.hstack((xxdatalist, xx_data))
+				xxdatalist = np.vstack((xxdatalist, xx_data))
 			if yy_data.shape != (56, 1024):
 				pass
 			else:
-				yydatalist = np.hstack((yydatalist, yy_data))
+				yydatalist = np.vstack((yydatalist, yy_data))
 		stokesI = xxdatalist+yydatalist
 		print (stokesI.shape)
 		plt.imshow((np.log10(np.abs(stokesI))), aspect='auto',
