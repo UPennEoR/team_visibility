@@ -89,7 +89,7 @@ def uvwaterfallstacker(data_dir):
 				pass
 			else:
 				yydatalist = np.hstack((yydatalist, yy_data))
-		stokesI = xx_data+yy_data
+		stokesI = xxdatalist+yydatalist
 		print (stokesI.shape)
 		plt.imshow((np.log10(np.abs(stokesI))), aspect='auto',
 					   vmax=0, vmin=-6, cmap='viridis')
