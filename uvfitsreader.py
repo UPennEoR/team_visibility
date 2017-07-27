@@ -295,6 +295,7 @@ def uvtimeavgreader2(data_dir):
 		plt.legend()
 		plt.xlabel('frequency')
 		plt.ylabel('avg power')
+		uvfits_file = uvfits_file.strip(data_dir)
 		plt.title('Model UV Avged over Time {} {}'.format(baseline, uvfits_file))
 		plt.savefig("/data4/paper/rkb/uvreader2storage/modelvisavgedtime{}{}.png".format(baseline, uvfits_file))
 		plt.clf()
