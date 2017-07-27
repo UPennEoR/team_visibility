@@ -229,9 +229,15 @@ def uvtimeavgreader2(data_dir):
 			yy_data = data[:, :, 1]
 			xy_data = data[:, :, 2]
 			yx_data = data[:, :, 3]
-			xxdatalist += xx_data
-			yydatalist += yy_data
-		
+			
+			if xx_data.shape != (56, 1024, 28):
+				pass
+			else:
+				xxdatalist += xx_data
+			if yy_data.shape != (56, 1024, 28):
+				pass
+			else:
+				yydatalist += yy_data
 		stokesI = xx_data-yy_data
 		stokesItotal= np.sum(stokesI, axis=0)
 		for index, element in enumerate(np.nditer(stokesItotal[0])):
