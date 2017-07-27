@@ -84,12 +84,13 @@ def uvwaterfallstacker(data_dir):
 			if xx_data.shape != (56, 1024, 28):
 				pass
 			else:
-				xxdatalist += xx_data
+				xxdatalist = np.vstack((xxdatalist, xx_data))
 			if yy_data.shape != (56, 1024, 28):
 				pass
 			else:
-				yydatalist += yy_data
+				yydatalist = np.vstack((yydatalist, yy_data))
 		stokesI = xx_data+yy_data
+		print (stokes.shape)
 		plt.imshow((np.log10(np.abs(stokesI))), aspect='auto',
 					   vmax=0, vmin=-6, cmap='viridis')
 		plt.xlabel('frequency')
