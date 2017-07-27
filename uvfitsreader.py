@@ -220,8 +220,8 @@ def uvtimeavgreader2(data_dir):
 	antpairall = UV.get_antpairs()
 	for baseline in antpairall:
 		avg = 0
-		xxdatalist = np.empty((56, 1024))
-		yydatalist = np.empty((56, 1024))
+		xxdatalist = np.empty((56, 1024), dtype=np.complex128)
+		yydatalist = np.empty((56, 1024), dtype=np.complex128)
 		for uvfits_file in datafiles:
 			UV.read_uvfits(uvfits_file)
 			data = UV.get_data(baseline)
