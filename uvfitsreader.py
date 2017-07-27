@@ -95,7 +95,6 @@ def uvtimeavgreader(data_dir):
 	antpairfile = datafiles[0]
 	UV.read_uvfits(antpairfile)
 	antpairall = UV.get_antpairs()
-	print (len(antpairall))
 	avg = 0
 	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
 	yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
@@ -110,7 +109,6 @@ def uvtimeavgreader(data_dir):
 				pass
 			else:
 				xxdatalist = np.dstack((xxdatalist, xxdata))
-		print (xxdatalist.shape)
 		if xxdatalist.shape != (56, 1024, 28):
 			pass
 		else:
@@ -129,16 +127,12 @@ def uvtimeavgreader(data_dir):
 		else:
 			yydatalist2 += yydatalist
 	stokesI = xxdatalist2+yydatalist2
-	print(stokesI.shape)
 	#collapse in time:
 	stokesItotal= np.sum(stokesI, axis=0)
-	print(stokesItotal.shape)
 	#avg:
 	n_avg = len(xxdatafiles)*56
 	stokesIavg = stokesItotal/n_avg
-	print(stokesIavg.shape)
 	averager = stokesIavg[0, :]
-	print(averager.shape)
 	ax1 = plt.subplot(211)
 	ax1.set_ylim(-0.25, 0.25)
 	for i, element in enumerate(averager):
