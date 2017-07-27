@@ -173,9 +173,12 @@ def uvtimeavgreader(data_dir):
 	plt.subplot(122)
 	for i, element in enumerate(averager):
 			ax.plot(np.imag(stokesIavg[:, i]))
-	ax.plot(np.imag(uvstokesIavg), 'g-', linewidth=3)
+	ax.plot(np.imag(uvstokesIavg), 'g-', linewidth=3, label="modeldata")
 	ax.set_xlabel("Frequency (MHz)")
 	plt.title("Imaginary")
+	plt.legend()
+	fig = gcf()
+	fig.suptitle("Stokes I Avg over Time")
 	# uvdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	# for uvfits_file in datafiles:
 	# 	UV.read_uvfits(uvfits_file)
