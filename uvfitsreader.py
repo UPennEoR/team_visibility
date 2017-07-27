@@ -237,7 +237,7 @@ def uvtimeavgreader2(data_dir):
 		for index, element in enumerate(np.nditer(stokesItotal[0])):
 			avg += stokesI[:,index]
 		n_avg = avg/len(np.nditer(stokesItotal)
-		plt.plot(np.real(n_avg), 'g-' label="imaginary")
+		plt.plot(np.real(n_avg), 'g-', label="imaginary")
 		plt.plot(np.imag(n_avg), label="real")
 		plt.legend()
 		plt.xlabel('frequency')
