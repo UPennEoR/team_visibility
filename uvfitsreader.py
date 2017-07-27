@@ -90,7 +90,7 @@ def uvwaterfallstacker(data_dir):
 			else:
 				yydatalist = np.vstack((yydatalist, yy_data))
 		stokesI = xx_data+yy_data
-		print (stokes.shape)
+		print (stokesI.shape)
 		plt.imshow((np.log10(np.abs(stokesI))), aspect='auto',
 					   vmax=0, vmin=-6, cmap='viridis')
 		plt.xlabel('frequency')
