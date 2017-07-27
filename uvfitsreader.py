@@ -139,7 +139,7 @@ def uvtimeavgreader(data_dir):
 	print(stokesIavg.shape)
 	averager = stokesIavg[0, :]
 	print(averager.shape)
-	ax1 = plt.subplot(121)
+	ax1 = plt.subplot(211)
 	ax1.set_ylim(-0.25, 0.25)
 	for i, element in enumerate(averager):
 			ax1.plot(np.real(stokesIavg[:, i]))
@@ -169,7 +169,7 @@ def uvtimeavgreader(data_dir):
 	ax1.set_ylabel("Average Power")
 	ax1.set_xlabel("Frequency (MHz)")
 	ax1.set_title("Real")
-	ax2 = plt.subplot(122)
+	ax2 = plt.subplot(212)
 	for i, element in enumerate(averager):
 			ax2.plot(np.imag(stokesIavg[:, i]))
 	ax2.plot(np.imag(uvstokesIavg), 'g-', linewidth=3, label="modeldata")
