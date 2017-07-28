@@ -50,6 +50,7 @@ def uvreader2(data_dir):
 			total_array = np.concatenate((total_array, data), axis=0)
 			np.save("/data4/paper/rkb/uvreaderarraystorage/zenuvfitssave{}.vis.uvfits".format(baseline), total_array)
 			total_array = np.empty([56, 1024, 4])
+
 def uvantpairgetter(data_dir):
 	datafiles = sorted(
 		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
