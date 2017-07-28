@@ -87,14 +87,26 @@ def viscalculator(data_dir):
 	xxtotalavg = xxtotal/n_avg
 	yytotalavg = yytotal/n_avg
 	baselineiterator = xxtotalavg[0, :]
-	plt.subplot(211)
-	plt.plot(vis_xx)
+	ax1=plt.subplot(211)
+	ax1.set_title("Vis XX")
+	ax1.set_ylim=(-0.25, 0.25)
+	ax1.set_xlabel("Frequency (MHz)")
+
+	ax1.plot(vis_xx, label="hd5line")
 	for i, element in enumerate(baselineiterator):
-			plt.plot(xxtotalavg[:, i])
-	plt.subplot(212)
-	plt.plot(vis_yy)
+			ax1.plot(xxtotalavg[:, i])
+	ax2 = plt.subplot(212)
+	ax2.set_title("Vis YY")
+	ax2.set_ylim(-0.25, 0.25)
+	ax2.set_xlabel("Frequency (MHz)")
+	ax2.plot(vis_yy, label="hd5line")
+	plt.legend()
+	plt.tight_layout()
+	fig = plt.gcf()
+	fig.suptitle("Vis XX and Vis YY, HDf5 against Actual Avg Over Time")
+
 	for i, element in enumerate(baselineiterator):
-			plt.plot(yytotalavg[:, i])
+			ax2.plot(yytotalavg[:, i])
 	plt.savefig("/data4/paper/rkb/viscalcgraph.png")		
 
 def stokescreator(stokes):
