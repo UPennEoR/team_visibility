@@ -8,6 +8,7 @@ import glob
 import imageio
 import shutil
 from pylab import *
+UV = UVData()
 
 def layoftheland(data_dir):
 	fn = glob.glob(''.join([data_dir, 'xi_nu_phi_vis.hdf5']))
