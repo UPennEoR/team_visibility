@@ -15,6 +15,19 @@ def layoftheland(data_dir):
 	dgrp = f["/Data"]
 	for key in dgrp.keys():
  		print(key)
+ 	dset_nu = dgrp["nu"]
+ 	nu = np.asarray(dset_nu)
+ 	print ("Nu shape:" + nu.shape)
+ 	dset_phi = dgrp["phi"]
+ 	phi = np.asarray(dset_phi)
+ 	print ("Phi shape:" + phi.shape)
+ 	dset_tauh = dgrp["tauh"]
+ 	tauh = np.asarray(dset_tauh)
+ 	print ("Tauh shape:" + tauh.shape)
+ 	dset_xi = dgrp["xi"]
+ 	xi = np.asarray(dset_xi)
+ 	print ("Xi shape:" + xi.shape)
+
 
 def stokescreator(stokes):
 	if os.path.isdir("/data4/paper/rkb/hd5saves/"):
