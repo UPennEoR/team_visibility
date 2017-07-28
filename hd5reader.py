@@ -106,6 +106,7 @@ def viscalculator(data_dir):
 	plt.tight_layout()
 	fig = plt.gcf()
 	fig.suptitle("Vis XX and Vis YY, HDf5 against Actual Avg Over Time")
+	fig.tight_layout()
 
 	for i, element in enumerate(baselineiterator):
 			ax2.plot(yytotalavg[:, i])
