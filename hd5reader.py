@@ -33,6 +33,67 @@ def layoftheland(data_dir):
  	print(xi.shape)
 
 
+def viscalculator(data_dir):
+	fn =("/home/plaplant/global_signal/Output/HERA/beam_zenith/xi_nu_phi_vis.hdf5")
+	f = h5py.File(fn, 'r')
+	dgrp = f["/Data"]
+	dset_xi = dgrp["xi"]
+	xi = np.asarray(dset_xi)
+	vis_xx = xi[0, 0, 0, :]
+	vis_xy = xi[0, 1, 0, :]
+	vis_yx = xi[0, 2, 0, :]
+	vis_yy = xi[0, 3, 0, :]
+	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	antpairfile = datafiles[0]
+	UV.read_uvfits(antpairfile)
+	antpairall = UV.get_antpairs()
+	avg = 0
+	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
+	yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
+	xxdatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
+	yydatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
+	for miriad_file in xxdatafiles:
+		UV.read_miriad(miriad_file)
+		xxdatalist = np.empty((56, 1024))
+		for baseline in antpairall:
+			xxdata = UV.get_data(baseline)
+			if xxdata.shape != (56, 1024):
+				pass
+			else:
+				xxdatalist = np.dstack((xxdatalist, xxdata))
+		if xxdatalist.shape != (56, 1024, 28):
+			pass
+		else:
+			xxdatalist2 += xxdatalist
+	for miriad_file in yydatafiles:
+		UV.read_miriad(miriad_file)
+		yydatalist = np.empty((56, 1024))
+		for baseline in antpairall:
+			yydata = UV.get_data(baseline)
+			if yydata.shape != (56, 1024):
+				pass
+			else:
+				yydatalist = np.dstack((yydatalist, yydata))
+		if yydatalist.shape != (56, 1024, 28):
+			pass
+		else:
+			yydatalist2 += yydatalist
+	xxtotal = np.sum(xxdatalist2, axis=0)
+	yytotal = np.sum(yydatalist2, axis=0)
+	n_avg = len(xxdatafiles)*56
+	xxtotalavg = xxtotal/n_avg
+	yytotalavg = yytotal/n_avg
+	baselineiterator = xxtotalavg[0, :]
+	plt.subplot(211)
+	plt.plot(vis_xx)
+	for i, element in enumerate(baselineiterator):
+			plt.plot(xxtotalavg[:, i])
+	plt.subplot(212)
+	plt.plot(vis_yy)
+	for i, element in enumerate(baselineiterator):
+			plt.plot(yytotalavg[:, i])
+	plt.savefig("/data4/paper/rkb/viscalcgraph.png")		
+
 def stokescreator(stokes):
 	if os.path.isdir("/data4/paper/rkb/hd5saves/"):
 		pass

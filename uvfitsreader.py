@@ -177,10 +177,10 @@ def uvtimeavgreader(data_dir):
 	#avg:
 	n_avg = len(xxdatafiles)*56
 	stokesIavg = stokesItotal/n_avg
-	averager = stokesIavg[0, :]
+	baselineiterator = stokesIavg[0, :]
 	ax1 = plt.subplot(211)
 	ax1.set_ylim(-0.25, 0.25)
-	for i, element in enumerate(averager):
+	for i, element in enumerate(baselineiterator):
 			ax1.plot(np.real(stokesIavg[:, i]))
 	uvdatafiles = sorted(
 		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
@@ -208,7 +208,7 @@ def uvtimeavgreader(data_dir):
 	ax1.set_ylabel("Average Power")
 	ax1.set_title("Real")
 	ax2 = plt.subplot(212)
-	for i, element in enumerate(averager):
+	for i, element in enumerate(baselineiterator):
 			ax2.plot(np.imag(stokesIavg[:, i]))
 	ax2.plot(np.imag(uvstokesIavg), 'g-', linewidth=3, label="modeldata")
 	ax2.set_xlabel("Frequency (MHz)")
