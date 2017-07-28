@@ -1,5 +1,7 @@
 import h5py
 import matplotlib
+from pyuvdata import UVData
+
 matplotlib.use('Agg')
 import numpy as np
 import matplotlib.pyplot as plt
