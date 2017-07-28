@@ -89,7 +89,7 @@ def viscalculator(data_dir):
 	baselineiterator = xxtotalavg[0, :]
 	ax1=plt.subplot(211)
 	ax1.set_title("Vis XX")
-	ax1.set_ylim=(-0.25, 0.25)
+	ax1.set_ylim(-0.25, 0.25)
 	ax1.set_xlabel("Frequency (MHz)")
 
 	ax1.plot(vis_xx, label="hd5line")
@@ -97,9 +97,11 @@ def viscalculator(data_dir):
 			ax1.plot(xxtotalavg[:, i])
 	ax2 = plt.subplot(212)
 	ax2.set_title("Vis YY")
-	ax2.set_ylim(-0.25, 0.25)
 	ax2.set_xlabel("Frequency (MHz)")
 	ax2.plot(vis_yy, label="hd5line")
+	for i, element in enumerate(baselineiterator):
+			ax2.plot(yytotalavg[:, i])
+	ax2.set_ylim(-0.25, 0.25)
 	plt.legend()
 	plt.tight_layout()
 	fig = plt.gcf()
