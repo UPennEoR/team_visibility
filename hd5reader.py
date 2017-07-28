@@ -53,8 +53,12 @@ def viscalculator(data_dir):
 	avg = 0
 	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
 	yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
+	xydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR'])))
+	yxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR'])))
 	xxdatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
 	yydatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
+	xydatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
+	yxdatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
 	for miriad_file in xxdatafiles:
 		UV.read_miriad(miriad_file)
 		xxdatalist = np.empty((56, 1024))
@@ -81,33 +85,73 @@ def viscalculator(data_dir):
 			pass
 		else:
 			yydatalist2 += yydatalist
+	for miriad_file in yydatafiles:
+		UV.read_miriad(miriad_file)
+		xydatalist = np.empty((56, 1024))
+		for baseline in antpairall:
+			xydata = UV.get_data(baseline)
+			if xydata.shape != (56, 1024):
+				pass
+			else:
+				xydatalist = np.dstack((xydatalist, xydata))
+		if xydatalist.shape != (56, 1024, 28):
+			pass
+		else:
+			xydatalist2 += xydatalist
+		for miriad_file in yydatafiles:
+		UV.read_miriad(miriad_file)
+		yydatalist = np.empty((56, 1024))
+	for baseline in antpairall:
+			yxdata = UV.get_data(baseline)
+			if yxdata.shape != (56, 1024):
+				pass
+			else:
+				yxdatalist = np.dstack((yxdatalist, yxdata))
+		if yxdatalist.shape != (56, 1024, 28):
+			pass
+		else:
+			yxdatalist2 += yxdatalist
 	xxtotal = np.sum(xxdatalist2, axis=0)
 	yytotal = np.sum(yydatalist2, axis=0)
+	xytotal = np.sum(xydatalist2, axis=0)
+	yxtotal = np.sum(yxdatalist2, axis=0)
 	n_avg = len(xxdatafiles)*56
 	xxtotalavg = xxtotal/n_avg
 	yytotalavg = yytotal/n_avg
+	xytotalavg = xytotal/n_avg
+	yxtotalavg = yxtotal/n_avg
 	baselineiterator = xxtotalavg[0, :]
-	ax1=plt.subplot(211)
+	ax1=plt.subplot(411)
 	ax1.set_title("Vis XX")
 	ax1.set_ylim(-0.1, 0.1)
-	ax1.set_xlabel("Frequency (MHz)")
-	ax1.legend()
+	ax1.set_ylabel("Average Power")
 	for i, element in enumerate(baselineiterator):
 			ax1.plot(xxtotalavg[:, i])
 	ax1.plot(vis_xx, 'g-', linewidth=3, label="hd5line")
-	ax2 = plt.subplot(212)
+	ax1.legend()
+	ax2 = plt.subplot(412)
 	ax2.set_title("Vis YY")
-	ax2.set_xlabel("Frequency (MHz)")
+	ax2.set_ylabel("Average Power")
 	for i, element in enumerate(baselineiterator):
 			ax2.plot(yytotalavg[:, i])
 	ax2.plot(vis_yy, 'g-', linewidth=3, label="hd5line")
 	ax2.set_ylim(-0.1, 0.1)
-	ax2.legend()
+	ax3 = plt.subplot(413)
+	ax3.set_title("Vis XY")
+	ax3.set_ylabel("Average Power")
+	for i, element in enumerate(baselineiterator):
+			ax3.plot(xytotalavg[:, i])
+	ax3.plot(vis_xy, 'g-', linewidth=3, label="hd5line")
+	ax3.set_ylim(-0.1, 0.1)
+	ax4 = plt.subplot(413)
+	ax4.set_title("Vis YX")
+	ax4.set_xlabel("Frequency (MHz)")
+	ax4.set_ylabel("Average Power")
+	for i, element in enumerate(baselineiterator):
+			ax4.plot(yxtotalavg[:, i])
+	ax4.plot(vis_yx, 'g-', linewidth=3, label="hd5line")
+	ax4.set_ylim(-0.1, 0.1)
 	plt.tight_layout()
-	fig = plt.gcf()
-	fig.suptitle("Vis XX and Vis YY, HDf5 against Actual Avg Over Time")
-	fig.tight_layout()
-
 	for i, element in enumerate(baselineiterator):
 			ax2.plot(yytotalavg[:, i])
 	plt.savefig("/data4/paper/rkb/viscalcgraph.png")		
