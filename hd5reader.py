@@ -11,6 +11,7 @@ from pylab import *
 
 def layoftheland(data_dir):
 	fn = glob.glob(''.join([data_dir, 'xi_nu_phi_vis.hdf5']))
+	print (fn)
 	f = h5py.File(fn, 'r')
 	dgrp = f["/Data"]
 	for key in dgrp.keys():
