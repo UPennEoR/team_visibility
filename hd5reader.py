@@ -98,10 +98,10 @@ def viscalculator(data_dir):
 			pass
 		else:
 			xydatalist2 += xydatalist
-		for miriad_file in yydatafiles:
+	for miriad_file in yydatafiles:
 		UV.read_miriad(miriad_file)
 		yydatalist = np.empty((56, 1024))
-	for baseline in antpairall:
+		for baseline in antpairall:
 			yxdata = UV.get_data(baseline)
 			if yxdata.shape != (56, 1024):
 				pass
