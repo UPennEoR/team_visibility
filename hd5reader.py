@@ -9,7 +9,12 @@ import imageio
 import shutil
 from pylab import *
 
-
+def layoftheland(data_dir):
+	fn = glob.glob(''.join([data_dir, 'xi_nu_phi_vis.hdf5']))
+	f = h5py.File(fn, 'r')
+	dgrp = f["/Data"]
+	for key in dgrp.keys():
+ 		print(key)
 
 def stokescreator(stokes):
 	if os.path.isdir("/data4/paper/rkb/hd5saves/"):
