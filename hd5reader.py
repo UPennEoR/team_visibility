@@ -121,6 +121,7 @@ def viscalculator(data_dir):
 	xytotalavg = xytotal/n_avg
 	yxtotalavg = yxtotal/n_avg
 	baselineiterator = xxtotalavg[0, :]
+	plt.figure(figsize=(10, 30))
 	ax1=plt.subplot(411)
 	ax1.set_title("Vis XX")
 	ax1.set_ylim(-0.1, 0.1)
@@ -143,7 +144,7 @@ def viscalculator(data_dir):
 			ax3.plot(xytotalavg[:, i])
 	ax3.plot(vis_xy, 'g-', linewidth=3, label="hd5line")
 	ax3.set_ylim(-0.1, 0.1)
-	ax4 = plt.subplot(413)
+	ax4 = plt.subplot(414)
 	ax4.set_title("Vis YX")
 	ax4.set_xlabel("Frequency (MHz)")
 	ax4.set_ylabel("Average Power")
