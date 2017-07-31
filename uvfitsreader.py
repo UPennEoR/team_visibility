@@ -93,7 +93,7 @@ def uvwaterfallstacker(data_dir):
 		stokesI = xxdatalist+yydatalist
 		print (stokesI.shape)
 		plt.imshow((np.log10(np.abs(stokesI))), aspect='auto',
-					   vmax=0, vmin=-6, cmap='viridis')
+					   vmax=6, vmin=-6, cmap='viridis')
 		plt.xlabel('frequency')
 		plt.ylabel('LST')
 		plt.colorbar()
