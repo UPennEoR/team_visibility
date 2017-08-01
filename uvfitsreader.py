@@ -184,7 +184,8 @@ def uvtimeavgreader(data_dir):
 	for i, element in enumerate(baselineiterator):
 		ax1 = plt.subplot(211)
 		ax1.plot(np.real(xxavg[:, i]))
-		UV.read_uvfits(uvfits_file)
+		for uvfitsfile in datafiles:
+			UV.read_uvfits(uvfits_file)
 		data = UV.get_data(antpairall[i])
 		xx_data = data[:, :, 0]
 		yy_data = data[:, :, 1]
