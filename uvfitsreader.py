@@ -132,10 +132,10 @@ def uvwaterfallreader(data_dir):
 			plt.clf()
 
 def uvtimeavgreader(data_dir):
-	if os.path.isdir("/data4/paper/rkb/uvreaderstorage/"):
+	if os.path.isdir("/data4/paper/rkb/uvtimeavgreaderstorage/"):
 		pass
 	else:
-		os.makedirs("/data4/paper/rkb/uvreaderstorage/")
+		os.makedirs("/data4/paper/rkb/uvtimeavgreaderstorage/")
 	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	antpairfile = datafiles[0]
 	UV.read_uvfits(antpairfile)
@@ -171,24 +171,20 @@ def uvtimeavgreader(data_dir):
 			pass
 		else:
 			yydatalist2 += yydatalist
-	stokesI = xxdatalist2+yydatalist2
 	#collapse in time:
-	stokesItotal= np.sum(stokesI, axis=0)
+	xxtotal= np.sum(xxdatalist2, axis=0)
 	#avg:
 	n_avg = len(xxdatafiles)*56
-	stokesIavg = stokesItotal/n_avg
-	baselineiterator = stokesIavg[0, :]
-	ax1 = plt.subplot(211)
-	ax1.set_ylim(-0.25, 0.25)
-	for i, element in enumerate(baselineiterator):
-			ax1.plot(np.real(stokesIavg[:, i]))
+	xxavg = xxtotal/n_avg
+	baselineiterator = xxavg[0, :]
 	uvdatafiles = sorted(
 		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	uvxxdatalist = np.empty((56, 1024), dtype=np.complex128)
 	uvyydatalist = np.empty((56, 1024), dtype=np.complex128)
-	for uvfits_file in datafiles:
+	for i, element in enumerate(baselineiterator):
+		ax1.plot(np.real(xxavg[:, i]))
 		UV.read_uvfits(uvfits_file)
-		data = UV.get_data(antpairall[1])
+		data = UV.get_data(antpairall[i])
 		xx_data = data[:, :, 0]
 		yy_data = data[:, :, 1]
 		xy_data = data[:, :, 2]
@@ -201,23 +197,23 @@ def uvtimeavgreader(data_dir):
 			pass
 		else:
 			uvyydatalist += yy_data
-	uvstokesI = uvxxdatalist+uvyydatalist
-	uvstokesItotal= np.sum(uvstokesI, axis=0)
-	uvstokesIavg = uvstokesItotal/n_avg
-	ax1.plot(np.real(uvstokesIavg), 'g-', linewidth=3, label="modeldata")
-	ax1.set_ylabel("Average Power")
-	ax1.set_title("Real")
-	ax2 = plt.subplot(212)
-	for i, element in enumerate(baselineiterator):
-			ax2.plot(np.imag(stokesIavg[:, i]))
-	ax2.plot(np.imag(uvstokesIavg), 'g-', linewidth=3, label="modeldata")
-	ax2.set_xlabel("Frequency (MHz)")
-	ax1.set_ylabel("Average Power")
-	ax2.set_title("Imaginary")
-	ax2.legend()
-	plt.tight_layout()
-	fig = plt.gcf()
-	fig.suptitle("Stokes I Avg over Time")
+		uvxxtotal= np.sum(uvxxdatalist, axis=0)
+		uvxxavg = uvxxtotal/n_avg
+		ax1 = plt.subplot(211)
+		ax1.set_ylim(-0.25, 0.25)
+		ax1.plot(np.real(uvxxavg), 'g-', linewidth=3, label="modeldata")
+		ax1.set_ylabel("Average Power")
+		ax1.set_title("Real")
+		ax2 = plt.subplot(212)
+		ax2.plot(np.imag(xxavg[:, i]))
+		ax2.plot(np.imag(uvxxavg), 'g-', linewidth=3, label="modeldata")
+		ax2.set_xlabel("Frequency (MHz)")
+		ax1.set_ylabel("Average Power")
+		ax2.set_title("Imaginary")
+		ax2.legend()
+		plt.tight_layout()
+		fig = plt.gcf()
+		fig.suptitle("Stokes I Avg over Time, {}".format(element))
 	# uvdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	# for uvfits_file in datafiles:
 	# 	UV.read_uvfits(uvfits_file)
@@ -227,7 +223,7 @@ def uvtimeavgreader(data_dir):
 	# 	xy_data = data[:, :, 2]
 	# 	yx_data = data[:, :, 3]
 	# 	stokesI = xx_data-yy_data
-	plt.savefig("/data4/paper/rkb/testtesttest.png")
+		plt.savefig("/data4/paper/rkb/uvtimeavgreaderstorage/{}.png".format(element))
 	# plt.title('ActualUV Avged Over Time {} {}'.format(baseline, miriad_file))
 	# for uvfits_file in datafiles:
 	# 	UV.read_uvfits(uvfits_file)
