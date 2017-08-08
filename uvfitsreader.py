@@ -131,6 +131,11 @@ def uvwaterfallreader(data_dir):
 			plt.savefig("/data4/paper/rkb/uvreaderwaterfallstorage/" +"uvreaderallantpair{},{}.png".format(baseline, uvfits_file))
 			plt.clf()
 def miriadplotter(data_dir):
+		if os.path.isdir("/data4/paper/rkb/miriadplotter/"):
+		pass
+	else:
+		os.makedirs("/data4/paper/rkb/miriadplotter/")
+
 	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	antpairfile = datafiles[0]
 	UV.read_uvfits(antpairfile)
@@ -179,6 +184,8 @@ def miriadplotter(data_dir):
 		plt.ylabel("Average Power")
 		plt.title("Visibility Avg Over Time, {}".format(antpairall[i]))
 		plt.tight_layout()
+		plt.savefig("/data4/paper/rkb/miriadplotter/{}.png".format(antpairall[i]))
+		plt.clf()
 
 def uvtimeavgreader(data_dir):
 	if os.path.isdir("/data4/paper/rkb/uvtimeavgreaderstorage/"):
