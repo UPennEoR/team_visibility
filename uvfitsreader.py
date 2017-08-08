@@ -178,6 +178,7 @@ def miriadplotter(data_dir):
 	xxavg = xxtotal/n_avg
 	baselineiterator = xxavg[0, :]
 	for i, element in enumerate(baselineiterator):
+		print(i)
 		plt.plot(np.real(xxavg[:, i]), label="real part")
 		plt.plot(np.imag(xxavg[:, i]), label="imaginary part")
 		plt.legend()
