@@ -243,7 +243,7 @@ def uvtimeavgreader(data_dir):
 		ax1.plot(np.real(xxavg[:, i]))
 		for uvfits_file in datafiles:
 			UV.read_uvfits(uvfits_file)
-		data = UV.get_data(antpairall[i])
+		data = UV.get_data(antpairall[i-1])
 		xx_data = data[:, :, 0]
 		yy_data = data[:, :, 1]
 		xy_data = data[:, :, 2]
