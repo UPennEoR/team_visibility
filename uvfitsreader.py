@@ -183,9 +183,9 @@ def miriadplotter(data_dir):
 		plt.plot(np.imag(xxavg[:, i]), label="imaginary part")
 		plt.legend()
 		plt.ylabel("Average Power")
-		plt.title("Visibility Avg Over Time, {}".format(antpairall[i+1]))
+		plt.title("Visibility Avg Over Time, {}".format(antpairall[i-1]))
 		plt.tight_layout()
-		plt.savefig("/data4/paper/rkb/miriadplotter/{}.png".format(antpairall[i+1]))
+		plt.savefig("/data4/paper/rkb/miriadplotter/{}.png".format(antpairall[i-1]))
 		plt.clf()
 
 def uvtimeavgreader(data_dir):
