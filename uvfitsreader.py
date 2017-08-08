@@ -179,14 +179,14 @@ def miriadplotter(data_dir):
 	baselineiterator = xxavg[0, :]
 	for i, element in enumerate(baselineiterator):
 		print(i)
-		# plt.plot(np.real(xxavg[:, i]), label="real part")
-		# plt.plot(np.imag(xxavg[:, i]), label="imaginary part")
-		# plt.legend()
-		# plt.ylabel("Average Power")
-		# plt.title("Visibility Avg Over Time, {}".format(antpairall[i]))
-		# plt.tight_layout()
-		# plt.savefig("/data4/paper/rkb/miriadplotter/{}.png".format(antpairall[i]))
-		# plt.clf()
+		plt.plot(np.real(xxavg[:, i]), label="real part")
+		plt.plot(np.imag(xxavg[:, i]), label="imaginary part")
+		plt.legend()
+		plt.ylabel("Average Power")
+		plt.title("Visibility Avg Over Time, {}".format(antpairall[i+1]))
+		plt.tight_layout()
+		plt.savefig("/data4/paper/rkb/miriadplotter/{}.png".format(antpairall[i+1]))
+		plt.clf()
 
 def uvtimeavgreader(data_dir):
 	if os.path.isdir("/data4/paper/rkb/uvtimeavgreaderstorage/"):
