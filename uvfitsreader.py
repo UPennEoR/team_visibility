@@ -130,6 +130,55 @@ def uvwaterfallreader(data_dir):
 			uvfits_file = uvfits_file.strip(data_dir)
 			plt.savefig("/data4/paper/rkb/uvreaderwaterfallstorage/" +"uvreaderallantpair{},{}.png".format(baseline, uvfits_file))
 			plt.clf()
+def miriadplotter(data_dir):
+	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	antpairfile = datafiles[0]
+	UV.read_uvfits(antpairfile)
+	antpairall = UV.get_antpairs()
+	avg = 0
+	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
+	yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
+	xxdatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
+	yydatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
+	for miriad_file in xxdatafiles:
+		UV.read_miriad(miriad_file)
+		xxdatalist = np.empty((56, 1024))
+		for baseline in antpairall:
+			xxdata = UV.get_data(baseline)
+			if xxdata.shape != (56, 1024):
+				pass
+			else:
+				xxdatalist = np.dstack((xxdatalist, xxdata))
+		if xxdatalist.shape != (56, 1024, 28):
+			pass
+		else:
+			xxdatalist2 += xxdatalist
+	for miriad_file in yydatafiles:
+		UV.read_miriad(miriad_file)
+		yydatalist = np.empty((56, 1024))
+		for baseline in antpairall:
+			yydata = UV.get_data(baseline)
+			if yydata.shape != (56, 1024):
+				pass
+			else:
+				yydatalist = np.dstack((yydatalist, yydata))
+		if yydatalist.shape != (56, 1024, 28):
+			pass
+		else:
+			yydatalist2 += yydatalist
+	#collapse in time:
+	xxtotal= np.sum(xxdatalist2, axis=0)
+	#avg:
+	n_avg = len(xxdatafiles)*56
+	xxavg = xxtotal/n_avg
+	baselineiterator = xxavg[0, :]
+	for i, element in enumerate(baselineiterator):
+		plt.plot(np.real(xxavg[:, i]), label="real part")
+		plt.plot(np.imag(xxavg[:, i]), label="imaginary part")
+		plt.legend()
+		plt.ylabel("Average Power")
+		plt.title("Visibility Avg Over Time, {}".format(antpairall[i]))
+		plt.tight_layout()
 
 def uvtimeavgreader(data_dir):
 	if os.path.isdir("/data4/paper/rkb/uvtimeavgreaderstorage/"):
@@ -214,7 +263,7 @@ def uvtimeavgreader(data_dir):
 		ax2.legend()
 		plt.tight_layout()
 		fig = plt.gcf()
-		fig.suptitle("Stokes I Avg over Time, {}".format(antpairall[i]))
+		fig.suptitle("Visibility Avg over Time, {}".format(antpairall[i]))
 	# uvdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	# for uvfits_file in datafiles:
 	# 	UV.read_uvfits(uvfits_file)

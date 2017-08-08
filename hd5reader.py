@@ -128,21 +128,21 @@ def viscalculator(data_dir):
 	ax1.set_ylabel("Average Power")
 	for i, element in enumerate(baselineiterator):
 			ax1.plot(np.real(xxtotalavg[:, i]))
-	ax1.plot(np.real(vis_xx), 'g-', linewidth=3, label="hd5line")
+	ax1.plot(100* np.real(vis_xx), 'g-', linewidth=3, label="hd5line")
 	ax1.legend()
 	ax2 = plt.subplot(412)
 	ax2.set_title("Vis YY")
 	ax2.set_ylabel("Average Power")
 	for i, element in enumerate(baselineiterator):
 			ax2.plot(np.real(yytotalavg[:, i]))
-	ax2.plot(np.real(vis_yy), 'g-', linewidth=3, label="hd5line")
+	ax2.plot(100* np.real(vis_yy), 'g-', linewidth=3, label="hd5line")
 	ax2.set_ylim(-0.1, 0.1)
 	ax3 = plt.subplot(413)
 	ax3.set_title("Vis XY")
 	ax3.set_ylabel("Average Power")
 	for i, element in enumerate(baselineiterator):
 			ax3.plot(np.real(xytotalavg[:, i]))
-	ax3.plot(np.real(vis_xy), 'g-', linewidth=3, label="hd5line")
+	ax3.plot(100* np.real(vis_xy), 'g-', linewidth=3, label="hd5line")
 	ax3.set_ylim(-0.1, 0.1)
 	ax4 = plt.subplot(414)
 	ax4.set_title("Vis YX")
@@ -150,7 +150,7 @@ def viscalculator(data_dir):
 	ax4.set_ylabel("Average Power")
 	for i, element in enumerate(baselineiterator):
 			ax4.plot(np.real(yxtotalavg[:, i]))
-	ax4.plot(np.real(vis_yx), 'g-', linewidth=3, label="hd5line")
+	ax4.plot(100* np.real(vis_yx), 'g-', linewidth=3, label="hd5line")
 	ax4.set_ylim(-0.1, 0.1)
 	plt.tight_layout()
 	plt.savefig("/data4/paper/rkb/viscalcgraph.png")		
