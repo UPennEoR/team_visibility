@@ -131,7 +131,7 @@ def uvwaterfallreader(data_dir):
 			plt.savefig("/data4/paper/rkb/uvreaderwaterfallstorage/" +"uvreaderallantpair{},{}.png".format(baseline, uvfits_file))
 			plt.clf()
 def miriadplotter(data_dir):
-		if os.path.isdir("/data4/paper/rkb/miriadplotter/"):
+	if os.path.isdir("/data4/paper/rkb/miriadplotter/"):
 		pass
 	else:
 		os.makedirs("/data4/paper/rkb/miriadplotter/")
