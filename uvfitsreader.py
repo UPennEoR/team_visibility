@@ -271,7 +271,7 @@ def uvtimeavgreader(data_dir):
 		ax2.legend()
 		plt.tight_layout()
 		fig = plt.gcf()
-		fig.suptitle("Visibility Avg over Time, {}".format(antpairall[i]))
+		fig.suptitle("Visibility Avg over Time, {}".format(antpairall[i-1]))
 	# uvdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 	# for uvfits_file in datafiles:
 	# 	UV.read_uvfits(uvfits_file)
@@ -281,7 +281,7 @@ def uvtimeavgreader(data_dir):
 	# 	xy_data = data[:, :, 2]
 	# 	yx_data = data[:, :, 3]
 	# 	stokesI = xx_data-yy_data
-		plt.savefig("/data4/paper/rkb/uvtimeavgreaderstorage/{}.png".format(antpairall[i]))
+		plt.savefig("/data4/paper/rkb/uvtimeavgreaderstorage/{}.png".format(antpairall[i-1]))
 		plt.clf()
 	# plt.title('ActualUV Avged Over Time {} {}'.format(baseline, miriad_file))
 	# for uvfits_file in datafiles:
