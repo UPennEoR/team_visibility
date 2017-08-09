@@ -154,7 +154,7 @@ def avgfreqcalc(data_dir, antstr, stokes):
 		if stokes == "I":
 			stokes_I = vis_xx + vis_yy
 			for it in range(vis_xx.shape[0]):    
-				avg_freq_i_real += (stokes_I[it, :])
+				avg_freq += (stokes_I[it, :])
 				n_avg += 1
 		elif stokes == "Q":
 			stokes_Q = vis_xx - vis_yy
