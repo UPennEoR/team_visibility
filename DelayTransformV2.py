@@ -150,7 +150,6 @@ def delaytransformv1(data_dir, stokes):
 		ax.axvline(x=-tauh, linestyle='--', color='0.5')
 		ax.axvline(x=tauh, linestyle='--', color='0.5')
 		ax.set_xlim(-400, 400)
-		ax.set_ylim(-12, -2)
 		ax.set_xlabel('Delay [bins]')
 		ax.set_ylabel('log10(abs(V_I)')
 		ax.set_title('Delay Transform'+antstr+stokes)
