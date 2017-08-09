@@ -142,7 +142,8 @@ def delaytransformv1(data_dir, stokes):
 		d_end = delays[-1]
 		#d_transform = np.abs(d_transform)
 		f, ax = plt.subplots(figsize=(5, 4))
-		ax.plot(delays, np.log(np.abs(d_transform)))
+		ax.plot(delays, np.log(np.real(d_transform)), label="real part")
+		ax.plot(delays, np.log(np.imag(d_transform)), label="imag part")
 		tauh = calculate_baseline(pair)/2.9979e8*1e9 # convert to ns
 		ax = plt.gca()
 		ax.axvline(x=0., linestyle='--', color='0.5')
@@ -153,6 +154,7 @@ def delaytransformv1(data_dir, stokes):
 		ax.set_xlabel('Delay [bins]')
 		ax.set_ylabel('log10(abs(V_I)')
 		ax.set_title('Delay Transform'+antstr+stokes)
+		plt.legend()
 		plt.savefig("/data4/paper/rkb/delaygifstorage/"+'delaytransform'+'{} {}.png'.format(antstr, stokes))
 		plt.clf()
 	images = glob.glob(('/data4/paper/rkb/delaygifstorage/*.png').format(stokes))

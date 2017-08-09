@@ -179,8 +179,8 @@ def miriadplotter(data_dir):
 	baselineiterator = xxavg[0, :]
 	for i, element in enumerate(baselineiterator):
 		print(i)
-		plt.plot(np.real(xxavg[:, i]), label="real part")
-		plt.plot(np.imag(xxavg[:, i]), label="imaginary part")
+		plt.plot(np.logo10(np.real(xxavg[:, i])), label="real part")
+		plt.plot(np.logo10(np.imag(xxavg[:, i])), label="imaginary part")
 		plt.legend()
 		plt.ylabel("Average Power")
 		plt.title("Visibility Avg Over Time, {}".format(antpairall[i-1]))
