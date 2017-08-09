@@ -142,8 +142,8 @@ def delaytransformv1(data_dir, stokes):
 		d_end = delays[-1]
 		#d_transform = np.abs(d_transform)
 		f, ax = plt.subplots(figsize=(5, 4))
-		ax.plot(delays, np.log(np.real(d_transform)), label="real part")
-		ax.plot(delays, np.log(np.imag(d_transform)), label="imag part")
+		ax.plot(delays, np.real(np.log(d_transform)), label="real part")
+		ax.plot(delays, np.imag(np.log(d_transform)), label="imag part")
 		tauh = calculate_baseline(pair)/2.9979e8*1e9 # convert to ns
 		ax = plt.gca()
 		ax.axvline(x=0., linestyle='--', color='0.5')
