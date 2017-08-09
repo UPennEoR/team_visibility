@@ -161,27 +161,27 @@ def avgfreqcalc(data_dir, antstr):
 			for it in range(vis_xx.shape[0]):    
 				avg_freq += (stokes_Q[it, :])
 				n_avg += 1
-	elif stokes == "V" or stokes == "U":
-		for i in np.arange(len(xy_data)):
-			t_xy, d_xy, f_xy = capo.miriad.read_files([xy_data[i]], antstr=antstr, polstr='xy', verbose=True)
-			t_yx, d_yx, f_yx = capo.miriad.read_files([yx_data[i]], antstr=antstr, polstr='yx', verbose=True)
+		elif stokes == "V" or stokes == "U":
+			for i in np.arange(len(xy_data)):
+				t_xy, d_xy, f_xy = capo.miriad.read_files([xy_data[i]], antstr=antstr, polstr='xy', verbose=True)
+				t_yx, d_yx, f_yx = capo.miriad.read_files([yx_data[i]], antstr=antstr, polstr='yx', verbose=True)
 
-			vis_xy = d_xy[(ant_i, ant_j)]['xy']
-			vis_yx = d_yx[(ant_i, ant_j)]['yx']
-			channels = vis_xy.shape[1]
-			if avg_freq is None:
-				avg_freq = np.zeros((vis_xy.shape[1]))
-			if stokes == "U":
-				stokes_U = vis_xy + vis_yx
-				for it in range(vis_xy.shape[0]):    
-					avg_freq += (stokes_U[it, :])
-					n_avg += 1
-			elif stokes == "V":
-				stokes_V = np.imag(vis_xy) - np.imag(vis_yx)
-				for it in range(vis_yx.shape[0]):    
-					avg_freq += np.abs(stokes_V[it, :])
-					n_avg += 1
-			
+				vis_xy = d_xy[(ant_i, ant_j)]['xy']
+				vis_yx = d_yx[(ant_i, ant_j)]['yx']
+				channels = vis_xy.shape[1]
+				if avg_freq is None:
+					avg_freq = np.zeros((vis_xy.shape[1]))
+				if stokes == "U":
+					stokes_U = vis_xy + vis_yx
+					for it in range(vis_xy.shape[0]):    
+						avg_freq += (stokes_U[it, :])
+						n_avg += 1
+				elif stokes == "V":
+					stokes_V = np.imag(vis_xy) - np.imag(vis_yx)
+					for it in range(vis_yx.shape[0]):    
+						avg_freq += np.abs(stokes_V[it, :])
+						n_avg += 1
+				
 
 	# finish averaging
 	avg_freq = np.abs(avg_freq/n_avg)
