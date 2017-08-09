@@ -130,7 +130,7 @@ def avgfreqall(data_dir):
 	print (total,"secs")
 
 
-def avgfreqcalc(data_dir, antstr):
+def avgfreqcalc(data_dir, antstr, stokes):
 	xx_data = glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR']))
 	xy_data = glob.glob(''.join([data_dir, 'zen.*.xy.HH.uvcORR']))
 	yx_data = glob.glob(''.join([data_dir, 'zen.*.yx.HH.uvcORR']))
