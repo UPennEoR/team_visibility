@@ -310,6 +310,66 @@ def uvtimeavgreader(data_dir):
 		# np.concatenate((total_array, data), axis=0)
 	# print (total_array)
 	#np.save("/data4/paper/rkb/zenuvfitssave.vis.uvfits", total_array)
+
+
+def zachtimeavgreader(data_dir):
+	if os.path.isdir("/data4/paper/rkb/zachtimeavgreaderstorage/"):
+		pass
+	else:
+		os.makedirs("/data4/paper/rkb/zachtimeavgreaderstorage/")
+	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	antpairfile = datafiles[0]
+	UV.read_uvfits(antpairfile)
+	antpairall = UV.get_antpairs()
+	avg = 0
+	uvdatafiles = sorted(
+		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	uvxxdatalist = np.empty((56, 1024), dtype=np.complex128)
+	uvyydatalist = np.empty((56, 1024), dtype=np.complex128)
+	for uvfits_file in datafiles:
+		UV.read_uvfits(uvfits_file)
+	for i in antpairall:
+		data = UV.get_data(antpairall[i-1])
+		xx_data = data[:, :, 0]
+		yy_data = data[:, :, 1]
+		xy_data = data[:, :, 2]
+		yx_data = data[:, :, 3]
+		if xx_data.shape != (56, 1024, 28):
+			pass
+		else:
+			uvxxdatalist += xx_data
+		if yy_data.shape != (56, 1024, 28):
+			pass
+		else:
+			uvyydatalist += yy_data
+		uvxxtotal= np.sum(uvxxdatalist, axis=0)
+		uvxxavg = uvxxtotal/n_avg
+		ax1 = plt.subplot(211)
+		ax1.set_ylim(-0.05, 0.05)
+		ax1.plot(np.real(uvxxavg), 'g-', linewidth=3, label="modeldata")
+		ax1.set_ylabel("Average Power")
+		ax1.set_title("Real")
+		ax2 = plt.subplot(212)
+		ax2.plot(np.imag(uvxxavg), 'g-', linewidth=3, label="modeldata")
+		ax2.set_xlabel("Frequency (MHz)")
+		ax1.set_ylabel("Average Power")
+		ax2.set_title("Imaginary")
+		ax2.legend()
+		plt.tight_layout()
+		fig = plt.gcf()
+		fig.suptitle("Zach Model Visibility Avg over Time, {}".format(antpairall[i-1]))
+		# uvdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+		# for uvfits_file in datafiles:
+		# 	UV.read_uvfits(uvfits_file)
+		# 	data = UV.get_data(antpairall[1])
+		# 	xx_data = data[:, :, 0]
+		# 	yy_data = data[:, :, 1]
+		# 	xy_data = data[:, :, 2]
+		# 	yx_data = data[:, :, 3]
+		# 	stokesI = xx_data-yy_data
+		plt.savefig("/data4/paper/rkb/zachtimeavgreaderstorage/{}.png".format(antpairall[i-1]))
+		plt.clf()
+
 def uvtimeavgreader2(data_dir):
 	if os.path.isdir("/data4/paper/rkb/uvreader2storage/"):
 		pass
