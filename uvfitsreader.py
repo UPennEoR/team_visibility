@@ -245,6 +245,7 @@ def uvtimeavgreader(data_dir):
 			UV.read_uvfits(uvfits_file)
 		data = UV.get_data(antpairall[i-1])
 		xx_data = data[:, :, 0]
+
 		yy_data = data[:, :, 1]
 		xy_data = data[:, :, 2]
 		yx_data = data[:, :, 3]
@@ -258,7 +259,7 @@ def uvtimeavgreader(data_dir):
 			uvyydatalist += yy_data
 		uvxxtotal= np.sum(uvxxdatalist, axis=0)
 		uvxxavg = uvxxtotal/n_avg
-		ax1.set_ylim(-0.25, 0.25)
+		ax1.set_ylim(-0.05, 0.05)
 		ax1.plot(np.real(uvxxavg), 'g-', linewidth=3, label="modeldata")
 		ax1.set_ylabel("Average Power")
 		ax1.set_title("Real")
