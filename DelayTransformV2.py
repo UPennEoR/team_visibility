@@ -132,9 +132,9 @@ def delaytransformv1(data_dir, stokes):
 	#baselines = ['96_112', '96_105', '64_97', '43_64', '97_104', '65_88', '65_72', '72_104', '10_80', '10_88', '43_105', '80_112']
 	# baselines = ['9_105', '22_72', '81_112', '65_89'] #Up1Left1; oneout
 	#baselines = ['53_104', '31_96'] #Up1Left1; oneout (must take comp.conj)
-	baselines = ['20_22'] #Up1Left1 ; allin
+	#baselines = ['20_22'] #Up1Left1 ; allin
 	#baselines = ['9_53', '20_31', '81_89'] #Up1Left1 ; allin (must take comp.conj)
-
+	baselines = ['72_112', '80_104']
 	for antstr in baselines:
 		ant_i, ant_j = map(int, antstr.split('_'))
 		pair = (ant_i, ant_j)
