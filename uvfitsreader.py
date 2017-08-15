@@ -331,7 +331,9 @@ def zachtimeavgreader(data_dir):
 	uvyxdatalist = np.empty((61, 1024), dtype=np.complex128)
 	uvyydatalist = np.empty((61, 1024), dtype=np.complex128)
 	for i, element in antpairall:
+		print (i)
 		for file in xxdatafiles:
+			print('xx')
 			UV.read_miriad(file)
 			xxdata = UV.get_data(antpairall[i-1])
 			if xxdata.shape != (61, 1024):
