@@ -330,6 +330,7 @@ def zachtimeavgreader(data_dir):
 		UV.read_miriad(uvfits_file)
 		for i, element in antpairall:
 			data = UV.get_data(antpairall[i-1])
+			print (data.shape)
 			xx_data = data[:, :, 0]
 			yy_data = data[:, :, 1]
 			xy_data = data[:, :, 2]
