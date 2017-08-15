@@ -335,7 +335,7 @@ def zachtimeavgreader(data_dir):
 			if xxdata.shape != (61, 1024):
 				pass
 			else:
-				uvxxdatalist += xx_data
+				uvxxdatalist += xxdata
 			uvxxtotal= np.sum(uvxxdatalist, axis=0)
 			uvxxavg = uvxxtotal/n_avg
 			ax1 = plt.subplot(211)
