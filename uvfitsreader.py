@@ -317,7 +317,7 @@ def zachtimeavgreader(data_dir):
 		pass
 	else:
 		os.makedirs("/data4/paper/rkb/zachtimeavgreaderstorage/")
-	datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
+	datafiles = sorted(glob.glob(''.join([data_dir, '*'])))
 	antpairfile = datafiles[0]
 	UV.read_uvfits(antpairfile)
 	antpairall = UV.get_antpairs()
