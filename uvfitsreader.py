@@ -317,29 +317,27 @@ def zachtimeavgreader(data_dir):
 		pass
 	else:
 		os.makedirs("/data4/paper/rkb/zachtimeavgreaderstorage/")
-	datafiles = sorted(glob.glob(''.join([data_dir, '*'])))
-	antpairfile = datafiles[0]
+	xxdatafiles = sorted(glob.glob(''.join([data_dir, '*.xx'])))
+	xydatafiles = sorted(glob.glob(''.join([data_dir, '*.xy'])))
+	yydatafiles = sorted(glob.glob(''.join([data_dir, '*.yy'])))
+	yxdatafiles = sorted(glob.glob(''.join([data_dir, '*.yx'])))
+	antpairfile = xxdatafiles[0]
 	UV.read_miriad(antpairfile)
 	antpairall = UV.get_antpairs()
+	n_avg = len(xxdatafiles)*61
 	avg = 0
-	uvdatafiles = sorted(
-		glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
-	uvxxdatalist = np.empty((56, 1024), dtype=np.complex128)
-	uvyydatalist = np.empty((56, 1024), dtype=np.complex128)
-	for uvfits_file in datafiles:
+	uvxxdatalist = np.empty((61, 1024), dtype=np.complex128)
+	uvyydatalist = np.empty((61, 1024), dtype=np.complex128)
+	for file in xxdatafiles:
 		UV.read_miriad(uvfits_file)
 		for i, element in antpairall:
-			data = UV.get_data(antpairall[i-1])
-			print (data.shape)
-			xx_data = data[:, :, 0]
-			yy_data = data[:, :, 1]
-			xy_data = data[:, :, 2]
-			yx_data = data[:, :, 3]
-			if xx_data.shape != (56, 1024, 28):
+			xxdata = UV.get_data(antpairall[i-1])
+			print (xxdata.shape)
+			if xx_data.shape != (61, 1024):
 				pass
 			else:
 				uvxxdatalist += xx_data
-			if yy_data.shape != (56, 1024, 28):
+			if yy_data.shape != (61, 1024):
 				pass
 			else:
 				uvyydatalist += yy_data
