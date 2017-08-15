@@ -412,8 +412,8 @@ def zachtimeavgreader(data_dir):
 			ax2.legend()
 			plt.tight_layout()
 
-			fig = plt.gcf()
-			fig.suptitle("Zach Model Visibility Avg over Time, {}".format(antpairall[i-1]))
+		fig = plt.gcf()
+		fig.suptitle("Zach Model Visibility Avg over Time, {}".format(antpairall[i-1]))
 			# uvdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.vis.uvfits'])))
 			# for uvfits_file in datafiles:
 			# 	UV.read_uvfits(uvfits_file)
@@ -423,8 +423,8 @@ def zachtimeavgreader(data_dir):
 			# 	xy_data = data[:, :, 2]
 			# 	yx_data = data[:, :, 3]
 			# 	stokesI = xx_data-yy_data
-			plt.savefig("/data4/paper/rkb/zachtimeavgreaderstorage/{}.png".format(antpairall[i-1]))
-			plt.clf()
+		plt.savefig("/data4/paper/rkb/zachtimeavgreaderstorage/{}.png".format(antpairall[i-1]))
+		plt.clf()
 
 def uvtimeavgreader2(data_dir):
 	if os.path.isdir("/data4/paper/rkb/uvreader2storage/"):
