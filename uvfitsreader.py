@@ -241,8 +241,7 @@ def uvtimeavgreader(data_dir):
 	for i, element in enumerate(baselineiterator):
 		ax1 = plt.subplot(211)
 		ax1.plot(np.real(xxavg[:, i]))
-		for uvfits_file in datafiles:
-			UV.read_uvfits(uvfits_file)
+		UV.read_uvfits(datafiles)
 		data = UV.get_data(antpairall[i-1])
 		xx_data = data[:, :, 0]
 
@@ -330,10 +329,10 @@ def zachtimeavgreader(data_dir):
 	uvxydatalist = np.empty((61, 1024), dtype=np.complex128)
 	uvyxdatalist = np.empty((61, 1024), dtype=np.complex128)
 	uvyydatalist = np.empty((61, 1024), dtype=np.complex128)
+	for file in xxdatafiles:
+		UV.read_miriad(file)
 	for i, element in antpairall:
 		print (i)
-		for file in xxdatafiles:
-			UV.read_miriad(file)
 			print('2')
 			xxdata = UV.get_data(antpairall[i-1])
 			print('3')
