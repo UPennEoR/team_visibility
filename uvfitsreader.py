@@ -319,7 +319,7 @@ def zachtimeavgreader(data_dir):
 		os.makedirs("/data4/paper/rkb/zachtimeavgreaderstorage/")
 	datafiles = sorted(glob.glob(''.join([data_dir, '*'])))
 	antpairfile = datafiles[0]
-	UV.read_uvfits(antpairfile)
+	UV.read_miriad(antpairfile)
 	antpairall = UV.get_antpairs()
 	avg = 0
 	uvdatafiles = sorted(
@@ -327,7 +327,7 @@ def zachtimeavgreader(data_dir):
 	uvxxdatalist = np.empty((56, 1024), dtype=np.complex128)
 	uvyydatalist = np.empty((56, 1024), dtype=np.complex128)
 	for uvfits_file in datafiles:
-		UV.read_uvfits(uvfits_file)
+		UV.read_miriad(uvfits_file)
 	for i in antpairall:
 		data = UV.get_data(antpairall[i-1])
 		xx_data = data[:, :, 0]
