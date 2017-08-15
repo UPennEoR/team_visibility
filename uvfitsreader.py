@@ -328,7 +328,7 @@ def zachtimeavgreader(data_dir):
 	uvyydatalist = np.empty((56, 1024), dtype=np.complex128)
 	for uvfits_file in datafiles:
 		UV.read_miriad(uvfits_file)
-		for i in antpairall:
+		for i, element in antpairall:
 			data = UV.get_data(antpairall[i-1])
 			xx_data = data[:, :, 0]
 			yy_data = data[:, :, 1]
