@@ -333,13 +333,16 @@ def zachtimeavgreader(data_dir):
 	for i, element in antpairall:
 		print (i)
 		for file in xxdatafiles:
-			print('xx')
+			print('1')
 			UV.read_miriad(file)
+			print('2')
 			xxdata = UV.get_data(antpairall[i-1])
+			print('3')
 			if xxdata.shape != (61, 1024):
 				pass
 			else:
 				uvxxdatalist += xxdata
+			print('4')
 		uvxxtotal= np.sum(uvxxdatalist, axis=0)
 		uvxxavg = uvxxtotal/n_avg
 		ax1 = plt.subplot(421)
