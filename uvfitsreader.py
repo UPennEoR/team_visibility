@@ -340,19 +340,19 @@ def zachtimeavgreader(data_dir):
 				pass
 			else:
 				uvxxdatalist += xxdata
-			uvxxtotal= np.sum(uvxxdatalist, axis=0)
-			uvxxavg = uvxxtotal/n_avg
-			ax1 = plt.subplot(421)
-			ax1.plot(np.real(uvxxavg), 'g-', linewidth=3, label="modeldata")
-			ax1.set_ylabel("Average Power")
-			ax1.set_title("Real XX")
-			ax2 = plt.subplot(422)
-			ax2.plot(np.imag(uvxxavg), 'g-', linewidth=3, label="modeldata")
-			ax2.set_xlabel("Frequency (MHz)")
-			ax1.set_ylabel("Average Power")
-			ax2.set_title("Imaginary XX")
-			ax2.legend()
-			plt.tight_layout()
+		uvxxtotal= np.sum(uvxxdatalist, axis=0)
+		uvxxavg = uvxxtotal/n_avg
+		ax1 = plt.subplot(421)
+		ax1.plot(np.real(uvxxavg), 'g-', linewidth=3, label="modeldata")
+		ax1.set_ylabel("Average Power")
+		ax1.set_title("Real XX")
+		ax2 = plt.subplot(422)
+		ax2.plot(np.imag(uvxxavg), 'g-', linewidth=3, label="modeldata")
+		ax2.set_xlabel("Frequency (MHz)")
+		ax1.set_ylabel("Average Power")
+		ax2.set_title("Imaginary XX")
+		ax2.legend()
+		plt.tight_layout()
 		for file in xydatafiles:
 			UV.read_miriad(file)
 			xydata = UV.get_data(antpairall[i-1])
@@ -360,19 +360,19 @@ def zachtimeavgreader(data_dir):
 				pass
 			else:
 				uvxxdatalist += xydata
-			uvxytotal= np.sum(uvxydatalist, axis=0)
-			uvxyavg = uvxxtotal/n_avg
-			ax1 = plt.subplot(423)
-			ax1.plot(np.real(uvxyavg), 'g-', linewidth=3, label="modeldata")
-			ax1.set_ylabel("Average Power")
-			ax1.set_title("Real XY")
-			ax2 = plt.subplot(424)
-			ax2.plot(np.imag(uvxyavg), 'g-', linewidth=3, label="modeldata")
-			ax2.set_xlabel("Frequency (MHz)")
-			ax1.set_ylabel("Average Power")
-			ax2.set_title("Imaginary XY")
-			ax2.legend()
-			plt.tight_layout()
+		uvxytotal= np.sum(uvxydatalist, axis=0)
+		uvxyavg = uvxxtotal/n_avg
+		ax1 = plt.subplot(423)
+		ax1.plot(np.real(uvxyavg), 'g-', linewidth=3, label="modeldata")
+		ax1.set_ylabel("Average Power")
+		ax1.set_title("Real XY")
+		ax2 = plt.subplot(424)
+		ax2.plot(np.imag(uvxyavg), 'g-', linewidth=3, label="modeldata")
+		ax2.set_xlabel("Frequency (MHz)")
+		ax1.set_ylabel("Average Power")
+		ax2.set_title("Imaginary XY")
+		ax2.legend()
+		plt.tight_layout()
 		for file in yxdatafiles:
 			UV.read_miriad(file)
 			yxdata = UV.get_data(antpairall[i-1])
@@ -380,19 +380,19 @@ def zachtimeavgreader(data_dir):
 				pass
 			else:
 				uvyxdatalist += yxdata
-			uvyxtotal= np.sum(uvyxdatalist, axis=0)
-			uvyxavg = uvyxtotal/n_avg
-			ax1 = plt.subplot(425)
-			ax1.plot(np.real(uvyxavg), 'g-', linewidth=3, label="modeldata")
-			ax1.set_ylabel("Average Power")
-			ax1.set_title("Real YX")
-			ax2 = plt.subplot(426)
-			ax2.plot(np.imag(uvyxavg), 'g-', linewidth=3, label="modeldata")
-			ax2.set_xlabel("Frequency (MHz)")
-			ax1.set_ylabel("Average Power")
-			ax2.set_title("Imaginary YX")
-			ax2.legend()
-			plt.tight_layout()
+		uvyxtotal= np.sum(uvyxdatalist, axis=0)
+		uvyxavg = uvyxtotal/n_avg
+		ax1 = plt.subplot(425)
+		ax1.plot(np.real(uvyxavg), 'g-', linewidth=3, label="modeldata")
+		ax1.set_ylabel("Average Power")
+		ax1.set_title("Real YX")
+		ax2 = plt.subplot(426)
+		ax2.plot(np.imag(uvyxavg), 'g-', linewidth=3, label="modeldata")
+		ax2.set_xlabel("Frequency (MHz)")
+		ax1.set_ylabel("Average Power")
+		ax2.set_title("Imaginary YX")
+		ax2.legend()
+		plt.tight_layout()
 		for file in yydatafiles:
 			UV.read_miriad(file)
 			yydata = UV.get_data(antpairall[i-1])
@@ -400,19 +400,19 @@ def zachtimeavgreader(data_dir):
 				pass
 			else:
 				uvyydatalist += yxdata
-			uvyytotal= np.sum(uvyydatalist, axis=0)
-			uvyyavg = uvyytotal/n_avg
-			ax1 = plt.subplot(427)
-			ax1.plot(np.real(uvyyavg), 'g-', linewidth=3, label="modeldata")
-			ax1.set_ylabel("Average Power")
-			ax1.set_title("Real YY")
-			ax2 = plt.subplot(428)
-			ax2.plot(np.imag(uvyyavg), 'g-', linewidth=3, label="modeldata")
-			ax2.set_xlabel("Frequency (MHz)")
-			ax1.set_ylabel("Average Power")
-			ax2.set_title("Imaginary YY")
-			ax2.legend()
-			plt.tight_layout()
+		uvyytotal= np.sum(uvyydatalist, axis=0)
+		uvyyavg = uvyytotal/n_avg
+		ax1 = plt.subplot(427)
+		ax1.plot(np.real(uvyyavg), 'g-', linewidth=3, label="modeldata")
+		ax1.set_ylabel("Average Power")
+		ax1.set_title("Real YY")
+		ax2 = plt.subplot(428)
+		ax2.plot(np.imag(uvyyavg), 'g-', linewidth=3, label="modeldata")
+		ax2.set_xlabel("Frequency (MHz)")
+		ax1.set_ylabel("Average Power")
+		ax2.set_title("Imaginary YY")
+		ax2.legend()
+		plt.tight_layout()
 
 		fig = plt.gcf()
 		fig.suptitle("Zach Model Visibility Avg over Time, {}".format(antpairall[i-1]))
