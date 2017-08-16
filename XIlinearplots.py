@@ -47,7 +47,7 @@ def calculate_baseline(antennae, pair):
     ps = (pair[0],pair[1],"%.2f" % slope)
     return "%.1f" % baseline,ps
 
-ex_ants=[]
+ex_ants=[72, 81]
 antennae = cal.prms['antpos_ideal']
 baselines = {}
 
