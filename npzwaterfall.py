@@ -142,11 +142,11 @@ for i in range(len(xx_data)):
             avgvis_dict['%s' %(antstr)]['xy_imag'] = np.zeros((vis_xx.shape[1]))
 
         for it in range(vis_xx.shape[0]):
-            avgvis_dict['%s' %(antstr)]['xx_real'] = np.dstack(vis_xx_real[it,:], avgvis_dict)
-            avgvis_dict['%s' %(antstr)]['xx_imag'] = np.dstack(vis_xx_imag[it,:], avgvis_dict)
-            avgvis_dict['%s' %(antstr)]['yy_real'] = np.dstack(vis_yy_real[it,:], avgvis_dict)
-            avgvis_dict['%s' %(antstr)]['yy_imag'] = np.dstack(vis_yy_imag[it,:], avgvis_dict)
-            avgvis_dict['%s' %(antstr)]['yx_real'] = np.dstack(vis_yx_real[it,:], avgvis_dict)
+            avgvis_dict['%s' %(antstr)]['xx_real'] = np.dstack((avgvis_dict, vis_xx_real[it,:]))
+            avgvis_dict['%s' %(antstr)]['xx_imag'] = np.dstack((avgvis_dict, vis_xx_imag[it,:]))
+            avgvis_dict['%s' %(antstr)]['yy_real'] = np.dstack((avgvis_dict, vis_yy_real[it,:]))
+            avgvis_dict['%s' %(antstr)]['yy_imag'] = np.dstack((avgvis_dict, vis_yy_imag[it,:]))
+            avgvis_dict['%s' %(antstr)]['yx_real'] = np.dstack((avgvis_dict, vis_yx_real[it,:]))
             avgvis_dict['%s' %(antstr)]['yx_imag'] = np.dstack(vis_yx_imag[it,:], avgvis_dict)
             avgvis_dict['%s' %(antstr)]['xy_real'] = np.dstack(vis_xy_real[it,:], avgvis_dict)
             avgvis_dict['%s' %(antstr)]['xy_imag'] = np.dstack(vis_xy_imag[it,:], avgvis_dict)
