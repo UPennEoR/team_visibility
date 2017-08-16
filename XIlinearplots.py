@@ -128,27 +128,27 @@ for iq,ibs in enumerate(keys):
 
 
             ax11=fig.add_subplot(411)
-            ax11.plot(xr1,tvis_i.real , alpha=0.75, linewidth = 4 , linestyle = '-.')
+            ax11.plot(xr1,100*tvis_i.real , alpha=0.75, linewidth = 4 , linestyle = '-.')
             ax11.yaxis.set_label_position("right")
             ax11.yaxis.tick_right()
             ax11.set_ylabel('Average power',fontsize = 8)
            
 
             ax22=fig.add_subplot(412)
-            ax22.plot(xr1,tvis_q.real , alpha=0.75, linewidth = 4, linestyle = '-.')
+            ax22.plot(xr1,100*tvis_q.real , alpha=0.75, linewidth = 4, linestyle = '-.')
             ax22.yaxis.set_label_position("right")
             ax22.yaxis.tick_right()
             ax22.set_ylabel('Average power',fontsize = 8)
             
 
             ax33=fig.add_subplot(413)
-            ax33.plot(xr1,tvis_u.real , alpha=0.75, linewidth = 4, linestyle = '-.')
+            ax33.plot(xr1,100*tvis_u.real , alpha=0.75, linewidth = 4, linestyle = '-.')
             ax33.yaxis.set_label_position("right")
             ax33.yaxis.tick_right()
             ax33.set_ylabel('Average power',fontsize = 8)
 
             ax44=fig.add_subplot(414)
-            ax44.plot(xr1,tvis_v.real , alpha=0.75, linewidth = 4, linestyle = '-.')
+            ax44.plot(xr1,100*tvis_v.real , alpha=0.75, linewidth = 4, linestyle = '-.')
             ax44.yaxis.set_label_position("right")
             ax44.yaxis.tick_right()
             ax44.set_ylabel('Average power',fontsize = 8)
@@ -172,7 +172,7 @@ for iq,ibs in enumerate(keys):
 
             limsi = np.log10(vis_i) 
             ax1 = fig.add_subplot(411,sharex=ax11,frameon=False)
-            ax1.plot(xr,100*vis_i,alpha=0.6)
+            ax1.plot(xr,vis_i,alpha=0.6)
             ax1.set_title('Vis xx bs:%s m:%s '%(ibs , q),fontsize = 10)
             ax1.set_xlabel('Frequency (MHz)',fontsize = 8)
             ax1.set_ylabel('Average power',fontsize = 8)
@@ -180,7 +180,7 @@ for iq,ibs in enumerate(keys):
 
             limsq = np.log10(vis_q) 
             ax2 = fig.add_subplot(412,sharex=ax22,frameon=False)
-            ax2.plot(xr,100*vis_q,alpha=0.6)
+            ax2.plot(xr,vis_q,alpha=0.6)
             ax2.set_title('Vis xy bs:%s m:%s '%(ibs , q),fontsize = 10)
             ax2.set_xlabel('Frequency (MHz)',fontsize = 8)
             ax2.set_ylabel('Average power',fontsize = 8)
@@ -188,7 +188,7 @@ for iq,ibs in enumerate(keys):
 
             limsu = np.log10(vis_u)
             ax3 = fig.add_subplot(413,sharex=ax33,frameon=False)
-            ax3.plot(xr,100*vis_u,alpha=0.6)
+            ax3.plot(xr,vis_u,alpha=0.6)
             ax3.set_title('Vis yx bs:%s m:%s '%(ibs , q),fontsize = 10)
             ax3.set_xlabel('Frequency (MHz)',fontsize = 8)
             ax3.set_ylabel('Average power',fontsize = 8)
@@ -196,7 +196,7 @@ for iq,ibs in enumerate(keys):
 
             limsv = np.log10(vis_v)
             ax4 = fig.add_subplot(414,sharex=ax44,frameon=False)
-            ax4.plot(xr,100*vis_v,alpha=0.6)
+            ax4.plot(xr,vis_v,alpha=0.6)
             ax4.set_title('Vis yy bs:%s m:%s '%(ibs , q),fontsize = 10)
             ax4.set_xlabel('Frequency (MHz)',fontsize = 8)
             ax4.set_ylabel('Average power',fontsize = 8)
