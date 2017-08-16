@@ -165,11 +165,14 @@ for iq,ibs in enumerate(keys):
             qwerty = qwerty.item()
 
 
-            vis_i = qwerty['{}'.format(antstr1)]['xx_real']
-            vis_q = qwerty['{}'.format(antstr1)]['xy_real']
-            vis_u = qwerty['{}'.format(antstr1)]['yx_real']
-            vis_v = qwerty['{}'.format(antstr1)]['yy_real']
-
+            vis_i = abs(np.vectorize(complex)(qwerty['{}'.format(antstr1)]['xx_real'],
+                                              qwerty['{}'.format(antstr1)]['xx_imag']))
+            vis_q = abs(np.vectorize(complex)(qwerty['{}'.format(antstr1)]['xy_real'],
+                                              qwerty['{}'.format(antstr1)]['xy_imag']))
+            vis_u = abs(np.vectorize(complex)(qwerty['{}'.format(antstr1)]['yx_real'],
+                                              qwerty['{}'.format(antstr1)]['yx_imag']))
+            vis_v = abs(np.vectorize(complex)(qwerty['{}'.format(antstr1)]['yy_real'],
+                                              qwerty['{}'.format(antstr1)]['yy_imag']))
             limsi = np.log10(vis_i) 
             ax1 = fig.add_subplot(411,sharex=ax11,frameon=False)
             ax1.plot(xr,np.log10(vis_i),alpha=0.6)
