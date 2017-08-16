@@ -66,7 +66,7 @@ for antenna_i in antennae:
 
 
 data_dir = '/data4/paper/HERA2015/2457555/PennData/RFI_flag/'
-my_path = '/data4/paper/rkb/NPZstorage/'
+my_path = '/data4/paper/rkb/NPZstorage/waterfall/'
 keys = sorted(baselines) 
 
 times = [3,4,5]

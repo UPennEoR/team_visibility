@@ -213,5 +213,5 @@ for iq,ibs in enumerate(keys):
                 label='<V>')
         plt.legend(handles=[blue_line,orange_line,z_line],loc='upper center', bbox_to_anchor=(0.5, -0.25), ncol=3)
         plt.tight_layout()
-        plt.savefig('/data4/paper/rkb/xiimagstorage/2457755_RFIraw/2457755.RFIraw.avgvis_{}_{}.png'.format(ibs,q))
+        plt.savefig('/data4/paper/rkb/xiimagstorage/2457755_RFIraw/waterfall/2457755.RFIraw.avgvis_{}_{}.png'.format(ibs,q))
         plt.close()
