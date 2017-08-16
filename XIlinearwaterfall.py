@@ -125,7 +125,7 @@ for iq,ibs in enumerate(keys):
             tvis_q = np.abs(xi[iq,1,w,:])
             tvis_u = np.abs(xi[iq,2,w,:])
             tvis_v = np.abs(xi[iq,3,w,:])
-
+            print(tvis_i.real.shape)
 
             ax11=fig.add_subplot(411)
             ax11.imshow(np.log10(tvis_i.real) , alpha=0.75, cmap="viridis")
