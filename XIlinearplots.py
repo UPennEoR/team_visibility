@@ -121,10 +121,10 @@ for iq,ibs in enumerate(keys):
 
         for w in phi:
             
-            tvis_i = xi[iq,0,w,:]
-            tvis_q = xi[iq,1,w,:]
-            tvis_u = xi[iq,2,w,:]
-            tvis_v = xi[iq,3,w,:]
+            tvis_i = np.abs(xi[iq,0,w,:])
+            tvis_q = np.abs(xi[iq,1,w,:])
+            tvis_u = np.abs(xi[iq,2,w,:])
+            tvis_v = np.abs(xi[iq,3,w,:])
 
 
             ax11=fig.add_subplot(411)
