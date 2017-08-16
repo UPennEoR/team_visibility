@@ -179,7 +179,7 @@ for iq,ibs in enumerate(keys):
             ax1.set_title('Vis xx bs:%s m:%s '%(ibs , q),fontsize = 10)
             ax1.set_xlabel('Frequency (MHz)',fontsize = 8)
             ax1.set_ylabel('Average power',fontsize = 8)
-            ax1.set_ylim(min(limsi[limsi != -np.inf])/2.,max(np.log10(vis_i)))
+           # ax1.set_ylim(min(limsi[limsi != -np.inf])/2.,max(np.log10(vis_i)))
 
             limsq = np.log10(vis_q) 
             ax2 = fig.add_subplot(412,sharex=ax22,frameon=False)
@@ -187,7 +187,7 @@ for iq,ibs in enumerate(keys):
             ax2.set_title('Vis xy bs:%s m:%s '%(ibs , q),fontsize = 10)
             ax2.set_xlabel('Frequency (MHz)',fontsize = 8)
             ax2.set_ylabel('Average power',fontsize = 8)
-            ax2.set_ylim(min(limsq[limsq != -np.inf])/2.,max(np.log10(vis_q)))
+            #ax2.set_ylim(min(limsq[limsq != -np.inf])/2.,max(np.log10(vis_q)))
 
             limsu = np.log10(vis_u)
             ax3 = fig.add_subplot(413,sharex=ax33,frameon=False)
@@ -195,7 +195,7 @@ for iq,ibs in enumerate(keys):
             ax3.set_title('Vis yx bs:%s m:%s '%(ibs , q),fontsize = 10)
             ax3.set_xlabel('Frequency (MHz)',fontsize = 8)
             ax3.set_ylabel('Average power',fontsize = 8)
-            ax3.set_ylim(min(limsu[limsu != -np.inf])/2.,max(np.log10(vis_u)))
+          #  ax3.set_ylim(min(limsu[limsu != -np.inf])/2.,max(np.log10(vis_u)))
 
             limsv = np.log10(vis_v)
             ax4 = fig.add_subplot(414,sharex=ax44,frameon=False)
@@ -203,7 +203,7 @@ for iq,ibs in enumerate(keys):
             ax4.set_title('Vis yy bs:%s m:%s '%(ibs , q),fontsize = 10)
             ax4.set_xlabel('Frequency (MHz)',fontsize = 8)
             ax4.set_ylabel('Average power',fontsize = 8)
-            ax4.set_ylim(min(limsv[limsv != -np.inf])/2.,max(np.log10(vis_v)))
+         #  ax4.set_ylim(min(limsv[limsv != -np.inf])/2.,max(np.log10(vis_v)))
 
 
         blue_line =mlines.Line2D([], [], color='#1f77b4', linestyle='-.',
