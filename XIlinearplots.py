@@ -170,7 +170,7 @@ for iq,ibs in enumerate(keys):
             vis_u = qwerty['{}'.format(antstr1)]['yx_real']
             vis_v = qwerty['{}'.format(antstr1)]['yy_real']
 
-            limsi = np.log10(vis_i) 
+            limsi = 10*np.log10(vis_i) 
             ax1 = fig.add_subplot(411,sharex=ax11,frameon=False)
             ax1.plot(xr,vis_i,alpha=0.6)
             ax1.set_title('Vis xx bs:%s m:%s '%(ibs , q),fontsize = 10)
@@ -178,7 +178,7 @@ for iq,ibs in enumerate(keys):
             ax1.set_ylabel('Average power',fontsize = 8)
             #ax1.set_ylim(min(limsi[limsi != -np.inf])/2.,max(np.log10(vis_i)))
 
-            limsq = np.log10(vis_q) 
+            limsq = 10*np.log10(vis_q) 
             ax2 = fig.add_subplot(412,sharex=ax22,frameon=False)
             ax2.plot(xr,vis_q,alpha=0.6)
             ax2.set_title('Vis xy bs:%s m:%s '%(ibs , q),fontsize = 10)
@@ -186,7 +186,7 @@ for iq,ibs in enumerate(keys):
             ax2.set_ylabel('Average power',fontsize = 8)
             #ax2.set_ylim(min(limsq[limsq != -np.inf])/2.,max(np.log10(vis_q)))
 
-            limsu = np.log10(vis_u)
+            limsu = 10*np.log10(vis_u)
             ax3 = fig.add_subplot(413,sharex=ax33,frameon=False)
             ax3.plot(xr,vis_u,alpha=0.6)
             ax3.set_title('Vis yx bs:%s m:%s '%(ibs , q),fontsize = 10)
@@ -194,7 +194,7 @@ for iq,ibs in enumerate(keys):
             ax3.set_ylabel('Average power',fontsize = 8)
             #ax3.set_ylim(min(limsu[limsu != -np.inf])/2.,max(np.log10(vis_u)))
 
-            limsv = np.log10(vis_v)
+            limsv = 10*np.log10(vis_v)
             ax4 = fig.add_subplot(414,sharex=ax44,frameon=False)
             ax4.plot(xr,vis_v,alpha=0.6)
             ax4.set_title('Vis yy bs:%s m:%s '%(ibs , q),fontsize = 10)
