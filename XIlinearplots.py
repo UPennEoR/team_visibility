@@ -204,7 +204,7 @@ for iq,ibs in enumerate(keys):
             ax4.set_xlabel('Frequency (MHz)',fontsize = 8)
             ax4.set_ylabel('Average power',fontsize = 8)
          #  ax4.set_ylim(min(limsv[limsv != -np.inf])/2.,max(np.log10(vis_v)))
-
+            print (max(np.log10(vis_i)))
 
         blue_line =mlines.Line2D([], [], color='#1f77b4', linestyle='-.',
                    label=r'$\Xi$;$\phi$ = {}$^\circ$'.format(phi[0]*15))
