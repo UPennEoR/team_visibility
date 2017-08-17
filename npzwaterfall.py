@@ -147,7 +147,7 @@ for i in range(len(xx_data)):
             avgvis_dict['%s' %(antstr)]['yy_real'] = np.dstack((avgvis_dict, vis_yy_real[it,:]))
             avgvis_dict['%s' %(antstr)]['yy_imag'] = np.dstack((avgvis_dict, vis_yy_imag[it,:]))
             avgvis_dict['%s' %(antstr)]['yx_real'] = np.dstack((avgvis_dict, vis_yx_real[it,:]))
-            avgvis_dict['%s' %(antstr)]['yx_imag'] = np.dstack(vis_yx_imag[it,:], avgvis_dict)
+            avgvis_dict['%s' %(antstr)]['yx_imag'] = np.dstack((avgvis_dict, vis_yx_imag[it,:]))
             avgvis_dict['%s' %(antstr)]['xy_real'] = np.dstack(vis_xy_real[it,:], avgvis_dict)
             avgvis_dict['%s' %(antstr)]['xy_imag'] = np.dstack(vis_xy_imag[it,:], avgvis_dict)
 
