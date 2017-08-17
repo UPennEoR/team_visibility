@@ -24,4 +24,4 @@ for file in datafiles:
 
 	    # apply them to the data
 	    print (d.shape)
-	    flagged_data = np.ma.masked_where(f == 1, d)
+	    flagged_data = np.ma.masked_where(f == 0.5, d)
