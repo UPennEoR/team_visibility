@@ -4,9 +4,10 @@ import glob
 uvd = UVData()
 
 
-data_dir = glob.glob("/data4/paper/HERA2015/2457555/PennData/RFI_flag2/")
+data_dir = "/data4/paper/HERA2015/2457555/PennData/RFI_flag2/"
+datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.HH.uvcOR'])))
 
-for file in data_dir:
+for file in datafiles:
 	print(file)
 	uvd.read_miriad(file)
 
