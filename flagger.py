@@ -7,6 +7,7 @@ uvd = UVData()
 data_dir = glob.glob("/data4/paper/HERA2015/2457555/PennData/RFI_flag2/")
 
 for file in data_dir:
+	print(file)
 	uvd.read_miriad(file)
 
 # iterate over all baselines
