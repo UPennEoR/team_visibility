@@ -65,7 +65,7 @@ for antenna_i in antennae:
             baselines[baseline].append(ps)
 
 
-data_dir = '/data4/paper/HERA2015/2457555/PennData/RFI_flag/'
+data_dir = '/data4/paper/HERA2015/2457555/PennData/RFI_flag2/'
 my_path = '/data4/paper/rkb/NPZstorage/round2/'
 keys = sorted(baselines) 
 
