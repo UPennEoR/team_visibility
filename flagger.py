@@ -5,7 +5,7 @@ uvd = UVData()
 
 
 data_dir = "/data4/paper/HERA2015/2457555/PennData/RFI_flag2/"
-datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvc.HH.uvcOR'])))
+datafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.HH.uvcOR'])))
 
 for file in datafiles:
 	print(file)
