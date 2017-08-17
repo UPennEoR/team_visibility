@@ -23,4 +23,5 @@ for file in datafiles:
 	    f = uvd.flag_array[ind1, 0, :, ipol]
 
 	    # apply them to the data
+	    print (f.shape)
 	    flagged_data = np.ma.masked_where(f == 1, d)
