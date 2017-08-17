@@ -1,12 +1,14 @@
 import numpy as np
 from pyuvdata import UVData
 import glob
-
 uvd = UVData()
-uvd.read_miriad('zen.2457555.12345.xx.HH.uvc')
+
+
 data_dir = glob.glob("/data4/paper/HERA2015/2457555/PennData/4polminV_v2")
 
 for file in data_dir:
+uvd.read_miriad('file')
+
 # iterate over all baselines
 # "key" is the baseline pair, saved as (ant1, ant2, pol)
 #   for instance, (89, 96, 'XX')
