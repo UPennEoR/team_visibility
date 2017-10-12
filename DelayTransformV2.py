@@ -8,7 +8,7 @@ import imageio
 import shutil
 import os
 import aipy
-from VIQUVaveraged_over_time import avgfreqcalc
+from XXYYAvgFreqCalc import avgfreqcalc
 import hsa7458_v001 as cal
 
 def calculate_baseline(pair):
@@ -121,7 +121,7 @@ def delaytransformlooped(data_dir):
 	for filename in images:
 		gif.append(imageio.imread(filename))
 	imageio.mimsave('/data4/paper/rkb/gifstorage/delaygif.gif', gif,fps=1)
-def delaytransformv1(data_dir, stokes):
+def delaytransformv1(data_dir, visibility):
 	if os.path.isdir("/data4/paper/rkb/delaygifstorage/"):
 		pass
 	else:
@@ -135,11 +135,11 @@ def delaytransformv1(data_dir, stokes):
 	#baselines = ['20_22'] #Up1Left1 ; allin
 	#baselines = ['9_53', '20_31', '81_89'] #Up1Left1 ; allin (must take comp.conj)
 	#baselines = ['9_20', '20_89'] #EW allin
-	baselines = ['20_31', '9_53' '81_89'] #Up1Left1; allin
+	baselines = ['20_31', '9_53', '20_31'] #Dwn1Right1; allin
 	for antstr in baselines:
 		ant_i, ant_j = map(int, antstr.split('_'))
 		pair = (ant_i, ant_j)
-		data, channels = avgfreqcalc(data_dir, antstr, stokes)
+		data, channels = avgfreqcalc(data_dir, antstr, visibility)
 		window = aipy.dsp.gen_window(channels, window="blackman-harris")
 		d_transform = np.fft.fftshift(np.fft.ifft(np.fft.fftshift(data * window)))
 		delays = np.fft.fftshift(np.fft.fftfreq(channels, .1/channels)) # fftfreq takes in (nchan, chan_spacing)
@@ -156,17 +156,18 @@ def delaytransformv1(data_dir, stokes):
 		ax.axvline(x=-tauh, linestyle='--', color='0.5')
 		ax.axvline(x=tauh, linestyle='--', color='0.5')
 		ax.set_xlim(-400, 400)
+		ax.set_ylim(-2, 2)
 		ax.set_xlabel('Delay [bins]')
 		ax.set_ylabel('log10(abs(V_I)')
 		ax.set_title('Delay Transform'+antstr+stokes)
 		plt.legend()
-		plt.savefig("/data4/paper/rkb/delaygifstorage/"+'delaytransform'+'{} {}.png'.format(antstr, stokes))
+		plt.savefig("/data4/paper/rkb/delaygifstorage/"+'delaytransformDwn1Rght1Allin'+'{} {}.png'.format(antstr, stokes))
 		plt.clf()
-	images = glob.glob(('/data4/paper/rkb/delaygifstorage/*.png').format(stokes))
-	gif = []
-	for filename in images:
-		gif.append(imageio.imread(filename))
-	imageio.mimsave('/data4/paper/rkb/delayv1lined.gif', gif,fps=1)
+	# images = glob.glob(('/data4/paper/rkb/delaygifstorage/*.png').format(stokes))
+	# gif = []
+	# for filename in images:
+	# 	gif.append(imageio.imread(filename))
+	# imageio.mimsave('/data4/paper/rkb/delayv1lined.gif', gif,fps=1)
 	# shutil.rmtree('/data4/paper/rkb/delaygifstorage/')
 
 
