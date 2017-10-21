@@ -8,6 +8,9 @@ def ccreator(data_dir):
 	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvc'])))
 	baselines = ['9_20', '20_89', '53_31']
 	xxdatalist2 = np.empty((4032, 1024, 28), dtype=np.complex128)
+	UV.read_miriad(xxdatafiles[0])
+	antpairall= UV.get_antpairs()
+	print(antpairall)
 	for miriad_file in xxdatafiles:
 		UV.read_miriad(miriad_file)
 		xxdatalist = np.empty((56, 1024))
