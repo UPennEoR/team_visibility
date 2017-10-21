@@ -5,7 +5,7 @@ UV = UVData()
 
 def ccreator(data_dir):
 	# zacfiles = sdkfjsdhlksjhf
-	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
+	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvc'])))
 	baselines = ['9_20', '20_89', '53_31']
 	xxdatalist2 = np.empty((4032, 1024, 28), dtype=np.complex128)
 	for miriad_file in xxdatafiles:
