@@ -22,18 +22,20 @@ def ccreator(data_dir):
 			pass
 		else:
 			xxdatalist2 = np.hstack(xxdatalist)
-	c = []
-	f = open("/data4/paper/rkb/Cvals.txt", "w")
-	for i in len(baselines):
-		mult = xxdatalist2[:, :, i] * zacxxdatalist2[:, :, i]
-		square = xxdatalist2[:, :, i] *xxdatalist2[:, :, i]
-		#now, sum it all by collapsing in time, and frequency
-		xxmulttimetotal = np.sum(mult, axis = 0)
-		xxmultcompletetotal = np.sum(xxtimetotal, axis = 0)
-		xxsquaretimetotal = np.sum(square, axis = 0)
-		xxsquarecompletetotal=np.sum(xxsquaretimetotal, axis = 0)
-		#Divide
-		c.append(xxmultcompletetotal/xxsquarecompletetotal)
-		f.write("%s, %s" c[i], baseline[i])
-	f.close()
+			print(xxdatalist2.shape())
+
+	# c = []
+	# f = open("/data4/paper/rkb/Cvals.txt", "w")
+	# for i in len(baselines):
+	# 	mult = xxdatalist2[:, :, i] * zacxxdatalist2[:, :, i]
+	# 	square = xxdatalist2[:, :, i] *xxdatalist2[:, :, i]
+	# 	#now, sum it all by collapsing in time, and frequency
+	# 	xxmulttimetotal = np.sum(mult, axis = 0)
+	# 	xxmultcompletetotal = np.sum(xxtimetotal, axis = 0)
+	# 	xxsquaretimetotal = np.sum(square, axis = 0)
+	# 	xxsquarecompletetotal=np.sum(xxsquaretimetotal, axis = 0)
+	# 	#Divide
+	# 	c.append(xxmultcompletetotal/xxsquarecompletetotal)
+	# 	f.write("%s, %s" c[i], baseline[i])
+	# f.close()
 
