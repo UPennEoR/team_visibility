@@ -6,7 +6,7 @@ UV = UVData()
 def ccreator(data_dir):
 	# zacfiles = sdkfjsdhlksjhf
 	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvc'])))
-	baselines = ['9_20', '20_89', '53_31']
+	baselines = [(9, 20), (20, 89), (53, 31)]
 	xxdatalist2 = np.empty((4032, 1024, 28), dtype=np.complex128)
 	UV.read_miriad(xxdatafiles[0])
 	antpairall= UV.get_antpairs()
