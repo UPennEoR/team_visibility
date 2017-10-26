@@ -21,12 +21,12 @@ def ccreator(data_dir):
 			else:
 				xxdatalist = np.dstack((xxdatalist, xxrealdata))
 				i += 1
-		print(xxdatalist.shape())
+		print(xxdatalist.shape)
 		if xxdatalist.shape != (56, 1024, 28):
 			pass
 		else:
 			xxdatalist2 = np.hstack(xxdatalist)
-		print(xxdatalist2.shape())
+		print(xxdatalist2.shape)
 
 	# c = []
 	# f = open("/data4/paper/rkb/Cvals.txt", "w")
