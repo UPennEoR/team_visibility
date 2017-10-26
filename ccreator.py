@@ -22,7 +22,7 @@ def ccreator(data_dir):
 				xxdatalist = np.dstack((xxdatalist, xxrealdata))
 				i += 1
 		print(xxdatalist.shape())
-		if xxdatalist.shape() != (56, 1024, 28):
+		if xxdatalist.shape != (56, 1024, 28):
 			pass
 		else:
 			xxdatalist2 = np.hstack(xxdatalist)
