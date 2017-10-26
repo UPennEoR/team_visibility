@@ -10,7 +10,6 @@ def ccreator(data_dir):
 	xxdatalist2 = np.empty((4032, 1024, 28), dtype=np.complex128)
 	UV.read_miriad(xxdatafiles[0])
 	antpairall= UV.get_antpairs()
-	print(antpairall)
 	for miriad_file in xxdatafiles:
 		UV.read_miriad(miriad_file)
 		xxdatalist = np.empty((56, 1024))
@@ -22,11 +21,12 @@ def ccreator(data_dir):
 			else:
 				xxdatalist = np.dstack((xxdatalist, xxrealdata))
 				i += 1
-		if xxdatalist.shape != (56, 1024, 28):
+		print(xxdatalist.shape())
+		if xxdatalist.shape() != (56, 1024, 28):
 			pass
 		else:
 			xxdatalist2 = np.hstack(xxdatalist)
-			print(xxdatalist2.shape())
+		print(xxdatalist2.shape())
 
 	# c = []
 	# f = open("/data4/paper/rkb/Cvals.txt", "w")
