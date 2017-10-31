@@ -20,7 +20,7 @@ def ccreator(data_dir):
 	antpairall= UV.get_antpairs()
 	for miriad_file in xxdatafiles:
 		UV.read_miriad(miriad_file)
-		xxdatalist = np.empty((56, 1024))
+		xxdatalist = np.empty((56, 1024), dtype=np.complex128)
 		i = 0
 		for baseline in baselines:
 			xxrealdata = UV.get_data(baseline)
@@ -35,7 +35,7 @@ def ccreator(data_dir):
 	zacxxdatalist2 = np.empty((56, 1024, 3), dtype=np.complex128)
 	for file in zacxxdatafiles:
 		UV.read_miriad(file)
-		zacxxdatalist = np.empty((56, 1024))
+		zacxxdatalist = np.empty((56, 1024), dtype=np.complex128)
 		for baseline in baselines:
 			xxzacdata = UV.get_data(baseline)
 			if zacxxdatalist.shape == (56, 1024):
