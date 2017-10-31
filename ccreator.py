@@ -24,7 +24,10 @@ def ccreator(data_dir):
 		i = 0
 		for baseline in baselines:
 			xxrealdata = UV.get_data(baseline)
-			xxdatalist = np.dstack((xxdatalist, xxrealdata))
+			if xxdatalist.shape == (56, 1024):
+				xxdatalist += xxrealdata
+			else:
+				xxdatalist = np.dstack((xxdatalist, xxrealdata))
 			i += 1
 		print(xxdatalist.shape)
 		xxdatalist2 += xxdatalist
@@ -35,7 +38,10 @@ def ccreator(data_dir):
 		zacxxdatalist = np.empty((56, 1024))
 		for baseline in baselines:
 			xxzacdata = UV.get_data(baseline)
-			zacxxdatalist = np.dstack((zacxxdatalist, xxzacdata))
+			if zacxxdatalist.shape == (56, 1024):
+				zacxxdatalist += xxzacdata
+			else:
+				zacxxdatalist = np.dstack((zacxxdatalist, xxzacdata))
 		zacxxdatalist2 += zacxxdatalist
 	c = []
 	f = open("/data4/paper/rkb/Cvals.txt", "w")
