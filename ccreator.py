@@ -24,7 +24,7 @@ def ccreator(data_dir):
 		i = 0
 		for baseline in baselines:
 			xxrealdata = UV.get_data(baseline)
-			if i == 1:
+			if i == 0:
 				xxdatalist += xxrealdata
 			else:
 				xxdatalist = np.dstack((xxdatalist, xxrealdata))
@@ -40,7 +40,7 @@ def ccreator(data_dir):
 		i = 0
 		for baseline in baselines:
 			xxzacdata = UV.get_data(baseline)
-			if i == 1:
+			if i == 0:
 				zacxxdatalist += xxzacdata
 			else:
 				zacxxdatalist = np.dstack((zacxxdatalist, xxzacdata))
