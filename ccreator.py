@@ -7,9 +7,9 @@ UV = UVData()
 #instead of stacking them and then collapsing, add as you go. Zach's data isn't aligned 
 #with the actual data.
 
-files = [f for f in os.listdir(visibility_dir) if f[-4:] == '.uvc']
-uv = UVData()
-uv.read_miriad(files)
+# files = [f for f in os.listdir(visibility_dir) if f[-4:] == '.uvc']
+# uv = UVData()
+# uv.read_miriad(files)
 
 def ccreator(data_dir):
 	zacxxdatafiles = sorted(glob.glob(''.join(['/data4/paper/HERA2015/2457458/', 'zen.*.xx.HH.uvc'])))
