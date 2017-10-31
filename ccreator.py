@@ -28,6 +28,7 @@ def ccreator(data_dir):
 				xxdatalist += xxrealdata
 			else:
 				xxdatalist = np.dstack((xxdatalist, xxrealdata))
+			print(i)
 			i += 1
 		print(xxdatalist.shape)
 		xxdatalist2 += xxdatalist
