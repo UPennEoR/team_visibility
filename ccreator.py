@@ -15,7 +15,7 @@ def ccreator(data_dir):
 	zacxxdatafiles = sorted(glob.glob(''.join(['/data4/paper/HERA2015/2457458/', 'zen.*.xx.HH.uvc'])))
 	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvc'])))
 	baselines = [(9, 20), (20, 89), (53, 31)]
-	xxdatalist2 = np.empty((4032, 1024, 3), dtype=np.complex128)
+	xxdatalist2 = np.empty((56, 1024, 3), dtype=np.complex128)
 	UV.read_miriad(xxdatafiles[0])
 	antpairall= UV.get_antpairs()
 	for miriad_file in xxdatafiles:
@@ -29,7 +29,7 @@ def ccreator(data_dir):
 		print(xxdatalist.shape)
 		xxdatalist2 += xxdatalist
 		print(xxdatalist2.shape)
-	zacxxdatalist2 = np.empty((4032, 1024, 3), dtype=np.complex128)
+	zacxxdatalist2 = np.empty((56, 1024, 3), dtype=np.complex128)
 	for file in zacxxdatafiles:
 		UV.read_miriad(file)
 		zacxxdatalist = np.empty((56, 1024))
