@@ -49,6 +49,6 @@ def ccreator(data_dir):
 		xxsquarecompletetotal=np.sum(xxsquaretimetotal, axis = 0)
 		#Divide
 		c.append(xxmultcompletetotal/xxsquarecompletetotal)
-		f.write("%s, %s \n" c[i], baseline[i])
+		f.write("%s, %s \n", c[i], baseline[i])
 	f.close()
 
