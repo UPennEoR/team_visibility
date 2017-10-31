@@ -24,7 +24,7 @@ def ccreator(data_dir):
 		i = 0
 		for baseline in baselines:
 			xxrealdata = UV.get_data(baseline)
-			if xxdatalist.shape == (56, 1024):
+			if i == 1:
 				xxdatalist += xxrealdata
 			else:
 				xxdatalist = np.dstack((xxdatalist, xxrealdata))
@@ -36,12 +36,14 @@ def ccreator(data_dir):
 	for file in zacxxdatafiles:
 		UV.read_miriad(file)
 		zacxxdatalist = np.empty((56, 1024), dtype=np.complex128)
+		i = 0
 		for baseline in baselines:
 			xxzacdata = UV.get_data(baseline)
-			if zacxxdatalist.shape == (56, 1024):
+			if i == 1:
 				zacxxdatalist += xxzacdata
 			else:
 				zacxxdatalist = np.dstack((zacxxdatalist, xxzacdata))
+			i += 1
 		zacxxdatalist2 += zacxxdatalist
 	c = []
 	f = open("/data4/paper/rkb/Cvals.txt", "w")
