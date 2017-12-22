@@ -234,22 +234,23 @@ def miriadtimeavgreader(data_dir):
 	xxavg = xxtotal/n_avg
 	yyavg = yytotal/n_avg
 	baselineiterator = xxavg[0, :]
-	ax1 = plt.subplot(211)
-	ax1.set_ylim(-0.05, 0.05)
-	ax1.plot(np.real(xxavg), 'g-', linewidth=3, label="modeldata")
-	ax1.set_ylabel("Average Power")
-	ax1.set_title("Real")
-	ax2 = plt.subplot(212)
-	ax2.plot(np.real(yyavg))
-	ax2.set_xlabel("Frequency (MHz)")
-	ax1.set_ylabel("Average Power")
-	ax2.set_title("Imaginary")
-	ax2.legend()
-	plt.tight_layout()
-	fig = plt.gcf()
-	fig.suptitle("Visibility Avg over Time, {}".format(antpairall[baseline-1]))
-	plt.savefig("/data4/paper/rkb/uvtimeavgreaderstorage/{}.png".format(antpairall[baseline-1]))
-	plt.clf()
+	for i in baselineiterator:
+		ax1 = plt.subplot(211)
+		ax1.set_ylim(-0.05, 0.05)
+		ax1.plot(np.real(xxavg), 'g-', linewidth=3, label="modeldata")
+		ax1.set_ylabel("Average Power")
+		ax1.set_title("Real")
+		ax2 = plt.subplot(212)
+		ax2.plot(np.real(yyavg))
+		ax2.set_xlabel("Frequency (MHz)")
+		ax1.set_ylabel("Average Power")
+		ax2.set_title("Imaginary")
+		ax2.legend()
+		plt.tight_layout()
+		fig = plt.gcf()
+		fig.suptitle("Visibility Avg over Time, {}".format(antpairall[i-1]))
+		plt.savefig("/data4/paper/rkb/uvtimeavgreaderstorage/{}.png".format(antpairall[i-1]))
+		plt.clf()
 
 def uvtimeavgreader(data_dir):
 	if os.path.isdir("/data4/paper/rkb/uvtimeavgreaderstorage/"):
