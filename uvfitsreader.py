@@ -194,7 +194,8 @@ def miriadtimeavgreader(data_dir):
 		pass
 	else:
 		os.makedirs("/data4/paper/rkb/uvtimeavgreaderstorage/")
-	antpairall = (72,22)
+	# antpairall = (72,22)
+	antpairall = [1]
 	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
 	yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
 	xxdatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
@@ -203,7 +204,7 @@ def miriadtimeavgreader(data_dir):
 		UV.read_miriad(miriad_file)
 		xxdatalist = np.empty((56, 1024))
 		for baseline in antpairall:
-			xxdata = UV.get_data(baseline)
+			xxdata = UV.get_data(72, 22)
 			if xxdata.shape != (56, 1024):
 				pass
 			else:
@@ -216,7 +217,7 @@ def miriadtimeavgreader(data_dir):
 		UV.read_miriad(miriad_file)
 		yydatalist = np.empty((56, 1024))
 		for baseline in antpairall:
-			yydata = UV.get_data(baseline)
+			yydata = UV.get_data(72, 22)
 			if yydata.shape != (56, 1024):
 				pass
 			else:
