@@ -232,6 +232,7 @@ def miriadtimeavgreader(data_dir):
 	n_avg = len(xxdatafiles)*56
 	xxavg = xxtotal/n_avg
 	baselineiterator = xxavg[0, :]
+	ax1 = plt.subplot(112)
 	ax1.set_ylim(-0.05, 0.05)
 	ax1.plot(np.real(xxavg), 'g-', linewidth=3, label="modeldata")
 	ax1.set_ylabel("Average Power")
