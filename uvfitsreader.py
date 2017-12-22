@@ -228,9 +228,11 @@ def miriadtimeavgreader(data_dir):
 			yydatalist2 += yydatalist
 	#collapse in time:
 	xxtotal= np.sum(xxdatalist2, axis=0)
+	yytotal= np.sum(yydatalist2, axis=0)
 	#avg:
 	n_avg = len(xxdatafiles)*56
 	xxavg = xxtotal/n_avg
+	yyavg = yytotal/n_avg
 	baselineiterator = xxavg[0, :]
 	ax1 = plt.subplot(211)
 	ax1.set_ylim(-0.05, 0.05)
