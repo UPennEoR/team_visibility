@@ -232,7 +232,7 @@ def miriadtimeavgreader(data_dir):
 	n_avg = len(xxdatafiles)*56
 	xxavg = xxtotal/n_avg
 	yyavg = yytotal/n_avg
-	print(xx)
+	print(xxavg)
 	baselineiterator = xxavg
 	for i in baselineiterator:
 		ax1 = plt.subplot(211)
