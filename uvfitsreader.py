@@ -236,7 +236,7 @@ def miriadtimeavgreader(data_dir):
 	yyavg = yytotal/n_avg
 	print(xxavg)
 	baselineiterator = xxavg
-	for i in 1:len(baselineiterator):
+	for i in range(1, len(baselineiterator)):
 		ax1 = plt.subplot(211)
 		ax1.set_ylim(-0.05, 0.05)
 		ax1.plot(np.real(xxavg), 'g-', linewidth=3, label="modeldata")
