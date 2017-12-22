@@ -204,7 +204,7 @@ def miriadtimeavgreader(data_dir):
 		UV.read_miriad(miriad_file)
 		xxdatalist = np.empty((56, 1024))
 		for baseline in antpairall:
-			xxdata = UV.get_data(72, 22)
+			xxdata = UV.get_data(22, 72)
 			print(xxdata)
 			if xxdata.shape != (56, 1024):
 				pass
@@ -218,7 +218,7 @@ def miriadtimeavgreader(data_dir):
 		UV.read_miriad(miriad_file)
 		yydatalist = np.empty((56, 1024))
 		for baseline in antpairall:
-			yydata = UV.get_data(72, 22)
+			yydata = UV.get_data(22, 72)
 			if yydata.shape != (56, 1024):
 				pass
 			else:
