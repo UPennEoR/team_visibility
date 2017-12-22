@@ -188,6 +188,66 @@ def miriadplotter(data_dir):
 		plt.savefig("/data4/paper/rkb/miriadplotter/{}.png".format(antpairall[i-1]))
 		plt.clf()
 
+
+def miriadtimeavgreader(data_dir):
+	if os.path.isdir("/data4/paper/rkb/uvtimeavgreaderstorage/"):
+		pass
+	else:
+		os.makedirs("/data4/paper/rkb/uvtimeavgreaderstorage/")
+	antpairall = ['72_22', '105_9', '53_104', '31_96', '89_65', '9_53', '22_20', '20_31', '81_89']
+	avg = 0
+	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
+	yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
+	xxdatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
+	yydatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
+	for miriad_file in xxdatafiles:
+		UV.read_miriad(miriad_file)
+		xxdatalist = np.empty((56, 1024))
+		for baseline in antpairall:
+			xxdata = UV.get_data(baseline)
+			if xxdata.shape != (56, 1024):
+				pass
+			else:
+				xxdatalist = np.dstack((xxdatalist, xxdata))
+		if xxdatalist.shape != (56, 1024, 28):
+			pass
+		else:
+			xxdatalist2 += xxdatalist
+	for miriad_file in yydatafiles:
+		UV.read_miriad(miriad_file)
+		yydatalist = np.empty((56, 1024))
+		for baseline in antpairall:
+			yydata = UV.get_data(baseline)
+			if yydata.shape != (56, 1024):
+				pass
+			else:
+				yydatalist = np.dstack((yydatalist, yydata))
+		if yydatalist.shape != (56, 1024, 28):
+			pass
+		else:
+			yydatalist2 += yydatalist
+	#collapse in time:
+	xxtotal= np.sum(xxdatalist2, axis=0)
+	#avg:
+	n_avg = len(xxdatafiles)*56
+	xxavg = xxtotal/n_avg
+	baselineiterator = xxavg[0, :]
+	ax1.set_ylim(-0.05, 0.05)
+	ax1.plot(np.real(xxavg), 'g-', linewidth=3, label="modeldata")
+	ax1.set_ylabel("Average Power")
+	ax1.set_title("Real")
+	ax2 = plt.subplot(212)
+	ax2.plot(np.real(yyavg[:, i]))
+	ax2.set_xlabel("Frequency (MHz)")
+	ax1.set_ylabel("Average Power")
+	ax2.set_title("Imaginary")
+	ax2.legend()
+	plt.tight_layout()
+	fig = plt.gcf()
+	fig.suptitle("Visibility Avg over Time, {}".format(antpairall[i-1]))
+	plt.savefig("/data4/paper/rkb/uvtimeavgreaderstorage/{}.png".format(antpairall[i-1]))
+	plt.clf()
+
 def uvtimeavgreader(data_dir):
 	if os.path.isdir("/data4/paper/rkb/uvtimeavgreaderstorage/"):
 		pass
