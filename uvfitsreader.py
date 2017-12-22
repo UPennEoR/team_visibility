@@ -246,7 +246,6 @@ def miriadtimeavgreader(data_dir):
 		ax2.set_xlabel("Frequency (MHz)")
 		ax1.set_ylabel("Average Power")
 		ax2.set_title("Imaginary")
-		ax2.legend()
 		plt.tight_layout()
 		fig = plt.gcf()
 		fig.suptitle("Visibility Avg over Time, {}".format(antpairall[i-1]))
