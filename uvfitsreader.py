@@ -240,7 +240,7 @@ def miriadtimeavgreader(data_dir):
 	ax1.set_ylabel("Average Power")
 	ax1.set_title("Real")
 	ax2 = plt.subplot(212)
-	ax2.plot(np.real(yyavg[:, i]))
+	ax2.plot(np.real(yyavg))
 	ax2.set_xlabel("Frequency (MHz)")
 	ax1.set_ylabel("Average Power")
 	ax2.set_title("Imaginary")
