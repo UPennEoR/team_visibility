@@ -194,8 +194,7 @@ def miriadtimeavgreader(data_dir):
 		pass
 	else:
 		os.makedirs("/data4/paper/rkb/uvtimeavgreaderstorage/")
-	antpairall = ['72_22', '105_9', '53_104', '31_96', '89_65', '9_53', '22_20', '20_31', '81_89']
-	avg = 0
+	antpairall = [72,22]
 	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
 	yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
 	xxdatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
@@ -233,9 +232,9 @@ def miriadtimeavgreader(data_dir):
 	n_avg = len(xxdatafiles)*56
 	xxavg = xxtotal/n_avg
 	yyavg = yytotal/n_avg
+	print(xx)
 	baselineiterator = xxavg
 	for i in baselineiterator:
-		print(i)
 		ax1 = plt.subplot(211)
 		ax1.set_ylim(-0.05, 0.05)
 		ax1.plot(np.real(xxavg), 'g-', linewidth=3, label="modeldata")
