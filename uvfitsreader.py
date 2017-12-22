@@ -205,6 +205,7 @@ def miriadtimeavgreader(data_dir):
 		xxdatalist = np.empty((56, 1024))
 		for baseline in antpairall:
 			xxdata = UV.get_data(72, 22)
+			print(xxdata)
 			if xxdata.shape != (56, 1024):
 				pass
 			else:
@@ -235,7 +236,7 @@ def miriadtimeavgreader(data_dir):
 	yyavg = yytotal/n_avg
 	print(xxavg)
 	baselineiterator = xxavg
-	for i in baselineiterator:
+	for i in 1:len(baselineiterator):
 		ax1 = plt.subplot(211)
 		ax1.set_ylim(-0.05, 0.05)
 		ax1.plot(np.real(xxavg), 'g-', linewidth=3, label="modeldata")
