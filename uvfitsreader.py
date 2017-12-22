@@ -194,7 +194,7 @@ def miriadtimeavgreader(data_dir):
 		pass
 	else:
 		os.makedirs("/data4/paper/rkb/uvtimeavgreaderstorage/")
-	antpairall = [72,22]
+	antpairall = (72,22)
 	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcORR'])))
 	yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcORR'])))
 	xxdatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
