@@ -248,7 +248,7 @@ def miriadtimeavgreader(data_dir):
 	plt.tight_layout()
 	fig = plt.gcf()
 	fig.suptitle("Visibility Avg over Time, {}".format(antpairall[i-1]))
-	plt.savefig("/data4/paper/rkb/uvtimeavgreaderstorage/{}.png".format(antpairall[i-1]))
+	plt.savefig("/data4/paper/rkb/uvtimeavgreaderstorage/{}.png".format(antpairall[baseline-1]))
 	plt.clf()
 
 def uvtimeavgreader(data_dir):
