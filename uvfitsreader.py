@@ -197,7 +197,6 @@ def miriadtimeavgreader(data_dir):
 	# antpairall = (72,22)
 	
 	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcOR'])))
-	print(xxdatafiles)
 	antpairfile = xxdatafiles[0]
 	UV.read_miriad(antpairfile)
 	antpairall = UV.get_antpairs()
@@ -209,28 +208,27 @@ def miriadtimeavgreader(data_dir):
 		xxdatalist = np.empty((56, 1024))
 		for baseline in antpairall:
 			xxdata = UV.get_data(baseline)
-			print(xxdata)
-			if xxdata.shape != (56, 1024):
-				pass
-			else:
-				xxdatalist = np.dstack((xxdatalist, xxdata))
-		if xxdatalist.shape != (56, 1024, 28):
-			pass
-		else:
-			xxdatalist2 += xxdatalist
+			# if xxdata.shape != (56, 1024):
+			# 	pass
+			# else:
+			xxdatalist = np.dstack((xxdatalist, xxdata))
+		# if xxdatalist.shape != (56, 1024, 28):
+		# 	pass
+		# else:
+		xxdatalist2 += xxdatalist
 	for miriad_file in yydatafiles:
 		UV.read_miriad(miriad_file)
 		yydatalist = np.empty((56, 1024))
 		for baseline in antpairall:
 			yydata = UV.get_data(baseline)
-			if yydata.shape != (56, 1024):
-				pass
-			else:
-				yydatalist = np.dstack((yydatalist, yydata))
-		if yydatalist.shape != (56, 1024, 28):
-			pass
-		else:
-			yydatalist2 += yydatalist
+			# if yydata.shape != (56, 1024):
+			# 	pass
+			# else:
+			yydatalist = np.dstack((yydatalist, yydata))
+		# if yydatalist.shape != (56, 1024, 28):
+		# 	pass
+		# else:
+		yydatalist2 += yydatalist
 	#collapse in time:
 	xxtotal= np.sum(xxdatalist2, axis=0)
 	yytotal= np.sum(yydatalist2, axis=0)
@@ -254,7 +252,7 @@ def miriadtimeavgreader(data_dir):
 		plt.tight_layout()
 		fig = plt.gcf()
 		fig.suptitle("Visibility Avg over Time")
-		plt.savefig("/data4/paper/rkb/uvtimeavgreaderstorage/{}.png".format(i))
+		plt.savefig("/data4/paper/rkb/uvtimeavgreaderstorage/{}.png".format(antpairall[i]))
 		plt.clf()
 
 def uvtimeavgreader(data_dir):
