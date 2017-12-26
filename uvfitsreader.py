@@ -257,6 +257,41 @@ def miriadtimeavgreader(data_dir):
 		plt.savefig("/data4/paper/rkb/uvtimeavgreaderstorage/{}.png".format(antpairall[i]))
 		plt.clf()
 
+
+def miriadtimeavgreader2(data_dir):
+	if os.path.isdir("/data4/paper/rkb/uvtimeavgreaderstorage/"):
+		pass
+	else:
+		os.makedirs("/data4/paper/rkb/uvtimeavgreaderstorage/")
+	# antpairall = (72,22)
+	
+	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcOR'])))
+	antpairfile = xxdatafiles[0]
+	UV.read_miriad(antpairfile)
+	antpairall = UV.get_antpairs()
+	yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcOR'])))
+	xxdatalist2 = np.empty((112, 1024, 28), dtype=np.complex128)
+	yydatalist2 = np.empty((112, 1024, 28), dtype=np.complex128)
+	for baseline in antpairall:
+		xxdatalist = np.empty((112, 1024))
+		for miriad_file in xxdatafiles:
+			UV.read_miriad(miriad_file)
+			xxdata = UV.get_data(baseline)	
+			xxdatalist = np.dstack((xxdatalist, xxdata))
+			xxtotal= np.sum(xxdatalist, axis=0)
+			n_avg = len(xxdatafiles)*112
+			xxavg = xxtotal/n_avg
+			yyavg = yytotal/n_avg
+			ax1 = plt.subplot(111)
+			ax1.set_ylim(-0.05, 0.05)
+			ax1.plot(np.real(xxavg), 'g-', linewidth=3, label="modeldata")
+			ax1.set_ylabel("Average Power")
+			ax1.set_title("Real")
+			plt.tight_layout()
+			fig = plt.gcf()
+			fig.suptitle("Visibility Avg over Time")
+			plt.savefig("/data4/paper/rkb/uvtimeavgreaderstorage/{}.png".format(antpairall[baseline]))
+			plt.clf()
 def uvtimeavgreader(data_dir):
 	if os.path.isdir("/data4/paper/rkb/uvtimeavgreaderstorage/"):
 		pass
