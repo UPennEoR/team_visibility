@@ -201,11 +201,11 @@ def miriadtimeavgreader(data_dir):
 	UV.read_miriad(antpairfile)
 	antpairall = UV.get_antpairs()
 	yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcOR'])))
-	xxdatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
-	yydatalist2 = np.empty((56, 1024, 28), dtype=np.complex128)
+	xxdatalist2 = np.empty((112, 1024, 28), dtype=np.complex128)
+	yydatalist2 = np.empty((112, 1024, 28), dtype=np.complex128)
 	for miriad_file in xxdatafiles:
 		UV.read_miriad(miriad_file)
-		xxdatalist = np.empty((56, 1024))
+		xxdatalist = np.empty((112, 1024))
 		for baseline in antpairall:
 			xxdata = UV.get_data(baseline)
 			print(xxdata.shape)
@@ -219,7 +219,7 @@ def miriadtimeavgreader(data_dir):
 		xxdatalist2 += xxdatalist
 	for miriad_file in yydatafiles:
 		UV.read_miriad(miriad_file)
-		yydatalist = np.empty((56, 1024))
+		yydatalist = np.empty((112, 1024))
 		for baseline in antpairall:
 			yydata = UV.get_data(baseline)
 			# if yydata.shape != (56, 1024):
@@ -234,7 +234,7 @@ def miriadtimeavgreader(data_dir):
 	xxtotal= np.sum(xxdatalist2, axis=0)
 	yytotal= np.sum(yydatalist2, axis=0)
 	#avg:
-	n_avg = len(xxdatafiles)*56
+	n_avg = len(xxdatafiles)*112
 	xxavg = xxtotal/n_avg
 	yyavg = yytotal/n_avg
 	print(xxavg)
