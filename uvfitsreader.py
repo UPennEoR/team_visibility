@@ -253,16 +253,16 @@ def miriadtimeavgreader(data_dir):
 		ax2.set_title("Imaginary")
 		plt.tight_layout()
 		fig = plt.gcf()
-		fig.suptitle("Visibility Avg over Time, XX")
+		fig.suptitle("Visibility Avg over Time")
 		plt.savefig("/data4/paper/rkb/uvtimeavgreaderstorage/{}.png".format(antpairall[i]))
 		plt.clf()
 
 
 def miriadtimeavgreader2(data_dir):
-	if os.path.isdir("/data4/paper/rkb/miriadtimeavgreaderstorage/"):
+	if os.path.isdir("/data4/paper/rkb/miriadtimeavgreaderstorage/XX/"):
 		pass
 	else:
-		os.makedirs("/data4/paper/rkb/miriadtimeavgreaderstorage/")
+		os.makedirs("/data4/paper/rkb/miriadtimeavgreaderstorage/XX/")
 	# antpairall = (72,22)
 	
 	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcOR'])))
@@ -288,8 +288,8 @@ def miriadtimeavgreader2(data_dir):
 			ax1.set_title("Real")
 			plt.tight_layout()
 			fig = plt.gcf()
-			fig.suptitle("Visibility Avg over Time")
-			plt.savefig("/data4/paper/rkb/miriadtimeavgreaderstorage/{}.png".format(baseline))
+			fig.suptitle("Visibility Avg over Time, XX")
+			plt.savefig("/data4/paper/rkb/miriadtimeavgreaderstorage/XX/{}.png".format(baseline))
 			plt.clf()
 def uvtimeavgreader(data_dir):
 	if os.path.isdir("/data4/paper/rkb/uvtimeavgreaderstorage/"):
