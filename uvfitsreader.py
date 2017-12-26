@@ -276,7 +276,8 @@ def miriadtimeavgreader2(data_dir):
 		xxdatalist = np.empty((112, 1024))
 		for miriad_file in xxdatafiles:
 			UV.read_miriad(miriad_file)
-			xxdata = UV.get_data(baseline)	
+			xxdata = UV.get_data(baseline)
+			print(xxdata.shape)
 			xxdatalist = np.dstack((xxdatalist, xxdata))
 		xxtotal= np.sum(xxdatalist, axis=0)
 		n_avg = len(xxdatafiles)*112
