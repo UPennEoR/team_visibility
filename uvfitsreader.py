@@ -278,19 +278,19 @@ def miriadtimeavgreader2(data_dir):
 			UV.read_miriad(miriad_file)
 			xxdata = UV.get_data(baseline)	
 			xxdatalist = np.dstack((xxdatalist, xxdata))
-			xxtotal= np.sum(xxdatalist, axis=0)
-			n_avg = len(xxdatafiles)*112
-			xxavg = xxtotal/n_avg
-			ax1 = plt.subplot(111)
-			ax1.set_ylim(-0.05, 0.05)
-			ax1.plot(np.real(xxavg), 'g-', linewidth=3, label="modeldata")
-			ax1.set_ylabel("Average Power")
-			ax1.set_title("Real")
-			plt.tight_layout()
-			fig = plt.gcf()
-			fig.suptitle("Visibility Avg over Time, XX")
-			plt.savefig("/data4/paper/rkb/miriadtimeavgreaderstorage/XX/{}.png".format(baseline))
-			plt.clf()
+		xxtotal= np.sum(xxdatalist, axis=0)
+		n_avg = len(xxdatafiles)*112
+		xxavg = xxtotal/n_avg
+		ax1 = plt.subplot(111)
+		ax1.plot(np.real(xxavg))
+		ax1.plot(np.imag(xxavg))
+		ax1.set_ylabel("Average Power")
+		ax1.set_title("Real")
+		plt.tight_layout()
+		fig = plt.gcf()
+		fig.suptitle("Visibility Avg over Time, XX")
+		plt.savefig("/data4/paper/rkb/miriadtimeavgreaderstorage/XX/{}.png".format(baseline))
+		plt.clf()
 def uvtimeavgreader(data_dir):
 	if os.path.isdir("/data4/paper/rkb/uvtimeavgreaderstorage/"):
 		pass
