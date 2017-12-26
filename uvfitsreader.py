@@ -208,7 +208,7 @@ def miriadtimeavgreader(data_dir):
 		xxdatalist = np.empty((56, 1024))
 		for baseline in antpairall:
 			xxdata = UV.get_data(baseline)
-			print(size(xxdata))
+			print(xxdata.shape)
 			# if xxdata.shape != (56, 1024):
 			# 	pass
 			# else:
