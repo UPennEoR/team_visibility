@@ -281,7 +281,6 @@ def miriadtimeavgreader2(data_dir):
 			xxtotal= np.sum(xxdatalist, axis=0)
 			n_avg = len(xxdatafiles)*112
 			xxavg = xxtotal/n_avg
-			yyavg = yytotal/n_avg
 			ax1 = plt.subplot(111)
 			ax1.set_ylim(-0.05, 0.05)
 			ax1.plot(np.real(xxavg), 'g-', linewidth=3, label="modeldata")
