@@ -203,11 +203,11 @@ def miriadtimeavgreader(data_dir):
 	yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcOR'])))
 	xxdatalist2 = np.empty((112, 1024, 28), dtype=np.complex128)
 	yydatalist2 = np.empty((112, 1024, 28), dtype=np.complex128)
-	for miriad_file in xxdatafiles:
-		UV.read_miriad(miriad_file)
+	for baseline in antpairall:
 		xxdatalist = np.empty((112, 1024))
-		for baseline in antpairall:
-			xxdata = UV.get_data(baseline)
+		for miriad_file in xxdatafiles:
+			UV.read_miriad(miriad_file)
+			xxdata = UV.get_data(baseline)	
 			print(xxdata.shape)
 			print(xxdata)
 			# if xxdata.shape != (56, 1024):
