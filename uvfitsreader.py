@@ -213,7 +213,7 @@ def miriadtimeavgreader(data_dir):
 			# if xxdata.shape != (56, 1024):
 			# 	pass
 			# else:
-			xxdatalist = np.dstack((xxdatalist, xxdata))
+			# xxdatalist = np.dstack((xxdatalist, xxdata))
 		# if xxdatalist.shape != (56, 1024, 28):
 		# 	pass
 		# else:
