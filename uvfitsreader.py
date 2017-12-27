@@ -263,8 +263,6 @@ def miriadtimeavgreader2(data_dir):
 		pass
 	else:
 		os.makedirs("/data4/paper/rkb/miriadtimeavgreaderstorage/XX/")
-	# antpairall = (72,22)
-	
 	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcOR'])))
 	antpairfile = xxdatafiles[0]
 	UV.read_miriad(antpairfile)
@@ -282,7 +280,7 @@ def miriadtimeavgreader2(data_dir):
 			else:
 				xxdatalist = np.dstack((xxdatalist, xxdata))
 		xxtotal= np.sum(xxdatalist, axis=0)
-		n_avg = len(xxdatafiles)*112
+		n_avg = 112
 		xxavg = xxtotal/n_avg
 		ax1 = plt.subplot(111)
 		ax1.plot(np.real(xxavg))
