@@ -286,7 +286,6 @@ def miriadtimeavgreader2(data_dir):
 		xxavg = xxtotal/n_avg
 		ax1 = plt.subplot(111)
 		ax1.plot(np.real(xxavg))
-		ax1.plot(np.imag(xxavg))
 		ax1.set_ylabel("Average Power")
 		ax1.set_title("Real")
 		plt.tight_layout()
