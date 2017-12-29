@@ -282,13 +282,11 @@ def miriadtimeavgreader2(data_dir):
 		xxtotal= np.sum(xxdatalist, axis=0)
 		n_avg = 112
 		xxavg = xxtotal/n_avg
-		ax1 = plt.subplot(111)
-		ax1.plot(np.real(xxavg))
-		ax1.set_ylabel("Average Power")
-		ax1.set_title("Real")
+		plt.plot(np.real(xxavg))
+		plt.ylim(-1.5, 1.5)
+		plt.ylabel("Average Power")
 		plt.tight_layout()
-		fig = plt.gcf()
-		fig.suptitle("Visibility Avg over Time, XX")
+		plt.title("Visibility Avg over Time, XX")
 		plt.savefig("/data4/paper/rkb/miriadtimeavgreaderstorage/XX/{}.png".format(baseline))
 		plt.clf()
 def uvtimeavgreader(data_dir):
