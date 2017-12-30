@@ -273,10 +273,7 @@ def miriadtimeavgreader2(data_dir):
 		for miriad_file in xxdatafiles:
 			UV.read_miriad(miriad_file)
 			xxdata = UV.get_data(baseline)
-			if xxdata.shape != (112, 1024):
-				pass
-			else:
-				xxdatalist = np.vstack((xxdatalist, xxdata))
+			xxdatalist = np.vstack((xxdatalist, xxdata))
 		xxtotal= np.sum(xxdatalist, axis=0)
 		print(xxtotal.shape)
 		print(xxdatalist.shape)
