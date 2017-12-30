@@ -276,7 +276,7 @@ def miriadtimeavgreader2(data_dir):
 			if xxdata.shape != (112, 1024):
 				pass
 			else:
-				xxdatalist = np.dstack((xxdatalist, xxdata))
+				xxdatalist = np.vstack((xxdatalist, xxdata))
 		xxtotal= np.sum(xxdatalist, axis=0)
 		print(xxdatalist.shape)
 		n_avg = 112*xxdatalist.shape(1)
