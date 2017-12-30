@@ -279,7 +279,7 @@ def miriadtimeavgreader2(data_dir):
 				xxdatalist = np.vstack((xxdatalist, xxdata))
 		xxtotal= np.sum(xxdatalist, axis=0)
 		print(xxdatalist.shape)
-		n_avg = 112*xxdatalist.shape(1)
+		n_avg = xxdatalist.shape[0]
 		xxavg = xxtotal/n_avg
 		plt.plot(np.real(xxavg))
 		plt.ylim(-1.5, 1.5)
