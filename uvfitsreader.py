@@ -281,7 +281,7 @@ def miriadtimeavgreader2(data_dir):
 		print(n_avg)
 		xxavg = xxtotal/n_avg
 		plt.plot(np.real(xxavg))
-		plt.ylim(-1.5, 1.5)
+		plt.ylim(-0.3, 0.3)
 		plt.ylabel("Average Power")
 		plt.tight_layout()
 		plt.title("Visibility Avg over Time, XX")
