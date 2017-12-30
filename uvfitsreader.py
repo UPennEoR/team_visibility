@@ -278,7 +278,7 @@ def miriadtimeavgreader2(data_dir):
 			else:
 				xxdatalist = np.vstack((xxdatalist, xxdata))
 		xxtotal= np.sum(xxdatalist, axis=0)
-		print(xxtotal)
+		print(xxtotal.shape)
 		print(xxdatalist.shape)
 		n_avg = xxdatalist.shape[0]
 		print(n_avg)
