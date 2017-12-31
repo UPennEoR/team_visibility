@@ -267,6 +267,7 @@ def miriadtimeavgreader2(data_dir):
 	antpairfile = xxdatafiles[0]
 	UV.read_miriad(antpairfile)
 	antpairall = UV.get_antpairs()
+	print(antpairall)
 	# yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcOR'])))
 	for baseline in antpairall:
 		xxdatalist = np.empty((112, 1024))
