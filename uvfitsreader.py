@@ -259,14 +259,14 @@ def miriadtimeavgreader(data_dir):
 
 
 def miriadtimeavgreader2(data_dir):
-	if os.path.isdir("/data4/paper/rkb/miriadtimeavgreaderstorage/XX/"):
+	if os.path.isdir("/data4/paper/rkb/miriadtimeavgreaderstorage/XXRFI/"):
 		pass
 	else:
-		os.makedirs("/data4/paper/rkb/miriadtimeavgreaderstorage/XX/")
-	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcOR'])))
+		os.makedirs("/data4/paper/rkb/miriadtimeavgreaderstorage/XXRFI/")
+	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcRF'])))
 	antpairfile = xxdatafiles[0]
 	UV.read_miriad(antpairfile)
-	#antpairall = UV.get_antpairs()
+	# antpairall = UV.get_antpairs()
 	antpairall = [(9, 64), (10, 89), (53, 80), (97, 81)]
 	# yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcOR'])))
 	for baseline in antpairall:
@@ -285,8 +285,7 @@ def miriadtimeavgreader2(data_dir):
 		plt.ylim(-0.3, 0.3)
 		plt.ylabel("Average Power")
 		plt.tight_layout()
-		plt.savefig("/data4/paper/rkb/miriadtimeavgreaderstorage/XX/down1left1oneout.png")
-
+		plt.savefig("/data4/paper/rkb/miriadtimeavgreaderstorage/XXRFI/down1left1oneout.png")
 		# plt.savefig("/data4/paper/rkb/miriadtimeavgreaderstorage/XX/{}.png".format(baseline))
 		# plt.clf()
 def uvtimeavgreader(data_dir):
