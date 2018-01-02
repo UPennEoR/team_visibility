@@ -263,7 +263,7 @@ def miriadtimeavgreader2(data_dir):
 		pass
 	else:
 		os.makedirs("/data4/paper/rkb/miriadtimeavgreaderstorage/XXRFI/")
-	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcRF'])))
+	xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcRO'])))
 	antpairfile = xxdatafiles[0]
 	UV.read_miriad(antpairfile)
 	# antpairall = UV.get_antpairs()
