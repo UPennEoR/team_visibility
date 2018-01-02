@@ -267,7 +267,7 @@ def miriadtimeavgreader2(data_dir):
 	antpairfile = xxdatafiles[0]
 	UV.read_miriad(antpairfile)
 	#antpairall = UV.get_antpairs()
-	antpairall = [(20, 53), (22, 9), (81, 20), (89, 31)]
+	antpairall = [(9, 64), (10, 89), (53, 80), (97, 81)]
 	# yydatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.yy.HH.uvcOR'])))
 	for baseline in antpairall:
 		xxdatalist = np.empty((112, 1024))
@@ -285,8 +285,7 @@ def miriadtimeavgreader2(data_dir):
 		plt.ylim(-0.3, 0.3)
 		plt.ylabel("Average Power")
 		plt.tight_layout()
-		plt.title("Visibility Avg over Time, XX")
-		plt.savefig("/data4/paper/rkb/miriadtimeavgreaderstorage/XX/down1left1allin.png")
+		plt.savefig("/data4/paper/rkb/miriadtimeavgreaderstorage/XX/down1left1oneout.png")
 
 		# plt.savefig("/data4/paper/rkb/miriadtimeavgreaderstorage/XX/{}.png".format(baseline))
 		# plt.clf()
