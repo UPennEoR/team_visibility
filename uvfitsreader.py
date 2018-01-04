@@ -281,7 +281,7 @@ def miriadtimeavgreader2(data_dir):
 		n_avg = xxdatalist.shape[0]
 		print(n_avg)
 		xxavg = xxtotal/n_avg
-		xxavg = np.where(np.isnan(xxavg, 0., xxavg))
+		xxavg = np.where(np.isnan(xxavg), 0., xxavg)
 		xxavg = np.where(counts[key]/n_avg < 0.8, 0., xxavg)
 		plt.plot(np.real(xxavg))
 		plt.ylim(-0.3, 0.3)
