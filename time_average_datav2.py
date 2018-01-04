@@ -13,7 +13,7 @@ plot_files = True
 
 # save total number of time samples
 # 56*71 + 45 (last file is shorter) = 4021
-Ntimes = 4021
+Ntimes = 4133
 
 # define all east-west 14 meter baselines
 ew14m = [
@@ -116,9 +116,7 @@ def plot_time_average_data(infiles, outfiles, file_type):
         fn_re = ''.join([outfiles[i], '_re.pdf'])
         fn_im = ''.join([outfiles[i], '_im.pdf'])
         print("Saving {}".format(fn_re))
-        fig1.savefig(fn_re, bbox_inches='tight')
-        print("Saving {}".format(fn_im))
-        fig2.savefig(fn_im, bbox_inches='tight')
+        fig1.savefig('/data4/paper/rkb/miriadtimeavgreaderstorage/XXRFI/down1left1oneout.png', bbox_inches='tight')
 
     return
 
