@@ -18,10 +18,10 @@ Ntimes = 4133
 
 # define all east-west 14 meter baselines
 ew14m = [
-    '9_53',
-    '20_31',
-    '22_20',
-    '81_89',
+    '20_53',
+    '22_9',
+    '81_20',
+    '89_31',
 ]
 
 def time_average_data(data_dir, outfile, file_type):
@@ -30,7 +30,7 @@ def time_average_data(data_dir, outfile, file_type):
     counts = {}
 
     # loop over files and add to average
-    xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcRO'])))
+    xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcRK'])))
     for fn in xxdatafiles:
         print("Reading {}".format(fn))
         uvd = UVData()
