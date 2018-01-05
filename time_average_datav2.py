@@ -18,8 +18,9 @@ Ntimes = 4133
 
 # define all east-west 14 meter baselines
 ew14m = [
-    '20_31',
-    '9_53',
+    '20_53',
+    '22_9',
+    '89_31',
 ]
 
 def time_average_data(data_dir, outfile, file_type):
@@ -115,6 +116,7 @@ def plot_time_average_data(data_dir, outfiles, file_type):
         ax_im.set_ylabel('Average Power')
         ax_re.set_xlim((100,200))
         ax_im.set_xlim((100,200))
+        ax_re.set_ylim((-0.025, 0.125))
         leg = ax_re.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         leg = ax_im.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         fn_re = ''.join([outfiles, '_re.pdf'])
