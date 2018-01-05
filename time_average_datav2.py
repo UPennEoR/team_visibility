@@ -18,8 +18,10 @@ Ntimes = 4133
 
 # define all east-west 14 meter baselines
 ew14m = [
-    '97_10',
-    '88_64',
+    '105_9',
+    '89_65',
+    '31_96',
+    '53_104'
 ]
 
 def time_average_data(data_dir, outfile, file_type):
