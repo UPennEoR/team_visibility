@@ -4,6 +4,7 @@ import numpy as np
 import os
 import re
 import matplotlib
+import glob
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from pyuvdata import UVData
