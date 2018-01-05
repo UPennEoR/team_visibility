@@ -113,6 +113,8 @@ def plot_time_average_data(data_dir, outfiles, file_type):
         # make plot pretty
         ax_re.set_xlabel('Freq [MHz]')
         ax_im.set_xlabel('Freq [MHz]')
+        ax_re.set_ylabel('Average Power')
+        ax_im.set_ylabel('Average Power')
         ax_re.set_xlim((100,200))
         ax_im.set_xlim((100,200))
         leg = ax_re.legend(loc='center left', bbox_to_anchor=(1, 0.5))
@@ -120,7 +122,9 @@ def plot_time_average_data(data_dir, outfiles, file_type):
         fn_re = ''.join([outfiles[i], '_re.pdf'])
         fn_im = ''.join([outfiles[i], '_im.pdf'])
         print("Saving {}".format(fn_re))
-        fig1.savefig('/data4/paper/rkb/miriadtimeavgreaderstorage/XXRFI/down1left1allin.png', bbox_inches='tight')
+        fig1.savefig(fn_re, bbox_inches='tight')
+        print("Saving {}".format(fn_im))
+        fig2.savefig(fn_im, bbox_inches='tight')
 
     return
 
