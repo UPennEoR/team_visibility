@@ -66,7 +66,7 @@ def time_average_data(data_dir, outfile, file_type):
 
     return
 
-def plot_time_average_data(infiles, outfiles, file_type):
+def plot_time_average_data(data_dir, outfiles, file_type):
     # set some options
     matplotlib.rc('text', usetex=True)
     matplotlib.rc('font', family='serif')
@@ -74,7 +74,7 @@ def plot_time_average_data(infiles, outfiles, file_type):
 
     # make list of frequencies
     freqs = np.linspace(100, 200, num=1024, endpoint=False)
-
+    infiles = sorted(glob.glob(''.join([data_dir, '*.npz'])))
     # loop over input files
     for i, infile in enumerate(infiles):
         # make empty new figures
