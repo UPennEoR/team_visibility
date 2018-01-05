@@ -78,6 +78,7 @@ def plot_time_average_data(infiles, outfiles, file_type):
     # loop over input files
     for i, infile in enumerate(infiles):
         # make empty new figures
+        print(infile)
         fig1 = plt.figure()
         ax_re = plt.gca()
         fig2 = plt.figure()
