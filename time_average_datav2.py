@@ -74,7 +74,7 @@ def plot_time_average_data(data_dir, outfiles, file_type):
 
     # make list of frequencies
     freqs = np.linspace(100, 200, num=1024, endpoint=False)
-    infiles = sorted(glob.glob(''.join([data_dir, '*.npz'])))
+    infiles = sorted(glob.glob(''.join([data_dir, 'down1left1oneout.npz'])))
     # loop over input files
     for i, infile in enumerate(infiles):
         # make empty new figures
