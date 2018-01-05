@@ -18,10 +18,10 @@ Ntimes = 4133
 
 # define all east-west 14 meter baselines
 ew14m = [
-    '9_64',
-    '10_89',
-    '53_80',
-    '97_81',
+    '20_53',
+    '22_9',
+    '81_20',
+    '89_31',
 ]
 
 def time_average_data(data_dir, outfile, file_type):
@@ -74,7 +74,7 @@ def plot_time_average_data(data_dir, outfiles, file_type):
 
     # make list of frequencies
     freqs = np.linspace(100, 200, num=1024, endpoint=False)
-    infiles = sorted(glob.glob(''.join([data_dir, 'down1left1oneout.npz'])))
+    infiles = sorted(glob.glob(''.join([data_dir, '*.npz'])))
     # loop over input files
     for i, infile in enumerate(infiles):
         # make empty new figures
@@ -120,7 +120,7 @@ def plot_time_average_data(data_dir, outfiles, file_type):
         fn_re = ''.join([outfiles[i], '_re.pdf'])
         fn_im = ''.join([outfiles[i], '_im.pdf'])
         print("Saving {}".format(fn_re))
-        fig1.savefig('/data4/paper/rkb/miriadtimeavgreaderstorage/XXRFI/down1left1oneout.png', bbox_inches='tight')
+        fig1.savefig('/data4/paper/rkb/miriadtimeavgreaderstorage/XXRFI/down1left1allin.png', bbox_inches='tight')
 
     return
 
