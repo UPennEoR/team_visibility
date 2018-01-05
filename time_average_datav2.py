@@ -18,7 +18,6 @@ Ntimes = 4133
 
 # define all east-west 14 meter baselines
 ew14m = [
-    '20_53',
     '22_9',
     '81_20',
     '89_31',
