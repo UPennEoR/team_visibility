@@ -23,13 +23,14 @@ ew14m = [
     '97_81',
 ]
 
-def time_average_data(file_list, outfile, file_type):
+def time_average_data(data_dir, outfile, file_type):
     # initialize dict for average visibilities
     avg_vis = {}
     counts = {}
 
     # loop over files and add to average
-    for fn in file_list:
+    xxdatafiles = sorted(glob.glob(''.join([data_dir, 'zen.*.xx.HH.uvcRO'])))
+    for fn in xxdatafiles:
         print("Reading {}".format(fn))
         uvd = UVData()
         uvd.read_miriad(fn)
