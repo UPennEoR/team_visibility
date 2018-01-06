@@ -115,7 +115,7 @@ def plot_time_average_data(data_dir, outfiles, file_type):
         ax_im.set_ylabel('Average Power')
         ax_re.set_xlim((100,200))
         ax_im.set_xlim((100,200))
-        ax_re.set_ylim((-0.2, 0.125))
+        ax_re.set_ylim((-0.02, 0.125))
         leg = ax_re.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         leg = ax_im.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         fn_re = ''.join([outfiles, '_re.pdf'])
